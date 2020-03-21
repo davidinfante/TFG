@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
-import {HeadermenuComponent} from "../../headermenu/headermenu.component";
+import {HeadermenuComponent} from "../../components/headermenu/headermenu.component";
 
 @NgModule({
   imports: [
