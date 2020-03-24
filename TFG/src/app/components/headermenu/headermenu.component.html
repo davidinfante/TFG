@@ -1,7 +1,7 @@
 <!--
-  - Side menu content
+  - Side menu content only visible and interactive in mobile mode
   -->
-<ion-menu side="start" content-id="menu-content">
+<ion-menu side="start" content-id="menu-content" *ngIf="mobile">
   <ion-header>
     <ion-toolbar>
       <ion-title>VITRAEL</ion-title>
