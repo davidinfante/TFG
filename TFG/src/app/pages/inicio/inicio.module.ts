@@ -8,6 +8,7 @@ import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
 import {HeadermenuComponent} from "../../components/headermenu/headermenu.component";
+import {FooterComponent} from "../../components/footer/footer.component";
 
 @NgModule({
   imports: [
@@ -16,9 +17,10 @@ import {HeadermenuComponent} from "../../components/headermenu/headermenu.compon
     IonicModule,
     InicioPageRoutingModule
   ],
-  declarations: [
-      InicioPage,
-      HeadermenuComponent
-  ]
+    declarations: [
+        InicioPage,
+        HeadermenuComponent,
+        FooterComponent
+    ]
 })
 export class InicioPageModule {}
