@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProyectoPageRoutingModule } from './proyecto-routing.module';
+import { ProjectPageRoutingModule } from './project-routing.module';
 
-import { ProyectoPage } from './proyecto.page';
-import {InicioPageModule} from "../inicio/inicio.module";
+import { ProjectPage } from './project.page';
+import {HomePageModule} from "../home/home.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProyectoPageRoutingModule,
-    InicioPageModule
+    ProjectPageRoutingModule,
+    HomePageModule
   ],
   declarations: [
-    ProyectoPage
+    ProjectPage
   ]
 })
-export class ProyectoPageModule {}
+export class ProjectPageModule {}

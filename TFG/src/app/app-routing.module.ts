@@ -2,14 +2,35 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then(m => m.InicioPageModule)
-  },  {
-    path: 'proyecto',
-    loadChildren: () => import('./pages/proyecto/proyecto.module').then( m => m.ProyectoPageModule)
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
+  {
+    path: 'project',
+    loadChildren: () => import('./pages/project/project.module').then(m => m.ProjectPageModule)
+  },
+  {
+    path: 'members',
+    loadChildren: () => import('./pages/members/members.module').then(m => m.MembersPageModule)
+  },  {
+    path: 'exercises',
+    loadChildren: () => import('./pages/exercises/exercises.module').then( m => m.ExercisesPageModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'access',
+    loadChildren: () => import('./pages/access/access.module').then( m => m.AccessPageModule)
+  },
+
 
 ];
 

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InicioPageRoutingModule } from './inicio-routing.module';
+import { HomePageRoutingModule } from './home-routing.module';
 
-import { InicioPage } from './inicio.page';
+import { HomePage } from './home.page';
 import {HeadermenuComponent} from "../../components/headermenu/headermenu.component";
 import {FooterComponent} from "../../components/footer/footer.component";
 
@@ -15,10 +15,10 @@ import {FooterComponent} from "../../components/footer/footer.component";
     CommonModule,
     FormsModule,
     IonicModule,
-    InicioPageRoutingModule,
+    HomePageRoutingModule,
   ],
   declarations: [
-    InicioPage,
+    HomePage,
     HeadermenuComponent,
     FooterComponent
   ],
@@ -27,4 +27,4 @@ import {FooterComponent} from "../../components/footer/footer.component";
     FooterComponent
   ],
 })
-export class InicioPageModule {}
+export class HomePageModule {}
