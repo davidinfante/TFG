@@ -7,7 +7,63 @@
   - Content
   -->
 <ion-content>
-  <p>registro</p>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Registro</ion-card-title>
+              <ion-card-subtitle>Debes registrarte para poder realizar los ejercicios de VIRTRA-EL. Por favor, rellena el siguiente formulario.
+                Si eres un terapeuta o un cuidador, por favor, <a routerLink="/contact">contacta con el administrador</a> para que te dé de alta.</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Apellidos</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">E-Mail</ion-label>
+                <ion-input type="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Confirmar E-Mail</ion-label>
+                <ion-input type="email"></ion-input>
+              </ion-item>
+              <ion-text>Compruebe que su e-mail sea correcto. Se le enviará un mensaje para que confirme este registro antes de activar su cuenta.</ion-text>
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Confirmar contraseña</ion-label>
+                <ion-input type="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Resultado de 1 + 3</ion-label>
+                <ion-input type="number"></ion-input>
+              </ion-item>
+              <ion-text>Esto evita que se haga un mal uso del formulario de contacto</ion-text>
+              <ion-item>
+                <ion-button>
+                  <ion-icon slot="start" name="add-outline"></ion-icon>
+                  Enviar
+                </ion-button>
+                <ion-button fill="outline" color="danger">
+                  <ion-icon slot="start" name="trash-outline"></ion-icon>
+                  Limpiar
+                </ion-button>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 </ion-content>
 
 <!--

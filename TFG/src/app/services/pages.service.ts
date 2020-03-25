@@ -67,7 +67,7 @@ export class PagesService {
       icon: 'log-in-outline',
       showIcon: true,
       fill: 'solid',
-      color: 'danger',
+      color: 'primary',
       position: 'end'
     },
   ]
