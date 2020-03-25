@@ -15,12 +15,16 @@ import {FooterComponent} from "../../components/footer/footer.component";
     CommonModule,
     FormsModule,
     IonicModule,
-    InicioPageRoutingModule
+    InicioPageRoutingModule,
   ],
-    declarations: [
-        InicioPage,
-        HeadermenuComponent,
-        FooterComponent
-    ]
+  declarations: [
+    InicioPage,
+    HeadermenuComponent,
+    FooterComponent
+  ],
+  exports: [
+    HeadermenuComponent,
+    FooterComponent
+  ],
 })
 export class InicioPageModule {}
