@@ -1,5 +1,50 @@
+<!--
+  - Header
+  -->
 <app-headermenu></app-headermenu>
 
+<!--
+  - Content
+  -->
 <ion-content>
-  <p>it works!</p>
+  <ion-grid>
+    <!--
+      - Banner
+      -->
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-img id="banner_img" src="../../../assets/img/banner.png" height="294" width="1170"></ion-img>
+          <div id="overlay">
+            <div id="card_title">Plataforma Virtual de Evaluación e Intervención Cognitiva en Mayores</div>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!--
+      - Information
+      -->
+    <ion-row>
+      <ion-col size="12" size-sm>
+        <ion-img src="../../../assets/img/marketing1.png" height="391" width="646"></ion-img>
+        <h3>Sesiones programadas</h3>
+        <p>VIRTRA-EL te propone 15 sesiones de ejercicios de aproximadamente una hora, para que las completes en diferentes días.</p>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <ion-img src="../../../assets/img/marketing2.png" height="391" width="646"></ion-img>
+        <h3>Múltiples ejercicios</h3>
+        <p>En cada sesión realizarás ejercicios para estimular diferentes áreas: la memoria, la atención, el razonamiento y la planificación.</p>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <ion-img src="../../../assets/img/marketing3.png" height="391" width="646"></ion-img>
+        <h3>Hecho para todos</h3>
+        <p>VIRTRA-EL funciona en cualquier navegador, móvil o de escritorio. Además es una web totalmente accesible, basada solo en tecnologías estándares.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<!--
+  - Footer
+  -->
+<app-footer></app-footer>
