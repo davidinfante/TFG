@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Page} from "../../interfaces/page";
 import {PagesService} from "../../services/pages.service";
+import {FunctionsService} from "../../services/functions.service";
 
 @Component({
   selector: 'app-headermenu',
@@ -17,17 +18,17 @@ export class HeadermenuComponent implements OnInit {
    */
   pages: Page[];
 
-  constructor(private pagesService: PagesService) { }
+  constructor(
+      private functionsService: FunctionsService,
+      private pagesService: PagesService
+  ) { }
 
   ngOnInit() {
     // Detects if the device is a mobile device
-    if (window.screen.width <= 1000) this.mobile = true;
-    else this.mobile = false;
+    this.mobile = this.functionsService.isMobile();
 
     // Gets all pages
-    this.pagesService.pagesObs.subscribe(pages => {
-      this.pages = pages;
-    });
+    this.pages = this.pagesService.getAllPages();
   }
 
 }

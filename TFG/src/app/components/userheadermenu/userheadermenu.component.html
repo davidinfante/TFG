@@ -1,0 +1,72 @@
+<!--
+  - Side menu content only visible and interactive in mobile mode
+  -->
+<ion-menu side="start" content-id="menu-content" *ngIf="mobile">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>VIRTRAEL</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let page of headerOptions" [color]="page.color">
+        <ion-icon [name]="page.icon" slot="start"></ion-icon>
+        <ion-label>{{ page.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!--
+  - Header with Menu button and title
+  -->
+<ion-header id="menu-content">
+  <ion-toolbar color="primary">
+    <ion-grid>
+      <!--
+        - Displays side menu if mobile
+        -->
+      <ion-row>
+        <ion-col *ngIf="mobile">
+          <ion-buttons>
+            <ion-menu-button autoHide="false"></ion-menu-button>
+            <ion-title>VIRTRAEL</ion-title>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+
+      <!--
+        - else displays toolbar
+        -->
+      <ion-row *ngIf="mobile==false">
+        <!--
+          - Buttons at start position
+          -->
+        <ion-col>
+          <ion-buttons>
+            <div *ngFor="let page of headerOptions">
+              <ion-button *ngIf="page.position=='start'" [fill]="page.fill" [color]="page.color">
+                <ion-icon [name]="page.icon" slot="start"></ion-icon>
+                {{ page.title }}
+              </ion-button>
+            </div>
+          </ion-buttons>
+        </ion-col>
+        <!--
+          - Buttons at end position
+          -->
+        <ion-col size-lg="4" size-md="4" size="12">
+          <ion-buttons>
+            <div *ngFor="let page of headerOptions">
+              <ion-button *ngIf="page.position=='end'" [fill]="page.fill" [color]="page.color">
+                <ion-icon [name]="page.icon" slot="start"></ion-icon>
+                {{ page.title }}
+              </ion-button>
+            </div>
+          </ion-buttons>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Page} from "../interfaces/page";
-import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -72,20 +71,17 @@ export class PagesService {
     },
   ]
 
-  private pagesSource = new BehaviorSubject(this.pages);
-  pagesObs = this.pagesSource.asObservable();
-
   constructor() { }
 
   /**
-   * Devuelve todas las pages existentes
+   * Return all existent pages
    */
   getAllPages() {
     return  [...this.pages];
   }
 
   /**
-   * Devuelve una page especificando su URL
+   * Returns a page by it's URL
    */
   getPage(pageUrl: string) {
     return {
