@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'members',
     loadChildren: () => import('./pages/members/members.module').then(m => m.MembersPageModule)
-  },  {
+  },
+  {
     path: 'exercises',
     loadChildren: () => import('./pages/exercises/exercises.module').then( m => m.ExercisesPageModule)
   },
@@ -32,7 +33,11 @@ const routes: Routes = [
   },
   {
     path: 'exerciseslist',
-    loadChildren: () => import('./exerciseslist/exerciseslist.module').then( m => m.ExerciseslistPageModule)
+    loadChildren: () => import('./pages/exerciseslist/exerciseslist.module').then(m => m.ExerciseslistPageModule)
+  },
+  {
+    path: 'session',
+    loadChildren: () => import('./pages/session/session.module').then( m => m.SessionPageModule)
   },
 
 

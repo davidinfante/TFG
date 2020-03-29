@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FunctionsService} from "../../services/functions.service";
-import {HeaderOption} from "../../interfaces/header-option";
+import {HeaderOption} from "../../classes/header-option";
 import {HeaderOptionsService} from "../../services/header-options.service";
 
 @Component({
