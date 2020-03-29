@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from "../../interfaces/page";
+import {Page} from "../../classes/page";
 import {PagesService} from "../../services/pages.service";
 import {FunctionsService} from "../../services/functions.service";
 

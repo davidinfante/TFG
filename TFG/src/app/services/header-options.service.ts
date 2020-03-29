@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HeaderOption} from "../interfaces/header-option";
+import {HeaderOption} from "../classes/header-option";
 
 @Injectable({
   providedIn: 'root'

@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ExerciseslistPageRoutingModule } from './exerciseslist-routing.module';
 
 import { ExerciseslistPage } from './exerciseslist.page';
-import {UserheadermenuComponent} from "../components/userheadermenu/userheadermenu.component";
+import {UserheadermenuComponent} from "../../components/userheadermenu/userheadermenu.component";
+import {AssistantComponent} from "../../components/assistant/assistant.component";
 
 @NgModule({
   imports: [
@@ -18,7 +19,12 @@ import {UserheadermenuComponent} from "../components/userheadermenu/userheaderme
   ],
   declarations: [
     ExerciseslistPage,
-    UserheadermenuComponent
+    UserheadermenuComponent,
+    AssistantComponent
+  ],
+  exports: [
+    UserheadermenuComponent,
+    AssistantComponent
   ]
 })
 export class ExerciseslistPageModule {}
