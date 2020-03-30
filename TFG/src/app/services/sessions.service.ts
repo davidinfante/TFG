@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Session} from "../classes/session";
-import {DurationKind} from "../enum/duration-kind.enum";
+import {Session} from '../classes/session';
+import {DurationKind} from '../enum/duration-kind.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,15 @@ export class SessionsService {
       exercises: [
         {
           id: 'e1',
+          type: 0,
+          duration: 60,
+          maxTime: 60,
+          dependsOn: -1,
+          repetitions: 0,
+          durationKind: DurationKind.TIME,
+        },
+        {
+          id: 'e2',
           type: 0,
           duration: 60,
           maxTime: 60,

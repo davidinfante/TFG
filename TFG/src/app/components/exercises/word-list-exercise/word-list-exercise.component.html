@@ -1,0 +1,30 @@
+<!--
+  - Start button
+  -->
+<ion-button *ngIf="exercisePhase === 0" (click)="startExercise()">Comenzar</ion-button>
+
+<ion-card *ngIf="exercisePhase !== 0">
+  <ion-card-content>
+    <!--
+      - Word list and timer
+      -->
+    <ion-list *ngIf="exercisePhase === 1">
+      <ion-item  *ngFor="let word of wordList">
+        - {{ word }}
+      </ion-item>
+      <ion-item>
+        Tiempo restante: {{ this.timeLeft }}/{{ this.totalTime }}
+      </ion-item>
+    </ion-list>
+
+    <!--
+      - Word input and end button
+      -->
+    <div *ngIf="exercisePhase === 2">
+      <ion-label>Introduce una palabra:</ion-label>
+      <ion-input type="string" [(ngModel)]="answer"></ion-input>
+      <ion-button (click)="checkAnswer()">Añadir palabra</ion-button>
+      <ion-button (click)="endExercise()">No recuerdo más palabras</ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
