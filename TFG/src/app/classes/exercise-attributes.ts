@@ -1,9 +1,9 @@
-import {DurationKind} from "../enum/duration-kind.enum";
+import {DurationKind} from '../enum/duration-kind.enum';
 
 /**
  * Information that every exercise referenced in a session must have
  */
-export class SessionExercise {
+export class ExerciseAttributes {
   id: string;
   type: number;
   duration: number;

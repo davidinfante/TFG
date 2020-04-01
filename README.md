@@ -11,9 +11,28 @@ TFG 19/20
 
 ### How to add new Exercises:
 - Create or use any components you may need and pack them up in a component with the full exercise
+  - Your main component class must have these attributes `private id: string;
+                                                            private type: number;
+                                                            private duration: number;
+                                                            private maxTime: number;
+                                                            private dependsOn: number;
+                                                            private repetitions: number;
+                                                            private durationKind: DurationKind;` 
   - Include the object `exerciseManager` in your main exercise class
+  - Add this code in the constructor `exerciseManager.exerciseInfo.subscribe( data => {
+                                            this.id = data.id,
+                                              this.type = data.type,
+                                              this.duration = data.duration,
+                                              this.maxTime = data.maxTime,
+                                              this.dependsOn = data.dependsOn,
+                                              this.repetitions = data.repetitions,
+                                              this.durationKind = data.durationKind;
+                                          });`
   - Add this code to the function that is called when the exercise end
-   `exerciseManager.notify({class: this.constructor.name, success: true});`
+   `exerciseManager.notifyEnd({
+          id: this.id,
+          success: true
+        });`
 - Edit the file `/services/exercises.service.ts` adding a new element in the exercises array including:
   - The exercise's id (the standard is e + number e.g. `e1`), this id must be the same as the one 
   specified in the session's exercises array

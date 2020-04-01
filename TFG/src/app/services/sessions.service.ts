@@ -15,7 +15,7 @@ export class SessionsService {
         {
           id: 'e1',
           type: 0,
-          duration: 60,
+          duration: 5,
           maxTime: 60,
           dependsOn: -1,
           repetitions: 0,
@@ -24,12 +24,21 @@ export class SessionsService {
         {
           id: 'e2',
           type: 0,
-          duration: 60,
+          duration: 1,
           maxTime: 60,
           dependsOn: -1,
           repetitions: 0,
           durationKind: DurationKind.TIME,
-        }
+        },
+        {
+          id: 'e1',
+          type: 0,
+          duration: 3,
+          maxTime: 60,
+          dependsOn: -1,
+          repetitions: 0,
+          durationKind: DurationKind.TIME,
+        },
       ],
     },
   ];
@@ -52,5 +61,21 @@ export class SessionsService {
         return session.id === id;
       })
     };
+  }
+
+  /**
+   * Returns an exercise's attributes
+   */
+  getExerciseAttributes(sessionId: string, exercisePos: number) {
+    return {
+      ...this.getSession(sessionId).exercises[exercisePos]
+    };
+  }
+
+  /**
+   * Return the number of exercises in a session
+   */
+  getNumberOfExercises(sessionId: string) {
+    return this.getSession(sessionId).exercises.length;
   }
 }

@@ -1,4 +1,4 @@
-import {SessionExercise} from "./session-exercise";
+import {ExerciseAttributes} from './exercise-attributes';
 
 /**
  * Basic information about a session
@@ -7,7 +7,7 @@ export class Session {
   id: string;
   title: string;
   description: string;
-  exercises: SessionExercise[];
+  exercises: ExerciseAttributes[];
 
   constructor() {
     this.id = null;

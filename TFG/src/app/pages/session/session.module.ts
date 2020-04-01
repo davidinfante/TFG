@@ -10,7 +10,6 @@ import { SessionPage } from './session.page';
 import {ExerciseslistPageModule} from '../exerciseslist/exerciseslist.module';
 import {WordListExerciseComponent} from '../../components/exercises/word-list-exercise/word-list-exercise.component';
 import {AdDirective} from '../../directives/ad-directive.directive';
-import {EmptyExerciseComponent} from '../../components/exercises/empty-exercise/empty-exercise.component';
 
 @NgModule({
   imports: [
@@ -23,11 +22,9 @@ import {EmptyExerciseComponent} from '../../components/exercises/empty-exercise/
   declarations: [
     SessionPage,
     AdDirective,
-    EmptyExerciseComponent,
     WordListExerciseComponent
   ],
   entryComponents: [
-    EmptyExerciseComponent,
     WordListExerciseComponent
   ]
 })
