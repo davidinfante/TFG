@@ -10,14 +10,12 @@ export class ExercisesService {
     {
       id: 'e1',
       class: WordListExerciseComponent,
-      title: '¡Lista de palabras!',
-      description: 'Memoriza las palabras de la lista y cuando acabe el tiempo intenta escribir tantas como puedas. Pulsa comenzar cuando estés listo.'
+      title: '¡Lista de palabras!'
     },
     {
       id: 'e2',
       class: WordListExerciseComponent,
-      title: '¡Lista de palabras SEGUNDA EDICION!',
-      description: 'Memoriza las palabras de la lista y cuando acabe el tiempo intenta escribir tantas como puedas. Pulsa comenzar cuando estés listo.'
+      title: '¡Lista de palabras!',
     }
   ];
 

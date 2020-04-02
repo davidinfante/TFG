@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {exerciseManager} from '../../classes/exercise-manager';
 
 @Component({
   selector: 'app-assistant',
@@ -6,30 +7,23 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./assistant.component.scss'],
 })
 export class AssistantComponent implements OnInit {
-  @Input() title: string;
-  @Input() description: string;
+  private show: boolean;
+  private title: string;
+  private description: string;
 
-  constructor() { }
+  constructor() {
+    // Change the assistant text when needed
+    exerciseManager.assistantChange.subscribe( data => {
+      this.show = data.show;
+      this.title = data.title;
+      this.description = data.description;
+    });
+  }
 
   ngOnInit() {
+    this.show = true;
     this.title = '';
     this.description = '';
-  }
-
-  /**
-   * Changes the title for the one passed as porameter
-   * @param title Text to be setted as title
-   */
-  setTitle(title: string) {
-    this.title = title;
-  }
-
-  /**
-   * Changes the description for the one passed as porameter
-   * @param description Text to be setted as description
-   */
-  setDescription(description: string) {
-    this.description = description;
   }
 
 }

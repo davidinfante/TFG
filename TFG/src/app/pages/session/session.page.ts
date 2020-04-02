@@ -31,7 +31,6 @@ export enum SessionPhase {
 export class SessionPage implements OnInit, AfterViewInit {
   private sessionId: string;
   @ViewChild(AdDirective, null) adHost: AdDirective;
-  @ViewChild('assistant', null) assistant: AssistantComponent;
   private session: Session;
   private currentExercise: Exercise;
   private currentExerciseIndex: number;
@@ -65,8 +64,7 @@ export class SessionPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assistant.setTitle(this.session.title);
-    this.assistant.setDescription(this.session.description);
+    exerciseManager.notifyAssistant({show: true, title: this.session.title, description: this.session.description});
   }
 
   /**
@@ -96,15 +94,11 @@ export class SessionPage implements OnInit, AfterViewInit {
       exerciseManager.notifyExerciseInfo(this.sessionsService.getExerciseAttributes(this.sessionId, this.currentExerciseIndex));
 
       ++this.currentExerciseIndex;
-      // Change the assistant's texts with the exercise's
-      this.assistant.setTitle(this.currentExercise.title);
-      this.assistant.setDescription(this.currentExercise.description);
     } else { // No exercises left
       this.sessionPhase = SessionPhase.END;
       this.componentRef.destroy();
 
-      this.assistant.setTitle('Fin de la sesión');
-      this.assistant.setDescription('Fin de la sesión');
+      exerciseManager.notifyAssistant({show: true, title: 'Fin de la sesión', description: 'La sesión ha finalizado'});
     }
   }
 

@@ -7,6 +7,7 @@ import {DurationKind} from '../../../enum/duration-kind.enum';
  */
 export enum ExercisePhase {
   INTRO,
+  COUNTDOWN,
   READ,
   WRITE
 }
@@ -26,7 +27,7 @@ export class WordListExerciseComponent implements OnInit {
   private durationKind: DurationKind;
 
   private exercisePhase: ExercisePhase;
-  private wordList: string[] = ['hola', 'esto', 'es', 'una', 'prueba'];
+  private wordList: string[] = ['Buitre', 'Clavel', 'Licor', 'Silla', 'Orquídea', 'Águila', 'Lámpara', 'Anís', 'Pavo', 'Armario', 'Jazmín', 'Coñac'];
   private answeredList: string[];
   @Input() answer: string;
   /**
@@ -34,6 +35,7 @@ export class WordListExerciseComponent implements OnInit {
    */
   private timeLeft: number;
   private interval;
+  private countdownTimeLeft: number;
 
   constructor() {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -49,16 +51,19 @@ export class WordListExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO;
+    this.countdownTimeLeft = 3;
     this.timeLeft = this.duration;
     this.answeredList = [];
+    this.changeAssistantText();
   }
 
   /**
    * Begin the exercise
    */
   private startExercise() {
-    this.exercisePhase = ExercisePhase.READ;
-    this.startTimer();
+    this.exercisePhase = ExercisePhase.COUNTDOWN;
+    this.changeAssistantText();
+    this.startCountdown();
   }
 
   /**
@@ -72,6 +77,39 @@ export class WordListExerciseComponent implements OnInit {
   }
 
   /**
+   * Changes the text and visibility of the assistant
+   */
+  private changeAssistantText() {
+    let showA;
+    let titleA;
+    let descriptionA;
+
+    switch (this.exercisePhase) {
+      case ExercisePhase.INTRO:
+        showA = true;
+        titleA = '¡Lista de palabras!';
+        descriptionA = 'Memoriza las palabras de la lista y cuando acabe el tiempo intenta escribir tantas como puedas. Pulsa comenzar cuando estés listo.';
+        break;
+      case ExercisePhase.COUNTDOWN:
+        showA = false;
+        titleA = '';
+        descriptionA = '';
+        break;
+      case ExercisePhase.WRITE:
+        showA = true;
+        titleA = 'Escriba las palabras';
+        descriptionA = 'Escriba una palabra y pulse en "Escribir Siguiente Palabra" para escribir otra palabra.\n' +
+          'Cuando no recuerde más palabaras pulse "No recuerdo más palabras".';
+        break;
+    }
+    exerciseManager.notifyAssistant({
+      show: showA,
+      title: titleA,
+      description: descriptionA
+    });
+  }
+
+  /**
    * Checks if the answer is included in the wordList array
    */
   private checkAnswer() {
@@ -81,10 +119,26 @@ export class WordListExerciseComponent implements OnInit {
       this.answeredList.push(this.answer);
       // Get score maybe
     }
+    this.answer = null;
   }
 
   /**
-   * Starts the timer
+   * Starts the countdown before showing the list
+   */
+  private startCountdown() {
+    this.interval = setInterval(() => {
+      if (this.countdownTimeLeft > 0) {
+        this.countdownTimeLeft--;
+      } else {
+        this.exercisePhase = ExercisePhase.READ;
+        this.pauseTimer();
+        this.startTimer();
+      }
+    }, 1000);
+  }
+
+  /**
+   * Starts the timer during the exercise
    */
   private startTimer() {
     this.interval = setInterval(() => {
@@ -92,6 +146,7 @@ export class WordListExerciseComponent implements OnInit {
         this.timeLeft--;
       } else {
         this.exercisePhase = ExercisePhase.WRITE;
+        this.changeAssistantText();
         this.pauseTimer();
       }
     }, 1000);
