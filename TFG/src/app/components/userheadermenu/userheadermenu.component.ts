@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {FunctionsService} from "../../services/functions.service";
-import {HeaderOption} from "../../classes/header-option";
-import {HeaderOptionsService} from "../../services/header-options.service";
+import {FunctionsService} from '../../services/functions.service';
+import {HeaderOption} from '../../classes/header-option';
+import {HeaderOptionsService} from '../../services/header-options.service';
 
 @Component({
   selector: 'app-userheadermenu',
   templateUrl: './userheadermenu.component.html',
   styleUrls: ['./userheadermenu.component.scss'],
 })
+/**
+ * Header menu bar in the user pages
+ * both in mobile and desktop view
+ */
 export class UserheadermenuComponent implements OnInit {
   /**
    * Kind of device

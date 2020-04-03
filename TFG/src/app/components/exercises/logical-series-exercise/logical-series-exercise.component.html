@@ -1,0 +1,74 @@
+<!--
+  - Intro
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-card-subtitle>
+      Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
+      círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por último
+      otro cuadrado. ¿Adivinas que iría después del último cuadrado?
+    </ion-card-subtitle>
+    <ion-grid>
+      <ion-row>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+      </ion-row>
+      <ion-row>
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/placeholder.png" height="150" width="150"/>
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="startDemo()">Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Demo
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-card-subtitle>
+      Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
+      círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por
+      último otro cuadrado. ¿Adivinas que iría después del último cuadrado?
+    </ion-card-subtitle>
+    <!--
+      - Sample series
+      -->
+    <ion-row>
+      <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
+        <img [src]="img.src" [height]="img.height" [width]="img.width"/>
+      </div>
+    </ion-row>
+    <!--
+      - Placeholder Image
+      -->
+    <ion-row>
+      <img [src]=logicalSeriesService.getPlaceHolder().src [height]=logicalSeriesService.getPlaceHolder().height [width]=logicalSeriesService.getPlaceHolder().width />
+    </ion-row>
+    <ion-row>
+      <ion-card-subtitle>
+        De las respuestas de abajo, pulsa cuál es la correcta:
+      </ion-card-subtitle>
+    </ion-row>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="demoRadio">
+        <ion-row>
+          <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
+            <ion-item>
+              <img [src]="but.src" [height]="but.height" [width]="but.width"/>
+              <ion-radio class="ion-radio" name="demoRadio" [value]="but.value"></ion-radio>
+            </ion-item>
+          </div>
+        </ion-row>
+    </ion-radio-group>
+    <ion-button (click)="checkAnswer()">Listo</ion-button>
+  </ion-card-content>
+</ion-card>
+

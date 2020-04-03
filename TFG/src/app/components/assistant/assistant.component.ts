@@ -6,6 +6,10 @@ import {exerciseManager} from '../../classes/exercise-manager';
   templateUrl: './assistant.component.html',
   styleUrls: ['./assistant.component.scss'],
 })
+/**
+ * Assistant class where info about an exercise
+ * is located and the assistant avatar is displayed
+ */
 export class AssistantComponent implements OnInit {
   private show: boolean;
   private title: string;

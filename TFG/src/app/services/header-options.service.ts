@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HeaderOption} from "../classes/header-option";
+import {HeaderOption} from '../classes/header-option';
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * All user header menu buttons
+ */
 export class HeaderOptionsService {
   private headerOptions: HeaderOption[] = [
     {

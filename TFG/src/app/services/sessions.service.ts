@@ -5,6 +5,9 @@ import {DurationKind} from '../enum/duration-kind.enum';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Sessions service
+ */
 export class SessionsService {
   private sessions: Session[] = [
     {
@@ -15,25 +18,16 @@ export class SessionsService {
         {
           id: 'e1',
           type: 0,
-          duration: 5,
-          maxTime: 60,
+          duration: -1,
+          maxTime: -1,
           dependsOn: -1,
           repetitions: 0,
-          durationKind: DurationKind.TIME,
+          durationKind: DurationKind.NOTIME,
         },
         {
           id: 'e2',
           type: 0,
-          duration: 1,
-          maxTime: 60,
-          dependsOn: -1,
-          repetitions: 0,
-          durationKind: DurationKind.TIME,
-        },
-        {
-          id: 'e1',
-          type: 0,
-          duration: 3,
+          duration: 5,
           maxTime: 60,
           dependsOn: -1,
           repetitions: 0,
@@ -75,7 +69,7 @@ export class SessionsService {
   /**
    * Return the number of exercises in a session
    */
-  getNumberOfExercises(sessionId: string) {
+  length(sessionId: string) {
     return this.getSession(sessionId).exercises.length;
   }
 }

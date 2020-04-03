@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AccessPageRoutingModule } from './access-routing.module';
 
 import { AccessPage } from './access.page';
-import {HomePageModule} from "../home/home.module";
+import {HomePageModule} from '../home/home.module';
 
 @NgModule({
   imports: [

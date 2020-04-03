@@ -17,7 +17,14 @@ export enum ExercisePhase {
   templateUrl: './word-list-exercise.component.html',
   styleUrls: ['./word-list-exercise.component.scss'],
 })
+/**
+ * Word List Exercise, shows a list of words that
+ * must be memorized
+ */
 export class WordListExerciseComponent implements OnInit {
+  /**
+   * Exercise Attributes
+   */
   private id: string;
   private type: number;
   private duration: number;
@@ -25,7 +32,9 @@ export class WordListExerciseComponent implements OnInit {
   private dependsOn: number;
   private repetitions: number;
   private durationKind: DurationKind;
-
+  /**
+   * Word List Exercise's own attributes
+   */
   private exercisePhase: ExercisePhase;
   private wordList: string[] = ['Buitre', 'Clavel', 'Licor', 'Silla', 'Orquídea', 'Águila', 'Lámpara', 'Anís', 'Pavo', 'Armario', 'Jazmín', 'Coñac'];
   private answeredList: string[];
@@ -38,6 +47,7 @@ export class WordListExerciseComponent implements OnInit {
   private countdownTimeLeft: number;
 
   constructor() {
+    // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
       this.id = data.id,
       this.type = data.type,
@@ -58,18 +68,18 @@ export class WordListExerciseComponent implements OnInit {
   }
 
   /**
-   * Begin the exercise
+   * Begin the exercise's countdown
    */
-  private startExercise() {
+  private startExercise(): void {
     this.exercisePhase = ExercisePhase.COUNTDOWN;
     this.changeAssistantText();
     this.startCountdown();
   }
 
   /**
-   * Ends the exercise
+   * Ends the exercise notifying the session
    */
-  private endExercise() {
+  private endExercise(): void {
     exerciseManager.notifyEnd({
       id: this.id,
       success: true
@@ -78,8 +88,9 @@ export class WordListExerciseComponent implements OnInit {
 
   /**
    * Changes the text and visibility of the assistant
+   * during the exercise
    */
-  private changeAssistantText() {
+  private changeAssistantText(): void {
     let showA;
     let titleA;
     let descriptionA;
@@ -111,8 +122,9 @@ export class WordListExerciseComponent implements OnInit {
 
   /**
    * Checks if the answer is included in the wordList array
+   * and if it hasn't been answered yet
    */
-  private checkAnswer() {
+  private checkAnswer(): void {
     // If the inputted word is correct and hasn't been answered
     const correct = this.wordList.includes(this.answer) && !this.answeredList.includes(this.answer);
     if (correct) {
@@ -125,7 +137,7 @@ export class WordListExerciseComponent implements OnInit {
   /**
    * Starts the countdown before showing the list
    */
-  private startCountdown() {
+  private startCountdown(): void {
     this.interval = setInterval(() => {
       if (this.countdownTimeLeft > 0) {
         this.countdownTimeLeft--;
@@ -140,7 +152,7 @@ export class WordListExerciseComponent implements OnInit {
   /**
    * Starts the timer during the exercise
    */
-  private startTimer() {
+  private startTimer(): void {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
@@ -155,7 +167,7 @@ export class WordListExerciseComponent implements OnInit {
   /**
    * Pauses the timer
    */
-  private pauseTimer() {
+  private pauseTimer(): void {
     clearInterval(this.interval);
   }
 

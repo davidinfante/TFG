@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from "../../classes/page";
-import {PagesService} from "../../services/pages.service";
-import {FunctionsService} from "../../services/functions.service";
+import {Page} from '../../classes/page';
+import {PagesService} from '../../services/pages.service';
+import {FunctionsService} from '../../services/functions.service';
 
 @Component({
   selector: 'app-headermenu',
   templateUrl: './headermenu.component.html',
   styleUrls: ['./headermenu.component.scss'],
 })
+/**
+ * Header menu bar in the main pages
+ * both in mobile and desktop view
+ */
 export class HeadermenuComponent implements OnInit {
   /**
    * Kind of device

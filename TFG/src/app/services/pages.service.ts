@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Page} from "../classes/page";
+import {Page} from '../classes/page';
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * All header menu buttons
+ */
 export class PagesService {
   private pages: Page[] = [
     {

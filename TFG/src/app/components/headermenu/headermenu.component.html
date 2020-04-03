@@ -8,6 +8,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+    <!--
+      - Buttons
+      -->
     <ion-list>
       <ion-item *ngFor="let page of pages" [routerLink]="page.url" [color]="page.color">
         <ion-icon *ngIf="page.showIcon" [name]="page.icon" slot="start"></ion-icon>
@@ -34,7 +37,6 @@
           </ion-buttons>
         </ion-col>
       </ion-row>
-
       <!--
         - else displays toolbar
         -->

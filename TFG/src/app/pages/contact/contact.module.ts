@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ContactPageRoutingModule } from './contact-routing.module';
 
 import { ContactPage } from './contact.page';
-import {HomePageModule} from "../home/home.module";
+import {HomePageModule} from '../home/home.module';
 
 @NgModule({
   imports: [

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ExerciseslistPage } from './exerciseslist.page';
+import { LogicalSeriesExerciseComponent } from './logical-series-exercise.component';
 
-describe('ExerciseslistPage', () => {
-  let component: ExerciseslistPage;
-  let fixture: ComponentFixture<ExerciseslistPage>;
+describe('LogicalSeriesExerciseComponent', () => {
+  let component: LogicalSeriesExerciseComponent;
+  let fixture: ComponentFixture<LogicalSeriesExerciseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExerciseslistPage ],
+      declarations: [ LogicalSeriesExerciseComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExerciseslistPage);
+    fixture = TestBed.createComponent(LogicalSeriesExerciseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

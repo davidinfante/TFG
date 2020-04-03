@@ -1,5 +1,5 @@
 /**
- * Information that must have any page
+ * Information that any page in the header menu must have
  */
 export class Page {
   title: string;

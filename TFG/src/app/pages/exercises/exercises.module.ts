@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ExercisesPageRoutingModule } from './exercises-routing.module';
 
 import { ExercisesPage } from './exercises.page';
-import {HomePageModule} from "../home/home.module";
+import {HomePageModule} from '../home/home.module';
 
 @NgModule({
   imports: [

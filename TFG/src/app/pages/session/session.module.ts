@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { SessionPageRoutingModule } from './session-routing.module';
 
 import { SessionPage } from './session.page';
-import {ExerciseslistPageModule} from '../exerciseslist/exerciseslist.module';
 import {WordListExerciseComponent} from '../../components/exercises/word-list-exercise/word-list-exercise.component';
 import {AdDirective} from '../../directives/ad-directive.directive';
+import {UserheadermenuComponent} from '../../components/userheadermenu/userheadermenu.component';
+import {AssistantComponent} from '../../components/assistant/assistant.component';
+import {LogicalSeriesExerciseComponent} from '../../components/exercises/logical-series-exercise/logical-series-exercise.component';
 
 @NgModule({
   imports: [
@@ -17,15 +19,18 @@ import {AdDirective} from '../../directives/ad-directive.directive';
     FormsModule,
     IonicModule,
     SessionPageRoutingModule,
-    ExerciseslistPageModule
   ],
   declarations: [
     SessionPage,
+    UserheadermenuComponent,
+    AssistantComponent,
     AdDirective,
-    WordListExerciseComponent
+    WordListExerciseComponent,
+    LogicalSeriesExerciseComponent,
   ],
   entryComponents: [
-    WordListExerciseComponent
+    WordListExerciseComponent,
+    LogicalSeriesExerciseComponent,
   ]
 })
 export class SessionPageModule {}

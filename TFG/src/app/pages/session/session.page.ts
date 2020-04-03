@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewChild, ViewContainerRef
 } from '@angular/core';
-import {AssistantComponent} from '../../components/assistant/assistant.component';
 import {Session} from '../../classes/session';
 import {SessionsService} from '../../services/sessions.service';
 import {ExercisesService} from '../../services/exercises.service';
@@ -28,14 +27,25 @@ export enum SessionPhase {
   templateUrl: './session.page.html',
   styleUrls: ['./session.page.scss'],
 })
+/**
+ * Class that dynamically loads the exercises of a session
+ */
 export class SessionPage implements OnInit, AfterViewInit {
-  private sessionId: string;
+  /**
+   * Exercise creator directive
+   */
   @ViewChild(AdDirective, null) adHost: AdDirective;
+  /**
+   * Session's attributes
+   */
+  private sessionId: string;
   private session: Session;
   private currentExercise: Exercise;
   private currentExerciseIndex: number;
   private sessionPhase: SessionPhase;
-  // Dynamically generate component attributes
+  /**
+   * Dynamically generate component attributes
+   */
   private componentRef: ComponentRef<any>;
   private viewContainerRef: ViewContainerRef;
 
@@ -64,6 +74,7 @@ export class SessionPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // Change the assistant text with the session's title and description
     exerciseManager.notifyAssistant({show: true, title: this.session.title, description: this.session.description});
   }
 
@@ -74,7 +85,7 @@ export class SessionPage implements OnInit, AfterViewInit {
    */
   private nextExercise(): void {
     // Only load the next exercise if there is more left in the session
-    if (this.currentExerciseIndex < this.sessionsService.getNumberOfExercises(this.sessionId)) {
+    if (this.currentExerciseIndex < this.sessionsService.length(this.sessionId)) {
       this.sessionPhase = SessionPhase.EXERCISE;
       // Get the next exercise from exercises service
       this.currentExercise = this.exercisesService.getExercise(this.session.exercises[this.currentExerciseIndex].id);

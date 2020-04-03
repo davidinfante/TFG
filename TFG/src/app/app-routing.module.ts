@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/access/access.module').then( m => m.AccessPageModule)
   },
   {
-    path: 'exerciseslist',
-    loadChildren: () => import('./pages/exerciseslist/exerciseslist.module').then(m => m.ExerciseslistPageModule)
-  },
-  {
     path: 'session',
     loadChildren: () => import('./pages/session/session.module').then( m => m.SessionPageModule)
   },
