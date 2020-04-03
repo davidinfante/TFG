@@ -11,6 +11,7 @@ export enum ExercisePhase {
   DEMO,
   COUNTDOWN,
   EXERCISE,
+  END
 }
 
 @Component({
@@ -22,6 +23,7 @@ export enum ExercisePhase {
  * Local Series Exercise, shows a series of elements
  * and the following one must be picked between
  * a few options
+ * Has demo
  */
 export class LogicalSeriesExerciseComponent implements OnInit {
   /**
@@ -39,7 +41,15 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private exercisePhase: ExercisePhase;
   private actualSeries: number;
-  private demoRadio: string;
+  private radioValue: string;
+  private continueButton: boolean;
+  /**
+   * Place holder image variables
+   */
+  private placeholderSrc: string;
+  private placeholderH: number;
+  private placeholderW: number;
+  private showPlaceholder: boolean;
   /**
    * Timer variables
    */
@@ -60,9 +70,12 @@ export class LogicalSeriesExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.actualSeries = 0;
-    this.demoRadio = 'none';
+    this.continueButton = false;
+    this.radioValue = null;
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
+    this.countdownTimeLeft = 3;
+    this.showPlaceholder = true;
   }
 
   /**
@@ -71,14 +84,43 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private startDemo(): void {
     this.exercisePhase = ExercisePhase.DEMO;
     this.changeAssistantText();
+    this.changePlaceHolderImg();
   }
 
   /**
    * Begin the exercise's countdown
    */
   private startExercise(): void {
-    this.exercisePhase = ExercisePhase.DEMO;
+    this.exercisePhase = ExercisePhase.COUNTDOWN;
+    // Reset ready button visibility
+    this.continueButton = false;
+    // Reset radio button value
+    this.radioValue = null;
+    // Get next series
+    ++this.actualSeries;
+    // Get placeholder image
+    this.changePlaceHolderImg();
     this.changeAssistantText();
+    this.startCountdown();
+  }
+
+  /**
+   * Get the next series in the list and displays it
+   */
+  private nextSeries(): void {
+    if (this.actualSeries < this.logicalSeriesService.getLogicalSeriesLength() - 1) {
+      // Reset ready button visibility
+      this.continueButton = false;
+      // Reset radio button value
+      this.radioValue = null;
+      // Get next series
+      ++this.actualSeries;
+      // Get placeholder image
+      this.changePlaceHolderImg();
+    } else {
+      this.exercisePhase = ExercisePhase.END;
+      this.changeAssistantText();
+    }
   }
 
   /**
@@ -113,6 +155,21 @@ export class LogicalSeriesExerciseComponent implements OnInit {
         titleA = '';
         descriptionA = '';
         break;
+      case ExercisePhase.COUNTDOWN:
+        showA = true;
+        titleA = 'El ejercicio comenzará en:';
+        descriptionA = '';
+        break;
+      case ExercisePhase.EXERCISE:
+        showA = false;
+        titleA = '';
+        descriptionA = '';
+        break;
+      case ExercisePhase.END:
+        showA = true;
+        titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
+        descriptionA = '{{ Medalla }}';
+        break;
     }
     exerciseManager.notifyAssistant({
       show: showA,
@@ -129,7 +186,8 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       if (this.countdownTimeLeft > 0) {
         this.countdownTimeLeft--;
       } else {
-        //this.exercisePhase = ExercisePhase.EXERCISE;
+        this.exercisePhase = ExercisePhase.EXERCISE;
+        this.changeAssistantText();
         this.pauseTimer();
       }
     }, 1000);
@@ -146,12 +204,38 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    * Check's if the answer is correct
    */
   private checkAnswer(): void {
-    switch (this.exercisePhase) {
-      case ExercisePhase.DEMO:
-        if (this.demoRadio === '3') {
-          console.log('correct');
-        }
-        break;
+    console.log(this.logicalSeriesService.getCorrectOptionValue(this.actualSeries));
+    // Detect the correct position of the current series
+    if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
+      // Change button color
+      console.log('correct');
+    } else {
+      console.log('incorrect');
     }
+    // Change the placeholder image
+    this.changePlaceHolderImg();
+
+    this.continueButton = true;
+  }
+
+  /**
+   * Changes the placeholder image with the correct answer
+   * and vice versa
+   */
+  private changePlaceHolderImg(): void {
+    if (this.showPlaceholder) {
+      this.placeholderSrc = this.logicalSeriesService.getPlaceHolder().src;
+      this.placeholderH = this.logicalSeriesService.getPlaceHolder().height;
+      this.placeholderW = this.logicalSeriesService.getPlaceHolder().width;
+    } else {
+      this.placeholderSrc = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).src;
+      this.placeholderH = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).height;
+      this.placeholderW = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).width;
+    }
+    /**
+     * Get placeholder the first time it's called
+     * and the answer the second
+     */
+    this.showPlaceholder = !this.showPlaceholder;
   }
 }

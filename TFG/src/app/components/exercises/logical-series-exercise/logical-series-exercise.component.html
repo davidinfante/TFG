@@ -15,9 +15,8 @@
         <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
         <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
         <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
-      </ion-row>
-      <ion-row>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/placeholder.png" height="150" width="150"/>
+
+        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/placeholder.png" height="98" width="98"/>
       </ion-row>
       <ion-row>
         <ion-button (click)="startDemo()">Continuar</ion-button>
@@ -43,12 +42,10 @@
       <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
         <img [src]="img.src" [height]="img.height" [width]="img.width"/>
       </div>
-    </ion-row>
-    <!--
+      <!--
       - Placeholder Image
       -->
-    <ion-row>
-      <img [src]=logicalSeriesService.getPlaceHolder().src [height]=logicalSeriesService.getPlaceHolder().height [width]=logicalSeriesService.getPlaceHolder().width />
+      <img [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
     </ion-row>
     <ion-row>
       <ion-card-subtitle>
@@ -58,17 +55,81 @@
     <!--
       - Answer Buttons
       -->
-    <ion-radio-group [(ngModel)]="demoRadio">
+    <ion-radio-group [(ngModel)]="radioValue">
         <ion-row>
           <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
             <ion-item>
-              <img [src]="but.src" [height]="but.height" [width]="but.width"/>
-              <ion-radio class="ion-radio" name="demoRadio" [value]="but.value"></ion-radio>
+              <ion-col>
+                <img [src]="but.src" [height]="but.height" [width]="but.width"/>
+                <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
+                <span>{{ but.value }}</span>
+              </ion-col>
             </ion-item>
           </div>
         </ion-row>
     </ion-radio-group>
-    <ion-button (click)="checkAnswer()">Listo</ion-button>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()">Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="startExercise()">Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
+<!--
+  - Countdown
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Exercise series
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <!--
+      - Sample series
+      -->
+    <ion-row>
+      <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
+        <img [src]="img.src" [height]="img.height" [width]="img.width"/>
+      </div>
+      <!--
+      - Placeholder Image
+      -->
+      <img [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+    </ion-row>
+    <ion-row>
+      <ion-card-subtitle>
+        De las respuestas de abajo, pulsa cuál es la correcta:
+      </ion-card-subtitle>
+    </ion-row>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="radioValue">
+      <ion-row>
+        <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
+          <ion-item>
+            <ion-col>
+              <img [src]="but.src" [height]="but.height" [width]="but.width"/>
+              <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
+              <span>{{ but.value }}</span>
+            </ion-col>
+          </ion-item>
+        </div>
+      </ion-row>
+    </ion-radio-group>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()">Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="nextSeries()">Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Ending
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+  </ion-card-content>
+</ion-card>

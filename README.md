@@ -1,12 +1,32 @@
 # TFG
-TFG 19/20
+TFG 19/20 - David Infante Casas
 
-### How the session page work
-The session page implements ng-template using the ad-host directive, where the exercises will be loaded.  
+### Directory structure
+```
+docs/                       Project documentation
+TFG/src/
+    app/                    App code
+        classes             Classes needed by the app and the exercises
+        components/         Components used by the app
+            exercises/      Exercise components
+        directives          All directives needed by the app
+        enum                Enums needed by the app
+        pages               All pages that can be navigated through the app
+        services            Services that grant data to elements that require it
+    assets/                 Media files
+        img                 Project's main images
+        icon                App's favicon
+        exercise            Images required by exercises
+    theme/variables.scss    SCSS Global variables
+```
+### How the session page works
+Session page implements ng-template using the ad-host directive, where the exercises will be loaded.  
 Exercises are loaded using ComponentFactoryResolver and created with ViewContainerRef.  
 This allows the programmer to create exercises freely and makes the app extensible.  
 To allow freely exercise development, each exercise can change the Assistant status via exerciseManager.
 
+Here's a diagram:
+![Sessions Class Diagram](docs/Sessions-Exercises_classdiagram.png)
 
 ### How to add new Sessions:
 - Edit the file `/services/sessions.service.ts` adding a new element in the sessions array including:

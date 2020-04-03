@@ -102,8 +102,8 @@ export class WordListExerciseComponent implements OnInit {
         descriptionA = 'Memoriza las palabras de la lista y cuando acabe el tiempo intenta escribir tantas como puedas. Pulsa comenzar cuando estés listo.';
         break;
       case ExercisePhase.COUNTDOWN:
-        showA = false;
-        titleA = '';
+        showA = true;
+        titleA = 'El ejercicio comenzará en:';
         descriptionA = '';
         break;
       case ExercisePhase.WRITE:
