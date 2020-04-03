@@ -10,13 +10,13 @@
     </ion-card-subtitle>
     <ion-grid>
       <ion-row>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
 
-        <img src="../../../../assets/exercises/img/LogicalSeriesExercise/placeholder.png" height="98" width="98"/>
+        <img class="ion-margin" src="../../../../assets/exercises/img/LogicalSeriesExercise/placeholder.png" height="98" width="98"/>
       </ion-row>
       <ion-row>
         <ion-button (click)="startDemo()">Continuar</ion-button>
@@ -40,12 +40,12 @@
       -->
     <ion-row>
       <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
-        <img [src]="img.src" [height]="img.height" [width]="img.width"/>
+        <img class="ion-margin" [src]="img.src" [height]="img.height" [width]="img.width"/>
       </div>
       <!--
       - Placeholder Image
       -->
-      <img [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+      <img class="ion-margin" class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
     </ion-row>
     <ion-row>
       <ion-card-subtitle>
@@ -60,7 +60,7 @@
           <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
             <ion-item>
               <ion-col>
-                <img [src]="but.src" [height]="but.height" [width]="but.width"/>
+                <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width"/>
                 <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
                 <span>{{ but.value }}</span>
               </ion-col>
@@ -92,12 +92,12 @@
       -->
     <ion-row>
       <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
-        <img [src]="img.src" [height]="img.height" [width]="img.width"/>
+        <img class="ion-margin" [src]="img.src" [height]="img.height" [width]="img.width"/>
       </div>
       <!--
       - Placeholder Image
       -->
-      <img [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
     </ion-row>
     <ion-row>
       <ion-card-subtitle>
@@ -112,7 +112,7 @@
         <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
           <ion-item>
             <ion-col>
-              <img [src]="but.src" [height]="but.height" [width]="but.width"/>
+              <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width"/>
               <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
               <span>{{ but.value }}</span>
             </ion-col>
