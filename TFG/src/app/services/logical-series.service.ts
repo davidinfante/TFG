@@ -11,6 +11,9 @@ export class LogicalSeriesService {
     width: 98
   };
   private logicalSeries: LogicalSeries[] = [
+    /**
+     * Demo
+     */
     {
       id: 0,
       sampleImg: [
@@ -71,7 +74,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 1,
@@ -128,7 +132,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 2,
@@ -185,7 +190,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 3,
@@ -247,7 +253,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 4,
@@ -309,7 +316,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 5,
@@ -361,7 +369,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
     {
       id: 6,
@@ -413,7 +422,8 @@ export class LogicalSeriesService {
           width: 98,
           value: '4'
         },
-      ]
+      ],
+      changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
   ];
 
@@ -474,5 +484,13 @@ export class LogicalSeriesService {
    */
   getLogicalSeriesLength() {
     return this.logicalSeries.length;
+  }
+
+  /**
+   * Changes the color of the answer buttons
+   * of the specified logical series
+   */
+  changeButtonsColor(actualSeries: number) {
+    this.logicalSeries[actualSeries].changeBackgroundColor();
   }
 }

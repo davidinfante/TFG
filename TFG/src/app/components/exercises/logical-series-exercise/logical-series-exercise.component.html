@@ -60,8 +60,8 @@
           <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
             <ion-item>
               <ion-col>
-                <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width"/>
-                <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
+                <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+                <ion-radio *ngIf="!this.checkedAnswer" name="demoRadio" [value]="but.value"></ion-radio>
                 <span>{{ but.value }}</span>
               </ion-col>
             </ion-item>
@@ -97,7 +97,7 @@
       <!--
       - Placeholder Image
       -->
-      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW"/>
     </ion-row>
     <ion-row>
       <ion-card-subtitle>
@@ -112,8 +112,8 @@
         <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
           <ion-item>
             <ion-col>
-              <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width"/>
-              <ion-radio name="demoRadio" [value]="but.value"></ion-radio>
+              <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+              <ion-radio *ngIf="!this.checkedAnswer" name="demoRadio" [value]="but.value"></ion-radio>
               <span>{{ but.value }}</span>
             </ion-col>
           </ion-item>

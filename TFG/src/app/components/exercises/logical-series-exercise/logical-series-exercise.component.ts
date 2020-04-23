@@ -43,6 +43,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private actualSeries: number;
   private radioValue: string;
   private continueButton: boolean;
+  private checkedAnswer : boolean;
   /**
    * Place holder image variables
    */
@@ -76,6 +77,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.changeAssistantText();
     this.countdownTimeLeft = 3;
     this.showPlaceholder = true;
+    this.checkedAnswer = false;
   }
 
   /**
@@ -98,6 +100,8 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.radioValue = null;
     // Get next series
     ++this.actualSeries;
+    // Enable radio buttons
+    this.checkedAnswer = false;
     // Get placeholder image
     this.changePlaceHolderImg();
     this.changeAssistantText();
@@ -115,6 +119,8 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       this.radioValue = null;
       // Get next series
       ++this.actualSeries;
+      // Enable radio buttons
+      this.checkedAnswer = false;
       // Get placeholder image
       this.changePlaceHolderImg();
     } else {
@@ -204,17 +210,13 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    * Check's if the answer is correct
    */
   private checkAnswer(): void {
-    console.log(this.logicalSeriesService.getCorrectOptionValue(this.actualSeries));
-    // Detect the correct position of the current series
-    if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
-      // Change button color
-      console.log('correct');
-    } else {
-      console.log('incorrect');
-    }
+    // Change the answer buttons color
+    this.logicalSeriesService.changeButtonsColor(this.actualSeries);
     // Change the placeholder image
     this.changePlaceHolderImg();
-
+    // Disable radio buttons
+    this.checkedAnswer = true;
+    // Change the Done button to Continue button
     this.continueButton = true;
   }
 

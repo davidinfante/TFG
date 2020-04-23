@@ -21,12 +21,14 @@ export class LogicalSeriesButtons {
   height: number;
   width: number;
   value: string;
+  backgroundColor?: string;
 
   constructor() {
     this.src = '';
     this.height = 0;
     this.width = 0;
     this.value = '';
+    this.backgroundColor = '--ion-item-background';
   }
 }
 
@@ -38,4 +40,18 @@ export class LogicalSeries {
   sampleImg: LogicalSeriesSampleImg[];
   correctOption: LogicalSeriesButtons;
   buttons: LogicalSeriesButtons[];
+
+  /**
+   * Changes the background color to green
+   * if correct and to red if incorrect
+   */
+  changeBackgroundColor(): void {
+    for (const but of this.buttons) {
+      if (but.value === this.correctOption.value) {
+        but.backgroundColor = '#2fdf75';
+      } else {
+        but.backgroundColor = '#ff4961';
+      }
+    }
+  }
 }
