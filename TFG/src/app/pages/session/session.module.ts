@@ -12,6 +12,7 @@ import {AdDirective} from '../../directives/ad-directive.directive';
 import {UserheadermenuComponent} from '../../components/userheadermenu/userheadermenu.component';
 import {AssistantComponent} from '../../components/assistant/assistant.component';
 import {LogicalSeriesExerciseComponent} from '../../components/exercises/logical-series-exercise/logical-series-exercise.component';
+import {SemanticSeriesExerciseComponent} from '../../components/exercises/semantic-series-exercise/semantic-series-exercise.component';
 
 @NgModule({
   imports: [
@@ -27,10 +28,12 @@ import {LogicalSeriesExerciseComponent} from '../../components/exercises/logical
     AdDirective,
     WordListExerciseComponent,
     LogicalSeriesExerciseComponent,
+    SemanticSeriesExerciseComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
     LogicalSeriesExerciseComponent,
+    SemanticSeriesExerciseComponent,
   ]
 })
 export class SessionPageModule {}

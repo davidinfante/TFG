@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Exercise} from '../classes/exercise';
 import {WordListExerciseComponent} from '../components/exercises/word-list-exercise/word-list-exercise.component';
 import {LogicalSeriesExerciseComponent} from '../components/exercises/logical-series-exercise/logical-series-exercise.component';
+import {SemanticSeriesExerciseComponent} from '../components/exercises/semantic-series-exercise/semantic-series-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,12 @@ export class ExercisesService {
     {
       id: 'e2',
       class: WordListExerciseComponent,
-      title: '¡Lista de palabras!'
+      title: '¡Memoriza la lista de palabras!'
+    },
+    {
+      id: 'e3',
+      class: SemanticSeriesExerciseComponent,
+      title: '¡Selecciona la palabra que no tenga algo en común con el resto!'
     },
   ];
 

@@ -28,7 +28,7 @@ export class LogicalSeriesButtons {
     this.height = 0;
     this.width = 0;
     this.value = '';
-    this.backgroundColor = '--ion-item-background';
+    this.backgroundColor = '';
   }
 }
 

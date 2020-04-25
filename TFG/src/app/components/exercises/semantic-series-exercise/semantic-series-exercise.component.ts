@@ -1,31 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
+import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
-import {LogicalSeriesService} from '../../../services/exercises/logical-series.service';
+import {DurationKind} from '../../../enum/duration-kind.enum';
+import {LogicalSeriesService} from "../../../services/exercises/logical-series.service";
+import {SemanticSeriesService} from "../../../services/exercises/semantic-series.service";
 
 /**
  * Phase of the exercise
  */
 export enum ExercisePhase {
   INTRO,
-  DEMO,
   COUNTDOWN,
   EXERCISE,
   END
 }
 
 @Component({
-  selector: 'app-logical-series-exercise',
-  templateUrl: './logical-series-exercise.component.html',
-  styleUrls: ['./logical-series-exercise.component.scss'],
+  selector: 'app-semantic-series-exercise',
+  templateUrl: './semantic-series-exercise.component.html',
+  styleUrls: ['./semantic-series-exercise.component.scss'],
 })
-/**
- * Local Series Exercise, shows a series of elements
- * and the following one must be picked between
- * a few options
- * Has demo
- */
-export class LogicalSeriesExerciseComponent implements OnInit {
+export class SemanticSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
@@ -37,56 +31,38 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   repetitions: number;
   durationKind: DurationKind;
   /**
-   * Local Series Exercise's own attributes
+   * Semantic Series Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
   private actualSeries: number;
   private radioValue: string;
-  private continueButton: boolean;
   private checkedAnswer: boolean;
-  /**
-   * Place holder image variables
-   */
-  private placeholderSrc: string;
-  private placeholderH: number;
-  private placeholderW: number;
-  private showPlaceholder: boolean;
+  private continueButton: boolean;
   /**
    * Timer variables
    */
   private interval;
   private countdownTimeLeft: number;
 
-  constructor(private logicalSeriesService: LogicalSeriesService) {
+  constructor(private semanticSeriesService: SemanticSeriesService) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.id = data.id,
-      this.type = data.type,
-      this.duration = data.duration,
-      this.maxTime = data.maxTime,
-      this.dependsOn = data.dependsOn,
-      this.repetitions = data.repetitions,
-      this.durationKind = data.durationKind;
+        this.type = data.type,
+        this.duration = data.duration,
+        this.maxTime = data.maxTime,
+        this.dependsOn = data.dependsOn,
+        this.repetitions = data.repetitions,
+        this.durationKind = data.durationKind;
     });
   }
 
   ngOnInit() {
     this.actualSeries = 0;
-    this.continueButton = false;
-    this.radioValue = null;
     this.exercisePhase = ExercisePhase.INTRO;
-    this.changeAssistantText();
     this.countdownTimeLeft = 3;
-    this.showPlaceholder = true;
+    this.radioValue = null;
     this.checkedAnswer = false;
-  }
-
-  /**
-   * Begin the exercise's demo
-   */
-  private startDemo(): void {
-    this.exercisePhase = ExercisePhase.DEMO;
-    this.changeAssistantText();
-    this.changePlaceHolderImg();
+    this.continueButton = false;
   }
 
   /**
@@ -98,12 +74,10 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.continueButton = false;
     // Reset radio button value
     this.radioValue = null;
-    // Get next series
-    ++this.actualSeries;
     // Enable radio buttons
     this.checkedAnswer = false;
-    // Get placeholder image
-    this.changePlaceHolderImg();
+    // Get next series
+    ++this.actualSeries;
     this.changeAssistantText();
     this.startCountdown();
   }
@@ -112,7 +86,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    * Get the next series in the list and display it
    */
   private nextSeries(): void {
-    if (this.actualSeries < this.logicalSeriesService.getLogicalSeriesLength() - 1) {
+    if (this.actualSeries < this.semanticSeriesService.getSemanticSeriesLength() - 1) {
       // Reset ready button visibility
       this.continueButton = false;
       // Reset radio button value
@@ -121,8 +95,6 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       ++this.actualSeries;
       // Enable radio buttons
       this.checkedAnswer = false;
-      // Get placeholder image
-      this.changePlaceHolderImg();
     } else {
       this.exercisePhase = ExercisePhase.END;
       this.changeAssistantText();
@@ -151,15 +123,11 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     switch (this.exercisePhase) {
       case ExercisePhase.INTRO:
         showA = true;
-        titleA = '¡Completa la serie!';
-        descriptionA = 'En este ejercicio te mostraré una serie de dibujos que siguen un orden determinado. Deberás' +
-          ' averiguar cómo van cambiando y añadir el dibujo que falta en el lugar de la señal de interrogación. ' +
-          'Para ello tendrás que pulsar sobre una de las imágenes numeradas que aparecerán en la parte inferior de la pantalla.';
-        break;
-      case ExercisePhase.DEMO:
-        showA = false;
-        titleA = '';
-        descriptionA = '';
+        titleA = '¿Qué palabra sobra?';
+        descriptionA = '¡Genial! Vamos a realizar un ejercicio de razonamiento. En este ejercicio te presentaré una serie ' +
+          'de palabras. Entre ellas hay una que no está relacionada con las demás. Recuerda, cuando comiences el ejercicio, ' +
+          'deberás seleccionar la palabra que consideres correcta y pulsar el botón Listo. Dispondrás de un botón Ayuda, por si ' +
+          'necesitas alguna pista, pero ¡es mejor si lo intentas hacer tú solo! Cuando estés listo pulsa Continuar.';
         break;
       case ExercisePhase.COUNTDOWN:
         showA = true;
@@ -174,7 +142,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ Medalla }}';
+        descriptionA = 'Has ganado una medalla de {{ medalla }}.';
         break;
     }
     exerciseManager.notifyAssistant({
@@ -211,37 +179,14 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private checkAnswer(): void {
     // Detects if the selected answer is correct
-    if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
+    if (this.radioValue === this.semanticSeriesService.getCorrectOptionValue(this.actualSeries)) {
       console.log('correcto');
     }
     // Change the answer buttons color
-    this.logicalSeriesService.changeButtonsColor(this.actualSeries);
-    // Change the placeholder image
-    this.changePlaceHolderImg();
+    this.semanticSeriesService.changeButtonsColor(this.actualSeries);
     // Disable radio buttons
     this.checkedAnswer = true;
     // Change the Done button to Continue button
     this.continueButton = true;
-  }
-
-  /**
-   * Changes the placeholder image with the correct answer
-   * and vice versa
-   */
-  private changePlaceHolderImg(): void {
-    if (this.showPlaceholder) {
-      this.placeholderSrc = this.logicalSeriesService.getPlaceHolder().src;
-      this.placeholderH = this.logicalSeriesService.getPlaceHolder().height;
-      this.placeholderW = this.logicalSeriesService.getPlaceHolder().width;
-    } else {
-      this.placeholderSrc = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).src;
-      this.placeholderH = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).height;
-      this.placeholderW = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).width;
-    }
-    /**
-     * Get placeholder the first time it's called
-     * and the answer the second
-     */
-    this.showPlaceholder = !this.showPlaceholder;
   }
 }

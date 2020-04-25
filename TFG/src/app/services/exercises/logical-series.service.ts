@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LogicalSeries} from '../classes/logical-series';
+import {LogicalSeries} from '../../classes/exercises/logical-series';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +77,9 @@ export class LogicalSeriesService {
       ],
       changeBackgroundColor: LogicalSeries.prototype.changeBackgroundColor
     },
+    /**
+     * Exercise series
+     */
     {
       id: 1,
       sampleImg: [

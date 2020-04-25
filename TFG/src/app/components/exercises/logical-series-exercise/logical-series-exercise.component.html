@@ -61,7 +61,7 @@
             <ion-item>
               <ion-col>
                 <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
-                <ion-radio *ngIf="!this.checkedAnswer" name="demoRadio" [value]="but.value"></ion-radio>
+                <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
                 <span>{{ but.value }}</span>
               </ion-col>
             </ion-item>
@@ -113,7 +113,7 @@
           <ion-item>
             <ion-col>
               <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
-              <ion-radio *ngIf="!this.checkedAnswer" name="demoRadio" [value]="but.value"></ion-radio>
+              <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
               <span>{{ but.value }}</span>
             </ion-col>
           </ion-item>

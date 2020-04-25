@@ -16,6 +16,15 @@ export class SessionsService {
       description: '¡Bienvenido a VIRTRA-EL! Ésta es tu primera sesión, así que te explicaremos en qué consistirá tu plan de trabajo. Por favor, trata de realizar la sesión completa sin interrumpirla.',
       exercises: [
         {
+          id: 'e3',
+          type: 0,
+          duration: 5,
+          maxTime: 60,
+          dependsOn: -1,
+          repetitions: 0,
+          durationKind: DurationKind.NOTIME,
+        },
+        {
           id: 'e1',
           type: 0,
           duration: -1,
