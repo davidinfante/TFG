@@ -44,6 +44,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private radioValue: string;
   private continueButton: boolean;
   private checkedAnswer: boolean;
+  private score: number;
   /**
    * Place holder image variables
    */
@@ -78,6 +79,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.countdownTimeLeft = 3;
     this.showPlaceholder = true;
     this.checkedAnswer = false;
+    this.score = 0;
   }
 
   /**
@@ -174,7 +176,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ Medalla }}';
+        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
         break;
     }
     exerciseManager.notifyAssistant({
@@ -212,7 +214,9 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private checkAnswer(): void {
     // Detects if the selected answer is correct
     if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
-      console.log('correcto');
+      if (this.exercisePhase === ExercisePhase.EXERCISE) {
+        ++this.score;
+      }
     }
     // Change the answer buttons color
     this.logicalSeriesService.changeButtonsColor(this.actualSeries);

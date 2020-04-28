@@ -6,13 +6,15 @@ TFG 19/20 - David Infante Casas
 docs/                       Project documentation
 TFG/src/
     app/                    App code
-        classes             Classes needed by the app and the exercises
+        classes             Classes needed by the app
+            exercises/      Classes needed by the exercises
         components/         Components used by the app
             exercises/      Exercise components
         directives          All directives needed by the app
         enum                Enums needed by the app
         pages               All pages that can be navigated through the app
         services            Services that grant data to elements that require it
+            exercises/      Data needed by each exercise
     assets/                 Media files
         img                 Project's main images
         icon                App's favicon

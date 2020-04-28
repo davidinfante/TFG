@@ -13,6 +13,7 @@ import {UserheadermenuComponent} from '../../components/userheadermenu/userheade
 import {AssistantComponent} from '../../components/assistant/assistant.component';
 import {LogicalSeriesExerciseComponent} from '../../components/exercises/logical-series-exercise/logical-series-exercise.component';
 import {SemanticSeriesExerciseComponent} from '../../components/exercises/semantic-series-exercise/semantic-series-exercise.component';
+import {PositionsExerciseComponent} from '../../components/exercises/positions-exercise/positions-exercise.component';
 
 @NgModule({
   imports: [
@@ -29,11 +30,13 @@ import {SemanticSeriesExerciseComponent} from '../../components/exercises/semant
     WordListExerciseComponent,
     LogicalSeriesExerciseComponent,
     SemanticSeriesExerciseComponent,
+    PositionsExerciseComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
     LogicalSeriesExerciseComponent,
     SemanticSeriesExerciseComponent,
+    PositionsExerciseComponent,
   ]
 })
 export class SessionPageModule {}

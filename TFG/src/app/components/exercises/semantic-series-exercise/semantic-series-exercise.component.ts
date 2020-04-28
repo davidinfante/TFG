@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {DurationKind} from '../../../enum/duration-kind.enum';
-import {LogicalSeriesService} from "../../../services/exercises/logical-series.service";
-import {SemanticSeriesService} from "../../../services/exercises/semantic-series.service";
+import {SemanticSeriesService} from '../../../services/exercises/semantic-series.service';
 
 /**
  * Phase of the exercise
@@ -38,6 +37,7 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   private radioValue: string;
   private checkedAnswer: boolean;
   private continueButton: boolean;
+  private score: number;
   /**
    * Timer variables
    */
@@ -63,6 +63,8 @@ export class SemanticSeriesExerciseComponent implements OnInit {
     this.radioValue = null;
     this.checkedAnswer = false;
     this.continueButton = false;
+    this.changeAssistantText();
+    this.score = 0;
   }
 
   /**
@@ -142,7 +144,7 @@ export class SemanticSeriesExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = 'Has ganado una medalla de {{ medalla }}.';
+        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
         break;
     }
     exerciseManager.notifyAssistant({
@@ -180,7 +182,7 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   private checkAnswer(): void {
     // Detects if the selected answer is correct
     if (this.radioValue === this.semanticSeriesService.getCorrectOptionValue(this.actualSeries)) {
-      console.log('correcto');
+      ++this.score;
     }
     // Change the answer buttons color
     this.semanticSeriesService.changeButtonsColor(this.actualSeries);

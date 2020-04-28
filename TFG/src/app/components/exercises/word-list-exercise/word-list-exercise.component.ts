@@ -9,7 +9,8 @@ export enum ExercisePhase {
   INTRO,
   COUNTDOWN,
   READ,
-  WRITE
+  WRITE,
+  END
 }
 
 @Component({
@@ -39,6 +40,7 @@ export class WordListExerciseComponent implements OnInit {
   private wordList: string[] = ['Buitre', 'Clavel', 'Licor', 'Silla', 'Orquídea', 'Águila', 'Lámpara', 'Anís', 'Pavo', 'Armario', 'Jazmín', 'Coñac'];
   private answeredList: string[];
   @Input() answer: string;
+  private score: number;
   /**
    * Timer variables
    */
@@ -65,6 +67,7 @@ export class WordListExerciseComponent implements OnInit {
     this.timeLeft = this.duration;
     this.answeredList = [];
     this.changeAssistantText();
+    this.score = 0;
   }
 
   /**
@@ -112,6 +115,11 @@ export class WordListExerciseComponent implements OnInit {
         descriptionA = 'Escriba una palabra y pulse en "Escribir Siguiente Palabra" para escribir otra palabra.\n' +
           'Cuando no recuerde más palabaras pulse "No recuerdo más palabras".';
         break;
+      case ExercisePhase.END:
+        showA = true;
+        titleA = 'Fin del ejercicio';
+        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' palabras';
+        break;
     }
     exerciseManager.notifyAssistant({
       show: showA,
@@ -129,9 +137,17 @@ export class WordListExerciseComponent implements OnInit {
     const correct = this.wordList.includes(this.answer) && !this.answeredList.includes(this.answer);
     if (correct) {
       this.answeredList.push(this.answer);
-      // Get score maybe
+      ++this.score;
     }
     this.answer = null;
+  }
+
+  /**
+   * Shows the medal obtained and the ending of the exercise
+   */
+  private getMedal() {
+    this.exercisePhase = ExercisePhase.END;
+    this.changeAssistantText();
   }
 
   /**
