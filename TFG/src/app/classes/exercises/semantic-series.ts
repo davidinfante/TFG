@@ -7,7 +7,7 @@ export class SemanticSeriesButtons {
   backgroundColor?: string;
 
   constructor() {
-
+    this.title = '';
     this.value = '';
     this.backgroundColor = '';
   }

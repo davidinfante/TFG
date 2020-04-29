@@ -187,7 +187,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   }
 
   /**
-   * Starts the countdown before showing the list
+   * Starts the countdown before starting the exercise
    */
   private startCountdown(): void {
     this.interval = setInterval(() => {
