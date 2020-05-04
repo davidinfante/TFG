@@ -63,10 +63,10 @@ export class WordListExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO;
+    this.changeAssistantText();
     this.countdownTimeLeft = 3;
     this.timeLeft = this.duration;
     this.answeredList = [];
-    this.changeAssistantText();
     this.score = 0;
   }
 

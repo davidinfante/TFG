@@ -4,6 +4,7 @@ import {WordListExerciseComponent} from '../components/exercises/word-list-exerc
 import {LogicalSeriesExerciseComponent} from '../components/exercises/logical-series-exercise/logical-series-exercise.component';
 import {SemanticSeriesExerciseComponent} from '../components/exercises/semantic-series-exercise/semantic-series-exercise.component';
 import {PositionsExerciseComponent} from '../components/exercises/positions-exercise/positions-exercise.component';
+import {DirectNumbersExerciseComponent} from '../components/exercises/direct-numbers-exercise/direct-numbers-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class ExercisesService {
       id: 'e4',
       class: PositionsExerciseComponent,
       title: '¡Memoriza las posiciones!'
+    },
+    {
+      id: 'e5',
+      class: DirectNumbersExerciseComponent,
+      title: '¡Dictado de números!'
     },
   ];
 

@@ -6,17 +6,17 @@ import {Positions} from '../../classes/exercises/positions';
 })
 export class PositionsExerciseService {
   private tejado = {
-    src: '../../../../assets/exercises/img/PositionsExercise/tejado.png',
+    src: '../../../../assets/exercises/PositionsExercise/tejado.png',
     height: 136,
     width: 468
   };
   private ventanaClose = {
-    src: '../../../../assets/exercises/img/PositionsExercise/ventana-close.png',
+    src: '../../../../assets/exercises/PositionsExercise/ventana-close.png',
     height: 98,
     width: 98
   };
   private ventanaOpen = {
-    src: '../../../../assets/exercises/img/PositionsExercise/ventana-open.png',
+    src: '../../../../assets/exercises/PositionsExercise/ventana-open.png',
     height: 98,
     width: 98
   };

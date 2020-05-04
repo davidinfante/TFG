@@ -73,6 +73,7 @@ export class PositionsExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO;
+    this.changeAssistantText();
     this.countdownTimeLeft = 3;
     this.timeLeft = 10;
     this.actualBuilding = 1;

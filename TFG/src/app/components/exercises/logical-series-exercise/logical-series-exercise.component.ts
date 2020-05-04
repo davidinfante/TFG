@@ -4,7 +4,7 @@ import {exerciseManager} from '../../../classes/exercise-manager';
 import {LogicalSeriesService} from '../../../services/exercises/logical-series.service';
 
 /**
- * Phase of the exercise
+ * Phases of the exercise
  */
 export enum ExercisePhase {
   INTRO,

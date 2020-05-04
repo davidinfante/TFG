@@ -59,11 +59,11 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   ngOnInit() {
     this.actualSeries = 0;
     this.exercisePhase = ExercisePhase.INTRO;
+    this.changeAssistantText();
     this.countdownTimeLeft = 3;
     this.radioValue = null;
     this.checkedAnswer = false;
     this.continueButton = false;
-    this.changeAssistantText();
     this.score = 0;
   }
 
