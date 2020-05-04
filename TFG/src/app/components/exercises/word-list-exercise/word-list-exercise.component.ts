@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {DurationKind} from '../../../enum/duration-kind.enum';
+import {WordListService} from '../../../services/exercises/word-list.service';
 
 /**
  * Phase of the exercise
@@ -37,7 +38,6 @@ export class WordListExerciseComponent implements OnInit {
    * Word List Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
-  private wordList: string[] = ['Buitre', 'Clavel', 'Licor', 'Silla', 'Orquídea', 'Águila', 'Lámpara', 'Anís', 'Pavo', 'Armario', 'Jazmín', 'Coñac'];
   private answeredList: string[];
   @Input() answer: string;
   private score: number;
@@ -48,7 +48,7 @@ export class WordListExerciseComponent implements OnInit {
   private interval;
   private countdownTimeLeft: number;
 
-  constructor() {
+  constructor(private wordListService: WordListService) {
     // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
       this.id = data.id,
@@ -134,7 +134,7 @@ export class WordListExerciseComponent implements OnInit {
    */
   private checkAnswer(): void {
     // If the inputted word is correct and hasn't been answered
-    const correct = this.wordList.includes(this.answer) && !this.answeredList.includes(this.answer);
+    const correct = this.wordListService.getWordList().includes(this.answer) && !this.answeredList.includes(this.answer);
     if (correct) {
       this.answeredList.push(this.answer);
       ++this.score;

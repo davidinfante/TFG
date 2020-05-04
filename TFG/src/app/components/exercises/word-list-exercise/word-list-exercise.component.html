@@ -20,7 +20,7 @@
 <ion-card *ngIf="exercisePhase === 2">
   <ion-card-content>
     <ion-list>
-      <ion-item  *ngFor="let word of wordList">
+      <ion-item  *ngFor="let word of wordListService.getWordList()">
         - {{ word }}
       </ion-item>
       <ion-item>
