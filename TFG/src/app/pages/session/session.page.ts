@@ -57,6 +57,8 @@ export class SessionPage implements OnInit, AfterViewInit {
     // Subscribe to the ending exercise event
     exerciseManager.exerciseEnded.subscribe( data => {
       if (this.currentExercise.id === data.id && data.success) {
+        // Do something with the score
+        // data.score bla bla bla
         this.nextExercise();
       } else {
         console.log('An error has occurred while ending the exercise');

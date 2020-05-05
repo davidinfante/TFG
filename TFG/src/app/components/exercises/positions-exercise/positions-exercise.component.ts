@@ -106,6 +106,7 @@ export class PositionsExerciseComponent implements OnInit {
   private endExercise(): void {
     exerciseManager.notifyEnd({
       id: this.id,
+      score: this.score,
       success: true
     });
   }

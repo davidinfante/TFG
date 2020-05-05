@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
-import {DirectNumbersService} from '../../../services/exercises/direct-numbers.service';
+import {NumbersAndVowelsService} from '../../../services/exercises/numbers-and-vowels.service';
 
 /**
  * Phases of the exercise
@@ -36,11 +36,11 @@ export enum AnswerLength {
 }
 
 @Component({
-  selector: 'app-direct-numbers-exercise',
-  templateUrl: './direct-numbers-exercise.component.html',
-  styleUrls: ['./direct-numbers-exercise.component.scss'],
+  selector: 'app-numbers-and-vowels-exercise',
+  templateUrl: './numbers-and-vowels-exercise.component.html',
+  styleUrls: ['./numbers-and-vowels-exercise.component.scss'],
 })
-export class DirectNumbersExerciseComponent implements OnInit {
+export class NumbersAndVowelsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
@@ -70,7 +70,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
   private cdInterval;
   private countdownTimeLeft: number;
 
-  constructor(private directNumbersService: DirectNumbersService) {
+  constructor(private numbersAndVowelsService: NumbersAndVowelsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.id = data.id,
         this.type = data.type,
@@ -141,11 +141,11 @@ export class DirectNumbersExerciseComponent implements OnInit {
   private characterChange(): void {
     // Get first character
     if (this.duringDemo) {
-      this.actualChar = this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries).charAt(0);
+      this.actualChar = this.numbersAndVowelsService.getDemoSeriesSeries(this.actualDemoSeries).charAt(0);
       ++this.actualCharPos;
       this.timeChangeChar = 1;
     } else {
-      this.actualChar = this.directNumbersService.getSeriesSeries(this.actualSeries).charAt(this.actualCharPos);
+      this.actualChar = this.numbersAndVowelsService.getSeriesSeries(this.actualSeries).charAt(this.actualCharPos);
       ++this.actualCharPos;
       this.timeChangeChar = 1;
     }
@@ -158,8 +158,8 @@ export class DirectNumbersExerciseComponent implements OnInit {
       } else {
         // Demo series
         if (this.duringDemo) {
-          if (this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries).length > this.actualCharPos) {
-            this.actualChar = this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries).charAt(this.actualCharPos);
+          if (this.numbersAndVowelsService.getDemoSeriesSeries(this.actualDemoSeries).length > this.actualCharPos) {
+            this.actualChar = this.numbersAndVowelsService.getDemoSeriesSeries(this.actualDemoSeries).charAt(this.actualCharPos);
             ++this.actualCharPos;
             this.timeChangeChar = 1;
           } else {
@@ -168,8 +168,8 @@ export class DirectNumbersExerciseComponent implements OnInit {
             this.pauseTimer();
           }
         } else { // Exercise series
-          if (this.directNumbersService.getSeriesSeries(this.actualSeries).length > this.actualCharPos) {
-            this.actualChar = this.directNumbersService.getSeriesSeries(this.actualSeries).charAt(this.actualCharPos);
+          if (this.numbersAndVowelsService.getSeriesSeries(this.actualSeries).length > this.actualCharPos) {
+            this.actualChar = this.numbersAndVowelsService.getSeriesSeries(this.actualSeries).charAt(this.actualCharPos);
             ++this.actualCharPos;
             this.timeChangeChar = 1;
           } else {
@@ -264,6 +264,51 @@ export class DirectNumbersExerciseComponent implements OnInit {
   }
 
   /**
+   * Types 'a' into the answer
+   */
+  private answerA(): void {
+    if (this.checkAnswerLength() === AnswerLength.SMALLER) {
+      this.answer += 'a';
+    }
+  }
+
+  /**
+   * Types 'e' into the answer
+   */
+  private answerE(): void {
+    if (this.checkAnswerLength() === AnswerLength.SMALLER) {
+      this.answer += 'e';
+    }
+  }
+
+  /**
+   * Types 'i' into the answer
+   */
+  private answerI(): void {
+    if (this.checkAnswerLength() === AnswerLength.SMALLER) {
+      this.answer += 'i';
+    }
+  }
+
+  /**
+   * Types 'o' into the answer
+   */
+  private answerO(): void {
+    if (this.checkAnswerLength() === AnswerLength.SMALLER) {
+      this.answer += 'o';
+    }
+  }
+
+  /**
+   * Types 'u' into the answer
+   */
+  private answerU(): void {
+    if (this.checkAnswerLength() === AnswerLength.SMALLER) {
+      this.answer += 'u';
+    }
+  }
+
+  /**
    * Deletes last char of the answer
    */
   private deleteLastChar(): void {
@@ -276,17 +321,17 @@ export class DirectNumbersExerciseComponent implements OnInit {
    */
   private checkAnswerLength(): AnswerLength {
     if (this.duringDemo) {
-      if (this.answer.length === this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries).length) {
+      if (this.answer.length === this.numbersAndVowelsService.getDemoSeriesSeries(this.actualDemoSeries).length) {
         return AnswerLength.EQUAL;
-      } else if (this.answer.length <= this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries).length) {
+      } else if (this.answer.length <= this.numbersAndVowelsService.getDemoSeriesSeries(this.actualDemoSeries).length) {
         return AnswerLength.SMALLER;
       } else {
         return AnswerLength.GREATER;
       }
     } else {
-      if (this.answer.length === this.directNumbersService.getSeriesSeries(this.actualSeries).length) {
+      if (this.answer.length === this.numbersAndVowelsService.getSeriesSeries(this.actualSeries).length) {
         return AnswerLength.EQUAL;
-      } else if (this.answer.length <= this.directNumbersService.getSeriesSeries(this.actualSeries).length) {
+      } else if (this.answer.length <= this.numbersAndVowelsService.getSeriesSeries(this.actualSeries).length) {
         return AnswerLength.SMALLER;
       } else {
         return AnswerLength.GREATER;
@@ -301,7 +346,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
     // Demo
     if (this.duringDemo) {
       // If correct
-      if (this.answer === this.directNumbersService.getDemoSeriesSeries(this.actualDemoSeries)) {
+      if (this.answer === this.numbersAndVowelsService.getDemoSeriesCorrectAnswer(this.actualDemoSeries)) {
         this.exercisePhase = ExercisePhase.CORRECT_ANSWER;
         this.changeAssistantText();
       } else {
@@ -310,7 +355,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
       }
     } else { // Exercise series
       // If correct
-      if (this.answer === this.directNumbersService.getSeriesSeries(this.actualSeries)) {
+      if (this.answer === this.numbersAndVowelsService.getSeriesCorrectAnswer(this.actualSeries)) {
         ++this.score;
       }
       this.exercisePhase = ExercisePhase.NEXT;
@@ -324,7 +369,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
   private nextSeries(): void {
     if (this.duringDemo) {
       // Get next series
-      if (this.directNumbersService.getDemoSeriesLength() > this.actualDemoSeries) {
+      if (this.numbersAndVowelsService.getDemoSeriesLength() > this.actualDemoSeries) {
         ++this.actualDemoSeries;
         this.watchSeries();
       } else { // If any are left, start exercise
@@ -333,7 +378,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
         this.duringDemo = false;
       }
     } else {
-      if (this.directNumbersService.getSeriesLength() > this.actualSeries) {
+      if (this.numbersAndVowelsService.getSeriesLength() > this.actualSeries) {
         ++this.actualSeries;
         this.watchSeries();
       } else { // If any are left, end exercise
@@ -381,26 +426,28 @@ export class DirectNumbersExerciseComponent implements OnInit {
     switch (this.exercisePhase) {
       case ExercisePhase.INTRO:
         showA = true;
-        titleA = '¡Dictado de Números!';
-        descriptionA = 'Este ejercicio sirve para medir como está tu memoria. Para ello te mostraré varios números en una ' +
-          'pizarra como la de abajo. Irán apareciendo de uno en uno, de manera que deberás ir memorizándolos para después ' +
-          'marcarlos en el mismo orden en que te los mostré. Si en algún momento te equivocas podrás pulsar el botón Borrar. ' +
-          'Cuando estés listo, pulsa en Continuar.';
+        titleA = '¡Dictado de Números y Vocales!';
+        descriptionA = 'En este ejercicio te mostraré una pizarra donde aparecerán varias vocales y números que tendrás ' +
+          'que memorizar. Te los mostraré de uno en uno y cuando termine tendrás que introducir siempre en primer lugar ' +
+          'los números del más pequeño al más grande, y después las vocales siguiendo el orden a, e, i, o, u. Si en algún ' +
+          'momento te equivocas  podrás pulsar en el botón Borrar.';
         break;
       case ExercisePhase.DEMO_INTRO:
         showA = true;
-        titleA = '¡Dictado de Números!';
-        descriptionA = 'Ahora vamos a hacer tres pruebas. Se escribirán secuencias de números y se mostrará un panel para que ' +
-          'los escribas en el mismo orden en el que se te mostraron. Cuando estés listo, pulsa en Continuar.';
+        titleA = '¡Dictado de Números y Vocales!';
+        descriptionA = 'Ahora vamos a hacer tres pruebas. Se escribirán secuencias de números y vocales. Luego se mostrará ' +
+          'un panel para que los escribas primero los números del más pequeño al más grande y luego todas las vocales en ' +
+          'orden aeiou. Cuando estés listo, pulsa el botón Continuar.';
         break;
       case ExercisePhase.ANSWER_DEMO:
         showA = true;
-        titleA = '¡Dictado de Números!';
-        descriptionA = 'Introduce los números en el mismo orden en el que se te mostraron en la pizarra.';
+        titleA = '¡Dictado de Números y Vocales!';
+        descriptionA = 'Introduce primero los números que se mostraron en la pizarra del más pequeño al más grande y luego las ' +
+          'vocales en orden aeiou.';
         break;
       case ExercisePhase.DEMO_END:
         showA = true;
-        titleA = '¡Dictado de Números!';
+        titleA = '¡Dictado de Números y Vocales!';
         descriptionA = 'Has finalizado la prueba correctamente, ¡Enhorabuena! Ahora comenzarás el ejercicio. Cuando estés listo, ' +
           'pulsa el botón Comenzar ejercicio.';
         break;
@@ -416,8 +463,9 @@ export class DirectNumbersExerciseComponent implements OnInit {
         break;
       case ExercisePhase.CORRECT_ANSWER:
         showA = true;
-        titleA = '¡Dictado de Números!';
-        descriptionA = 'Introduce los números en el mismo orden en el que se te mostraron en la pizarra.';
+        titleA = '¡Dictado de Números y Vocales!';
+        descriptionA = 'Introduce primero los números que se mostraron en la pizarra del más pequeño al más grande y luego las ' +
+          'vocales en orden aeiou.';
         break;
       case ExercisePhase.NEXT:
         showA = false;
@@ -426,12 +474,12 @@ export class DirectNumbersExerciseComponent implements OnInit {
         break;
       case ExercisePhase.COUNTDOWN:
         showA = true;
-        titleA = 'El ejercicio comenzará en:';
+        titleA = '¡Dictado de Números y Vocales!';
         descriptionA = '';
         break;
       case ExercisePhase.ERR_1:
         showA = true;
-        titleA = '¡Dictado de Números!';
+        titleA = '¡Dictado de Números y Vocales!';
         descriptionA = 'Pulsa el botón Listo para continuar, o pulsa el botón Borrar si quieres corregir los números que hayas marcado.';
         break;
       case ExercisePhase.END:

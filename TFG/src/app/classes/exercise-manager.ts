@@ -32,7 +32,7 @@ class ExerciseManager {
   /**
    * Notify the session with the finalization of an exercise
    */
-  notifyEnd(notification: {id: string, success: boolean}): void {
+  notifyEnd(notification: {id: string, score: number, success: boolean}): void {
     this.exerciseEnded.emit(notification);
   }
 

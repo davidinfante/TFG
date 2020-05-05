@@ -1,0 +1,176 @@
+<!--
+  - Intro
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <span>
+          Por ejemplo, si te aparece la secuencia 3u1a, entonces deberás introducir 13au, ya que primero hay que
+          introducir todos los números del más pequeño al más grande y luego todas las vocales en orden aeiou.
+        </span>
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="startDemo()">Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Demo Intro
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-button (click)="watchSeries()">Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Watch Exercise WATCH
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <div class="blackboard">
+          <img [src]="numbersAndVowelsService.getPizarra().src" [height]="numbersAndVowelsService.getPizarra().height" [width]="numbersAndVowelsService.getPizarra().width"/>
+          <span class="characters">{{ this.actualChar }}</span>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - ANSWER_DEMO // ANSWER
+  -->
+<ion-card *ngIf="exercisePhase === 2 || exercisePhase === 5">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <div class="blackboard">
+          <img [src]="numbersAndVowelsService.getPizarra().src" [height]="numbersAndVowelsService.getPizarra().height" [width]="numbersAndVowelsService.getPizarra().width"/>
+          <span class="answer">{{ this.answer }}</span>
+        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-button (click)="answer1()">1</ion-button>
+            <ion-button (click)="answer2()">2</ion-button>
+            <ion-button (click)="answer3()">3</ion-button>
+          </ion-row>
+          <ion-row>
+            <ion-button (click)="answer4()">4</ion-button>
+            <ion-button (click)="answer5()">5</ion-button>
+            <ion-button (click)="answer6()">6</ion-button>
+          </ion-row>
+          <ion-row>
+            <ion-button (click)="answer7()">7</ion-button>
+            <ion-button (click)="answer8()">8</ion-button>
+            <ion-button (click)="answer9()">9</ion-button>
+          </ion-row>
+
+          <ion-row>
+            <ion-button (click)="answerA()">a</ion-button>
+            <ion-button (click)="answerE()">e</ion-button>
+            <ion-button (click)="answerI()">i</ion-button>
+          </ion-row>
+          <ion-row>
+            <ion-button (click)="answerO()">o</ion-button>
+            <ion-button (click)="answerU()">u</ion-button>
+          </ion-row>
+          <ion-row>
+            <ion-button (click)="deleteLastChar()">BORRAR</ion-button>
+          </ion-row>
+
+          <ion-row>
+            <ion-button *ngIf="duringDemo" (click)="watchSeries()">VER DE NUEVO</ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-row>
+      <ion-row>
+        <ion-button *ngIf="checkAnswerLength() === 0" (click)="checkAnswer()">Listo</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Error ERR 1
+  -->
+<ion-card *ngIf="exercisePhase === 10">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        Has pulsado {{ this.answer }}, pero deberías haber pulsado {{ this.numbersAndVowelsService.getDemoSeriesCorrectAnswer(actualDemoSeries) }}.
+        Pulsa el botón Continuar cuando estés preparado.
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="watchSeries()">Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Next Series CORRECT_ANSWER
+  -->
+<ion-card *ngIf="exercisePhase === 6">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        Es correcto, pulsa el botón Continuar cuando estés preparado.
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="nextSeries()">Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Ending of the demo DEMO_END
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-button (click)="startCountdown()">Comenzar ejercicio</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Countdown
+  -->
+<ion-card *ngIf="exercisePhase === 8">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - NEXT
+  -->
+<ion-card *ngIf="exercisePhase === 7">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        Pulsa el botón Continuar cuando estés preparado.
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="nextSeries()">Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - End
+  -->
+<ion-card *ngIf="exercisePhase === 9">
+  <ion-card-content>
+    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+  </ion-card-content>
+</ion-card>

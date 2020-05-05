@@ -40,34 +40,45 @@ Here's a diagram:
 
 ### How to add new Exercises:
 - Create or use any components you may need and pack them up in a component with the full exercise
-  - Your main component class must have these attributes `id: string;
-                                                          type: number;
-                                                          duration: number;
-                                                          maxTime: number;
-                                                          dependsOn: number;
-                                                          repetitions: number;
-                                                          durationKind: DurationKind;` 
+  - Your main component class must have these attributes
+  ```
+  id: string;
+  type: number;
+  duration: number;
+  maxTime: number;
+  dependsOn: number;
+  repetitions: number;
+  durationKind: DurationKind;
+  ``` 
   - Include the object `exerciseManager` in your main exercise class
-  - Add this code in the constructor `exerciseManager.exerciseInfo.subscribe( data => {
-                                            this.id = data.id,
-                                            this.type = data.type,
-                                            this.duration = data.duration,
-                                            this.maxTime = data.maxTime,
-                                            this.dependsOn = data.dependsOn,
-                                            this.repetitions = data.repetitions,
-                                            this.durationKind = data.durationKind;
-                                          });`
+  - Add this code in the constructor
+  ```
+  exerciseManager.exerciseInfo.subscribe( data => {
+    this.id = data.id,
+    this.type = data.type,
+    this.duration = data.duration,
+    this.maxTime = data.maxTime,
+    this.dependsOn = data.dependsOn,
+    this.repetitions = data.repetitions,
+    this.durationKind = data.durationKind;
+  });
+  ```
   - Add this code to the function that is called when the exercise end
-   `exerciseManager.notifyEnd({
-          id: this.id,
-          success: true
-        });`
+   ```
+  exerciseManager.notifyEnd({
+    id: this.id,
+    score: (The exercise's score as a number),
+    success: true
+  });
+  ```
   - If you need to change the text in the Assistant or hide it do it like this: 
-  `exerciseManager.notifyAssistant({
-         show: (true/false),
-         title: 'Your title',
-         description: 'Your description'
-       });`
+  ```
+  exerciseManager.notifyAssistant({
+    show: (true/false),
+    title: 'Your title',
+    description: 'Your description'
+  });
+  ```
 - Include the component's class in the `declarations: [...]` and `entryComponents: [...]` 
         sections at `/pages/session/session.module.ts`
 - Edit the file `/services/exercises.service.ts` adding a new element in the exercises array including:

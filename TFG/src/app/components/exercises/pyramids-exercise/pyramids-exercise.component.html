@@ -1,0 +1,17 @@
+<!--
+  - INTRO1
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-button (click)="startExercise()">Continuar</ion-button>
+      </ion-row>
+      <ion-row>
+        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+        <img class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
+        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

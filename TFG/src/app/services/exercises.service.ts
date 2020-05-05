@@ -5,6 +5,8 @@ import {LogicalSeriesExerciseComponent} from '../components/exercises/logical-se
 import {SemanticSeriesExerciseComponent} from '../components/exercises/semantic-series-exercise/semantic-series-exercise.component';
 import {PositionsExerciseComponent} from '../components/exercises/positions-exercise/positions-exercise.component';
 import {DirectNumbersExerciseComponent} from '../components/exercises/direct-numbers-exercise/direct-numbers-exercise.component';
+import {NumbersAndVowelsExerciseComponent} from '../components/exercises/numbers-and-vowels-exercise/numbers-and-vowels-exercise.component';
+import {PyramidsExerciseComponent} from '../components/exercises/pyramids-exercise/pyramids-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +39,17 @@ export class ExercisesService {
     {
       id: 'e5',
       class: DirectNumbersExerciseComponent,
-      title: '¡Dictado de números!'
+      title: '¡Dictado de Números!'
+    },
+    {
+      id: 'e6',
+      class: NumbersAndVowelsExerciseComponent,
+      title: '¡Dictado de Números y Vocales!'
+    },
+    {
+      id: 'e7',
+      class: PyramidsExerciseComponent,
+      title: '¡Pirámides!'
     },
   ];
 
