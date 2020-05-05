@@ -8,9 +8,9 @@
         <ion-button (click)="startExercise()">Continuar</ion-button>
       </ion-row>
       <ion-row>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
+import {PyramidsService} from '../../../services/exercises/pyramids.service';
 
 /**
  * Phase of the exercise
@@ -38,7 +39,7 @@ export class PyramidsExerciseComponent implements OnInit {
   private exercisePhase: ExercisePhase;
   private score: number;
 
-  constructor() {
+  constructor(private pyramidsService: PyramidsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.id = data.id,
         this.type = data.type,

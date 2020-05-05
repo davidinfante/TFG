@@ -5,12 +5,14 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <ion-button (click)="startExercise()">Continuar</ion-button>
+        <ion-col>
+          <ion-button>Continuar</ion-button>
+        </ion-col>
       </ion-row>
       <ion-row>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
-        <img class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c1').src" [height]="pyramidsService.getImage('c1').height" [width]="pyramidsService.getImage('c1').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c2').src" [height]="pyramidsService.getImage('c2').height" [width]="pyramidsService.getImage('c2').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c3').src" [height]="pyramidsService.getImage('c3').height" [width]="pyramidsService.getImage('c3').width"/></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>
