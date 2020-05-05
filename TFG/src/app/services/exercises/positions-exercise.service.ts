@@ -24,11 +24,11 @@ export class PositionsExerciseService {
     {
       id: 1,
       positions: [
-        [{value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
+        {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [1, 3, 5, 4, 2],
       valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
@@ -37,11 +37,11 @@ export class PositionsExerciseService {
     {
       id: 2,
       positions: [
-        [{value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
+        {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [2, 4, 5, 3, 1],
       valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
@@ -50,11 +50,11 @@ export class PositionsExerciseService {
     {
       id: 3,
       positions: [
-        [{value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}],
-        [{value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
+        {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false},
+        {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [2, 4, 1, 5, 3],
       valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
@@ -63,11 +63,11 @@ export class PositionsExerciseService {
     {
       id: 4,
       positions: [
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}],
-        [{value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}],
-        [{value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}],
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false},
+        {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
+        {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false},
       ],
       correctPositions: [3, 2, 4, 1, 5],
       valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
@@ -110,9 +110,9 @@ export class PositionsExerciseService {
   }
 
   /**
-   * Get the positions matrix by it's Id
+   * Get the positions array by it's Id
    */
-  getPositionsMatrix(id: number) {
+  getPositionsArray(id: number) {
     return [...this.searchPositionsById(id).positions];
   }
 

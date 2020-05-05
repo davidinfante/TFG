@@ -31,14 +31,12 @@
 <ion-card *ngIf="exercisePhase === 2">
   <ion-card-content>
     <ion-grid>
-      <div *ngFor="let row of positionsExerciseService.getPositionsMatrix(actualBuilding)">
-        <ion-row>
-          <div *ngFor="let col of row">
-              <img *ngIf="col.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-              <img *ngIf="col.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
-          </div>
-        </ion-row>
-      </div>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-card-content>
 </ion-card>
@@ -50,14 +48,14 @@
   <ion-card-content>
     <ion-grid>
       <ion-item-group>
-        <div *ngFor="let row of positionsExerciseService.getPositionsMatrix(actualBuilding)">
-          <ion-row>
-            <ion-item *ngFor="let col of row">
+        <ion-row>
+          <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+            <ion-item>
               <img [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-              <ion-checkbox [(ngModel)]="col.isChecked"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="pos.isChecked"></ion-checkbox>
             </ion-item>
-          </ion-row>
-        </div>
+          </ion-col>
+        </ion-row>
       </ion-item-group>
     </ion-grid>
     <ion-button (click)="checkAnswer()">Finalizar</ion-button>
@@ -115,14 +113,12 @@
 <ion-card *ngIf="exercisePhase === 9">
   <ion-card-content>
     <ion-grid>
-      <div *ngFor="let row of positionsExerciseService.getPositionsMatrix(actualBuilding)">
-        <ion-row>
-          <div *ngFor="let col of row">
-            <img *ngIf="col.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-            <img *ngIf="col.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
-          </div>
-        </ion-row>
-      </div>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
+        </ion-col>
+      </ion-row>
     </ion-grid>
     <ion-button (click)="errorTryAgain()">Nuevo Intento</ion-button>
   </ion-card-content>
@@ -143,15 +139,17 @@
 <ion-card *ngIf="exercisePhase === 11 || exercisePhase === 12">
   <ion-card-content>
     <ion-grid>
-      <div *ngFor="let row of positionsExerciseService.getPositionsMatrix(actualBuilding); let i = index;">
-        <ion-row>
-          <div *ngFor="let col of row">
-            <img *ngIf="col.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
-            <img *ngIf="col.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
-          </div>
-        </ion-row>
-        <span>{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i] }}</span>
-      </div>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding); let i = index;" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="positionsExerciseService.getVentanaClose().src" [height]="positionsExerciseService.getVentanaClose().height" [width]="positionsExerciseService.getVentanaClose().width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="positionsExerciseService.getVentanaOpen().src" [height]="positionsExerciseService.getVentanaOpen().height" [width]="positionsExerciseService.getVentanaOpen().width"/>
+          <span *ngIf="i === 4">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 4] }}</span>
+          <span *ngIf="i === 9">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 8] }}</span>
+          <span *ngIf="i === 14">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 12] }}</span>
+          <span *ngIf="i === 19">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 16] }}</span>
+          <span *ngIf="i === 24">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 20] }}</span>
+        </ion-col>
+      </ion-row>
     </ion-grid>
     <ion-button (click)="tryAgain()">Nuevo Intento</ion-button>
   </ion-card-content>

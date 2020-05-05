@@ -12,11 +12,11 @@ export class Position {
 }
 
 /**
- * Positions matrix
+ * Positions array
  */
 export class Positions {
   id: number;
-  positions: Position[][];
+  positions: Position[];
   correctPositions: number[];
 
   constructor() {
@@ -26,14 +26,12 @@ export class Positions {
   }
 
   /**
-   * Checks if each of the matrix's value and isChecked match
+   * Checks if each of the array's value and isChecked match
    */
   valueAndIsCheckedMatch(): boolean {
-    for (let i = 0; i < this.positions.length; ++i) {
-      for (let j = 0; j < this.positions[i].length; ++j) {
-        if (this.positions[i][j].value !== this.positions[i][j].isChecked) {
-          return false;
-        }
+    for (const pos of this.positions) {
+      if (pos.value !== pos.isChecked) {
+        return false;
       }
     }
     return true;
@@ -43,10 +41,8 @@ export class Positions {
    * Resets isChecked value to false
    */
   resetIsChecked(): void {
-    for (let i = 0; i < this.positions.length; ++i) {
-      for (let j = 0; j < this.positions[i].length; ++j) {
-        this.positions[i][j].isChecked = false;
-      }
+    for (const pos of this.positions) {
+      pos.isChecked = false;
     }
   }
 
