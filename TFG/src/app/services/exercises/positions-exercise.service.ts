@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Positions} from '../../classes/exercises/positions';
+import {CheckboxArray} from '../../classes/checkboxArray';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class PositionsExerciseService {
     height: 98,
     width: 98
   };
-  private positions: Positions[] = [
+  private positions: CheckboxArray[] = [
     {
       id: 1,
       positions: [
@@ -31,8 +31,9 @@ export class PositionsExerciseService {
         {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [1, 3, 5, 4, 2],
-      valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
-      resetIsChecked: Positions.prototype.resetIsChecked
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
     },
     {
       id: 2,
@@ -44,8 +45,9 @@ export class PositionsExerciseService {
         {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [2, 4, 5, 3, 1],
-      valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
-      resetIsChecked: Positions.prototype.resetIsChecked
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
     },
     {
       id: 3,
@@ -57,8 +59,9 @@ export class PositionsExerciseService {
         {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false},
       ],
       correctPositions: [2, 4, 1, 5, 3],
-      valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
-      resetIsChecked: Positions.prototype.resetIsChecked
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
     },
     {
       id: 4,
@@ -70,8 +73,9 @@ export class PositionsExerciseService {
         {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: false, isChecked: false}, {value: true, isChecked: false},
       ],
       correctPositions: [3, 2, 4, 1, 5],
-      valueAndIsCheckedMatch: Positions.prototype.valueAndIsCheckedMatch,
-      resetIsChecked: Positions.prototype.resetIsChecked
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
     },
   ];
 
@@ -135,7 +139,7 @@ export class PositionsExerciseService {
    * if true, the answer is correct
    */
   isCorrectAnswer(actualBuilding: number): boolean {
-    return this.positions[actualBuilding - 1].valueAndIsCheckedMatch();
+    return this.positions[actualBuilding - 1].allValueAndIsCheckedMatch();
   }
 
   /**

@@ -6,7 +6,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button>Continuar</ion-button>
+          <ion-button (click)="intro2()">Continuar</ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -15,5 +15,111 @@
         <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c3').src" [height]="pyramidsService.getImage('c3').height" [width]="pyramidsService.getImage('c3').width"/></ion-col>
       </ion-row>
     </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - INTRO2
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="startDemo()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d24').src" [height]="pyramidsService.getImage('d24').height" [width]="pyramidsService.getImage('d24').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d4').src" [height]="pyramidsService.getImage('d4').height" [width]="pyramidsService.getImage('d4').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d19').src" [height]="pyramidsService.getImage('d19').height" [width]="pyramidsService.getImage('d19').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d22').src" [height]="pyramidsService.getImage('d22').height" [width]="pyramidsService.getImage('d22').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d25').src" [height]="pyramidsService.getImage('d25').height" [width]="pyramidsService.getImage('d25').width"/></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - DEMO
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <ion-grid fixed="true">
+      <span>{{ this.demoText }}</span>
+      <ion-item-group (click)="demoScore()">
+        <ion-row>
+          <ion-col *ngFor="let pyr of pyramidsService.getPositionsArray(actualPyramids)" size="auto">
+            <ion-item>
+              <img [src]="pyramidsService.getImage(pyr.img).src" [height]="pyramidsService.getImage(pyr.img).height" [width]="pyramidsService.getImage(pyr.img).width"/>
+              <ion-checkbox [(ngModel)]="pyr.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - DEMO_END
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="startCountdown()">Comenzar ejercicio</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - COUNTDOWN
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - EXERCISE
+  -->
+<ion-card *ngIf="exercisePhase === 5">
+  <ion-card-content>
+    <ion-grid fixed="true">
+      <span>Repetición: {{ this.actualPyramids }}/{{ this.pyramidsService.getPyramidsLength() - 1 }}. Quedan {{ this.timeLeft }} segundos.</span>
+      <ion-item-group>
+        <ion-row>
+          <ion-col *ngFor="let pyr of pyramidsService.getPositionsArray(actualPyramids)" size="auto">
+            <ion-item>
+              <img [src]="pyramidsService.getImage(pyr.img).src" [height]="pyramidsService.getImage(pyr.img).height" [width]="pyramidsService.getImage(pyr.img).width"/>
+              <ion-checkbox [(ngModel)]="pyr.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - EXERCISE_CHANGE
+  -->
+<ion-card *ngIf="exercisePhase === 6">
+  <ion-card-content>
+    <h1>Cambio de panel</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - END
+  -->
+<ion-card *ngIf="exercisePhase === 7">
+  <ion-card-content>
+    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>

@@ -37,7 +37,17 @@ export class PyramidsExerciseComponent implements OnInit {
    * Pyramids Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
+  private actualPyramids: number;
+  private demoPyramidsLeft: number;
+  private demoText: string;
   private score: number;
+  /**
+   * Timer variables
+   */
+  private interval;
+  private cdInterval;
+  private countdownTimeLeft: number;
+  private timeLeft: number;
 
   constructor(private pyramidsService: PyramidsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -54,7 +64,13 @@ export class PyramidsExerciseComponent implements OnInit {
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO1;
     this.changeAssistantText();
+    this.actualPyramids = 0;
+    this.demoPyramidsLeft = 0;
+    this.demoText = '';
     this.score = 0;
+
+    this.countdownTimeLeft = 3;
+    this.timeLeft = 20;
   }
 
   /**
@@ -66,6 +82,136 @@ export class PyramidsExerciseComponent implements OnInit {
       score: this.score,
       success: true
     });
+  }
+
+  /**
+   * Continues to INTRO2 phase
+   */
+  private intro2(): void {
+    this.exercisePhase = ExercisePhase.INTRO2;
+    this.changeAssistantText();
+  }
+
+  /**
+   * Starts the demo
+   */
+  private startDemo(): void {
+    this.exercisePhase = ExercisePhase.DEMO;
+    this.changeAssistantText();
+    this.getAllDemoPyramids();
+    this.demoText = 'Quedan ' + this.demoPyramidsLeft + ' imágenes correctas';
+  }
+
+  /**
+   * Gives demoPyramidsLeft its initial value
+   * of true values
+   */
+  private getAllDemoPyramids(): void {
+    let numberOfTrue = 0;
+    for (const pos of this.pyramidsService.getPositionsArray(this.actualPyramids)) {
+      if (pos.value) {
+        ++numberOfTrue;
+      }
+    }
+    this.demoPyramidsLeft = numberOfTrue;
+  }
+
+  /**
+   * Check's how many Pyramids are left
+   * in the demo to be completed
+   */
+  private demoScore(): void {
+    const pyrLeft = this.demoPyramidsLeft - this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).matches;
+    this.demoText = 'Quedan ' + pyrLeft + ' imágenes correctas';
+
+    if (pyrLeft === 0) {
+      this.exercisePhase = ExercisePhase.DEMO_END;
+      this.changeAssistantText();
+    }
+  }
+
+  /**
+   * Controls the next Pyramids series
+   */
+  private nextExercise() {
+    // If there are more series
+    if (this.actualPyramids < this.pyramidsService.getPyramidsLength() - 1) { // - 1 because of demoSeries being id: 0
+      ++this.actualPyramids;
+      this.exercisePhase = ExercisePhase.EXERCISE;
+      this.startTimer();
+    }  else { // Otherwise end the exercise
+      this.exercisePhase = ExercisePhase.END;
+    }
+    this.changeAssistantText();
+  }
+
+  /**
+   * Exercise change panel function
+   */
+  private exerciseChangePanel(): void {
+    // Update score
+    this.score += this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).matches -
+      this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).errors;
+
+    // If there are not more exercises left
+    if (this.actualPyramids >= this.pyramidsService.getPyramidsLength() - 1) { // - 1 because of demoSeries being id: 0
+      ++this.actualPyramids;
+      this.nextExercise();
+    } else { // Otherwise continue to exercise_change
+      this.exercisePhase = ExercisePhase.EXERCISE_CHANGE;
+      this.changeAssistantText();
+
+      this.cdInterval = setInterval(() => {
+        if (this.countdownTimeLeft > 0) {
+          this.countdownTimeLeft--;
+        } else {
+          this.pauseTimer();
+          this.nextExercise();
+        }
+      }, 1000);
+    }
+  }
+
+  /**
+   * Starts the countdown before starting the exercise
+   */
+  private startCountdown(): void {
+    this.exercisePhase = ExercisePhase.COUNTDOWN;
+    this.changeAssistantText();
+
+    this.cdInterval = setInterval(() => {
+      if (this.countdownTimeLeft > 0) {
+        this.countdownTimeLeft--;
+      } else {
+        this.pauseTimer();
+        this.nextExercise();
+      }
+    }, 1000);
+  }
+
+  /**
+   * Starts the timer during the exercise
+   */
+  private startTimer(): void {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+        this.changeAssistantText();
+      } else {
+        this.pauseTimer();
+        this.exerciseChangePanel();
+      }
+    }, 1000);
+  }
+
+  /**
+   * Pauses the timer
+   */
+  private pauseTimer(): void {
+    clearInterval(this.cdInterval);
+    clearInterval(this.interval);
+    this.countdownTimeLeft = 1;
+    this.timeLeft = 20;
   }
 
   /**
@@ -105,8 +251,8 @@ export class PyramidsExerciseComponent implements OnInit {
           'listo pulsa el botón Comenzar Ejercicio.';
         break;
       case ExercisePhase.COUNTDOWN:
-        showA = false;
-        titleA = '';
+        showA = true;
+        titleA = 'El ejercicio comenzará en:';
         descriptionA = '';
         break;
       case ExercisePhase.EXERCISE:
