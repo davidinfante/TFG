@@ -20,4 +20,26 @@ export class FunctionsService {
       return false;
     }
   }
+
+  /**
+   * Lower cases and remove accents from a string
+   */
+  lowerCaseRemoveAccents(str) {
+    str = str.toLowerCase();
+
+    const accents    = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    const accentsOut = 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+    str = str.split('');
+    const strLen = str.length;
+    let i, x;
+
+    for (i = 0; i < strLen; i++) {
+      x = accents.indexOf(str[i]);
+      if (x !== -1) {
+        str[i] = accentsOut[x];
+      }
+    }
+
+    return str.join('');
+  }
 }

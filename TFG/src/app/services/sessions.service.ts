@@ -13,8 +13,27 @@ export class SessionsService {
     {
       id: 's1',
       title: 'Sesión 1',
-      description: '¡Bienvenido a VIRTRA-EL! Ésta es tu primera sesión, así que te explicaremos en qué consistirá tu plan de trabajo. Por favor, trata de realizar la sesión completa sin interrumpirla.',
+      description: '¡Bienvenido a VIRTRA-EL! Ésta es tu primera sesión, así que te explicaremos en qué consistirá tu plan de trabajo. ' +
+        'Por favor, trata de realizar la sesión completa sin interrumpirla.',
       exercises: [
+        {
+          id: 'e8',
+          type: 0,
+          duration: -1,
+          maxTime: -1,
+          dependsOn: -1,
+          repetitions: 0,
+          durationKind: DurationKind.NOTIME,
+        },
+        {
+          id: 'e2',
+          type: 0,
+          duration: 60,
+          maxTime: 60,
+          dependsOn: -1,
+          repetitions: 3,
+          durationKind: DurationKind.TIME,
+        },
         {
           id: 'e7',
           type: 0,
@@ -68,15 +87,6 @@ export class SessionsService {
           dependsOn: -1,
           repetitions: 0,
           durationKind: DurationKind.NOTIME,
-        },
-        {
-          id: 'e2',
-          type: 0,
-          duration: 5,
-          maxTime: 60,
-          dependsOn: -1,
-          repetitions: 0,
-          durationKind: DurationKind.TIME,
         },
       ],
     },

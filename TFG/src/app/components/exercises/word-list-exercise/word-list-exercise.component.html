@@ -1,7 +1,11 @@
 <!--
-  - Start button
+  - INTRO
   -->
-<ion-button *ngIf="exercisePhase === 0" (click)="startExercise();">Comenzar</ion-button>
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-button (click)="startExercise();">Comenzar</ion-button>
+  </ion-card-content>
+</ion-card>
 
 <!--
   - Countdown
@@ -15,13 +19,13 @@
 </ion-card>
 
 <!--
-  - Word list and timer
+  - Word list and timer READ
   -->
 <ion-card *ngIf="exercisePhase === 2">
   <ion-card-content>
     <ion-list>
       <ion-item  *ngFor="let word of wordListService.getWordList()">
-        - {{ word }}
+        <span class="words">- {{ word }}</span>
       </ion-item>
       <ion-item>
         Tiempo restante: {{ this.timeLeft }}/{{ this.duration }}
@@ -31,7 +35,7 @@
 </ion-card>
 
 <!--
-  - Word input and end button
+  - Word input and end button WRITE
   -->
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
@@ -39,15 +43,24 @@
       <ion-label>Introduce una palabra:</ion-label>
       <ion-input type="string" [(ngModel)]="answer"></ion-input>
       <ion-button (click)="checkAnswer()">Escribir Siguiente Palabra</ion-button>
-      <ion-button (click)="getMedal()">No recuerdo más palabras</ion-button>
+      <ion-button (click)="repeat()">No recuerdo más palabras</ion-button>
     </div>
   </ion-card-content>
 </ion-card>
 
 <!--
-  - End
+  - REPEAT
   -->
 <ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-button (click)="startTimer()">Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - END
+  -->
+<ion-card *ngIf="exercisePhase === 5">
   <ion-card-content>
     <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
   </ion-card-content>

@@ -17,6 +17,7 @@ import {PositionsExerciseComponent} from '../../components/exercises/positions-e
 import {DirectNumbersExerciseComponent} from '../../components/exercises/direct-numbers-exercise/direct-numbers-exercise.component';
 import {NumbersAndVowelsExerciseComponent} from '../../components/exercises/numbers-and-vowels-exercise/numbers-and-vowels-exercise.component';
 import {PyramidsExerciseComponent} from '../../components/exercises/pyramids-exercise/pyramids-exercise.component';
+import {WordListExerciseAlternativeComponent} from '../../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {PyramidsExerciseComponent} from '../../components/exercises/pyramids-exe
     DirectNumbersExerciseComponent,
     NumbersAndVowelsExerciseComponent,
     PyramidsExerciseComponent,
+    WordListExerciseAlternativeComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
@@ -46,6 +48,7 @@ import {PyramidsExerciseComponent} from '../../components/exercises/pyramids-exe
     DirectNumbersExerciseComponent,
     NumbersAndVowelsExerciseComponent,
     PyramidsExerciseComponent,
+    WordListExerciseAlternativeComponent,
   ]
 })
 export class SessionPageModule {}

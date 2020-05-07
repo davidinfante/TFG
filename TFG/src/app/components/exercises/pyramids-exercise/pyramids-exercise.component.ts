@@ -70,7 +70,7 @@ export class PyramidsExerciseComponent implements OnInit {
     this.score = 0;
 
     this.countdownTimeLeft = 3;
-    this.timeLeft = 20;
+    this.timeLeft = this.duration;
   }
 
   /**
@@ -211,7 +211,7 @@ export class PyramidsExerciseComponent implements OnInit {
     clearInterval(this.cdInterval);
     clearInterval(this.interval);
     this.countdownTimeLeft = 1;
-    this.timeLeft = 20;
+    this.timeLeft = this.duration;
   }
 
   /**
