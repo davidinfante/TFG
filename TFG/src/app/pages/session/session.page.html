@@ -14,22 +14,22 @@
         -->
       <ion-col size-md="8" offset-md="2">
         <ion-card>
-        <!--
-          - Assistant
-          -->
-        <app-assistant></app-assistant>
-        <!--
-          - Start Button
-          -->
-        <ion-button *ngIf="sessionPhase == 0" (click)="nextExercise()">Comenzar</ion-button>
-        <!--
-          - Template where exercises will be loaded dynamically
-          -->
-        <ng-template ad-host></ng-template>
-        <!--
-          - Finish Button
-          -->
-        <ion-button *ngIf="sessionPhase == 2" routerLink="/home">Finalizar</ion-button>
+          <!--
+            - Assistant
+            -->
+          <app-assistant></app-assistant>
+          <!--
+            - Start Button
+            -->
+          <ion-button *ngIf="sessionPhase == 0" (click)="nextExercise()">Comenzar</ion-button>
+          <!--
+            - Template where exercises will be loaded dynamically
+            -->
+          <ng-template ad-host></ng-template>
+          <!--
+            - Finish Button
+            -->
+          <ion-button *ngIf="sessionPhase == 2" routerLink="/home">Finalizar</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

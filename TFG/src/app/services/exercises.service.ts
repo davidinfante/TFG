@@ -8,6 +8,7 @@ import {DirectNumbersExerciseComponent} from '../components/exercises/direct-num
 import {NumbersAndVowelsExerciseComponent} from '../components/exercises/numbers-and-vowels-exercise/numbers-and-vowels-exercise.component';
 import {PyramidsExerciseComponent} from '../components/exercises/pyramids-exercise/pyramids-exercise.component';
 import {WordListExerciseAlternativeComponent} from '../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
+import {MouseDialogExerciseComponent} from '../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,11 @@ export class ExercisesService {
       id: 'e8',
       class: WordListExerciseAlternativeComponent,
       title: '¡Lista de Palabras (Largo Plazo)!'
+    },
+    {
+      id: 'e9',
+      class: MouseDialogExerciseComponent,
+      title: '¡Prueba de Puntería!'
     },
   ];
 

@@ -29,13 +29,13 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  id: string;
-  type: number;
-  duration: number;
-  maxTime: number;
-  dependsOn: number;
-  repetitions: number;
-  durationKind: DurationKind;
+  private id: string;
+  private type: number;
+  private duration: number;
+  private maxTime: number;
+  private dependsOn: number;
+  private repetitions: number;
+  private durationKind: DurationKind;
   /**
    * Local Series Exercise's own attributes
    */
@@ -143,51 +143,6 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   }
 
   /**
-   * Changes the text and visibility of the assistant
-   * during the exercise
-   */
-  private changeAssistantText(): void {
-    let showA;
-    let titleA;
-    let descriptionA;
-
-    switch (this.exercisePhase) {
-      case ExercisePhase.INTRO:
-        showA = true;
-        titleA = '¡Completa la serie!';
-        descriptionA = 'En este ejercicio te mostraré una serie de dibujos que siguen un orden determinado. Deberás' +
-          ' averiguar cómo van cambiando y añadir el dibujo que falta en el lugar de la señal de interrogación. ' +
-          'Para ello tendrás que pulsar sobre una de las imágenes numeradas que aparecerán en la parte inferior de la pantalla.';
-        break;
-      case ExercisePhase.DEMO:
-        showA = false;
-        titleA = '';
-        descriptionA = '';
-        break;
-      case ExercisePhase.COUNTDOWN:
-        showA = true;
-        titleA = 'El ejercicio comenzará en:';
-        descriptionA = '';
-        break;
-      case ExercisePhase.EXERCISE:
-        showA = false;
-        titleA = '';
-        descriptionA = '';
-        break;
-      case ExercisePhase.END:
-        showA = true;
-        titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
-        break;
-    }
-    exerciseManager.notifyAssistant({
-      show: showA,
-      title: titleA,
-      description: descriptionA
-    });
-  }
-
-  /**
    * Starts the countdown before starting the exercise
    */
   private startCountdown(): void {
@@ -248,5 +203,50 @@ export class LogicalSeriesExerciseComponent implements OnInit {
      * and the answer the second
      */
     this.showPlaceholder = !this.showPlaceholder;
+  }
+
+  /**
+   * Changes the text and visibility of the assistant
+   * during the exercise
+   */
+  private changeAssistantText(): void {
+    let showA;
+    let titleA;
+    let descriptionA;
+
+    switch (this.exercisePhase) {
+      case ExercisePhase.INTRO:
+        showA = true;
+        titleA = '¡Completa la serie!';
+        descriptionA = 'En este ejercicio te mostraré una serie de dibujos que siguen un orden determinado. Deberás' +
+          ' averiguar cómo van cambiando y añadir el dibujo que falta en el lugar de la señal de interrogación. ' +
+          'Para ello tendrás que pulsar sobre una de las imágenes numeradas que aparecerán en la parte inferior de la pantalla.';
+        break;
+      case ExercisePhase.DEMO:
+        showA = false;
+        titleA = '';
+        descriptionA = '';
+        break;
+      case ExercisePhase.COUNTDOWN:
+        showA = true;
+        titleA = 'El ejercicio comenzará en:';
+        descriptionA = '';
+        break;
+      case ExercisePhase.EXERCISE:
+        showA = false;
+        titleA = '';
+        descriptionA = '';
+        break;
+      case ExercisePhase.END:
+        showA = true;
+        titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
+        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
+        break;
+    }
+    exerciseManager.notifyAssistant({
+      show: showA,
+      title: titleA,
+      description: descriptionA
+    });
   }
 }

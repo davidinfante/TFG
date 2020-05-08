@@ -22,13 +22,13 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  id: string;
-  type: number;
-  duration: number;
-  maxTime: number;
-  dependsOn: number;
-  repetitions: number;
-  durationKind: DurationKind;
+  private id: string;
+  private type: number;
+  private duration: number;
+  private maxTime: number;
+  private dependsOn: number;
+  private repetitions: number;
+  private durationKind: DurationKind;
   /**
    * Semantic Series Exercise's own attributes
    */

@@ -1,0 +1,40 @@
+<!--
+  - INTRO
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="startExercise()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - EXERCISE
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <div class="clickArea">
+      <ion-button [ngStyle]="getPosition()" (click)="nextIteration()">¡Púlsame!</ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - END
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="endExercise()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

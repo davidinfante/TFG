@@ -42,13 +42,13 @@ Here's a diagram:
 - Create or use any components you may need and pack them up in a component with the full exercise
   - Your main component class must have these attributes
   ```
-  id: string;
-  type: number;
-  duration: number;
-  maxTime: number;
-  dependsOn: number;
-  repetitions: number;
-  durationKind: DurationKind;
+  private id: string;
+  private type: number;
+  private duration: number;
+  private maxTime: number;
+  private dependsOn: number;
+  private repetitions: number;
+  private durationKind: DurationKind;
   ``` 
   - Include the object `exerciseManager` in your main exercise class
   - Add this code in the constructor
