@@ -9,6 +9,7 @@ import {NumbersAndVowelsExerciseComponent} from '../components/exercises/numbers
 import {PyramidsExerciseComponent} from '../components/exercises/pyramids-exercise/pyramids-exercise.component';
 import {WordListExerciseAlternativeComponent} from '../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
 import {MouseDialogExerciseComponent} from '../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
+import {IntroductionExerciseComponent} from '../components/exercises/introduction-exercise/introduction-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,11 @@ export class ExercisesService {
       id: 'e9',
       class: MouseDialogExerciseComponent,
       title: '¡Prueba de Puntería!'
+    },
+    {
+      id: 'e10',
+      class: IntroductionExerciseComponent,
+      title: 'Introducción a VIRTRA-EL'
     },
   ];
 

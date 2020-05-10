@@ -19,6 +19,7 @@ import {NumbersAndVowelsExerciseComponent} from '../../components/exercises/numb
 import {PyramidsExerciseComponent} from '../../components/exercises/pyramids-exercise/pyramids-exercise.component';
 import {WordListExerciseAlternativeComponent} from '../../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
 import {MouseDialogExerciseComponent} from '../../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
+import {IntroductionExerciseComponent} from '../../components/exercises/introduction-exercise/introduction-exercise.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import {MouseDialogExerciseComponent} from '../../components/exercises/mouse-dia
     PyramidsExerciseComponent,
     WordListExerciseAlternativeComponent,
     MouseDialogExerciseComponent,
+    IntroductionExerciseComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
@@ -52,6 +54,7 @@ import {MouseDialogExerciseComponent} from '../../components/exercises/mouse-dia
     PyramidsExerciseComponent,
     WordListExerciseAlternativeComponent,
     MouseDialogExerciseComponent,
+    IntroductionExerciseComponent,
   ]
 })
 export class SessionPageModule {}
