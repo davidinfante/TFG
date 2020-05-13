@@ -20,6 +20,7 @@ import {PyramidsExerciseComponent} from '../../components/exercises/pyramids-exe
 import {WordListExerciseAlternativeComponent} from '../../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
 import {MouseDialogExerciseComponent} from '../../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
 import {IntroductionExerciseComponent} from '../../components/exercises/introduction-exercise/introduction-exercise.component';
+import {InstrumentalQuestionnaireExerciseComponent} from '../../components/exercises/instrumental-questionnaire-exercise/instrumental-questionnaire-exercise.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import {IntroductionExerciseComponent} from '../../components/exercises/introduc
     WordListExerciseAlternativeComponent,
     MouseDialogExerciseComponent,
     IntroductionExerciseComponent,
+    InstrumentalQuestionnaireExerciseComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
@@ -55,6 +57,7 @@ import {IntroductionExerciseComponent} from '../../components/exercises/introduc
     WordListExerciseAlternativeComponent,
     MouseDialogExerciseComponent,
     IntroductionExerciseComponent,
+    InstrumentalQuestionnaireExerciseComponent,
   ]
 })
 export class SessionPageModule {}

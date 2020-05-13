@@ -17,6 +17,15 @@ export class SessionsService {
         'Por favor, trata de realizar la sesión completa sin interrumpirla.',
       exercises: [
         {
+          id: 'e11',
+          type: 0,
+          duration: -1,
+          maxTime: -1,
+          dependsOn: -1,
+          repetitions: 0,
+          durationKind: DurationKind.NOTIME,
+        },
+        {
           id: 'e10',
           type: 0,
           duration: -1,

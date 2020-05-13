@@ -53,7 +53,7 @@ export class IntroductionExerciseComponent implements OnInit {
   private consent: boolean;
   private score: number;
   /**
-   * Questionnaire variables
+   * Questionnaire answers
    */
   private gender: string;
   private placeOfBirth: string;

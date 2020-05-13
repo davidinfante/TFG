@@ -10,6 +10,7 @@ import {PyramidsExerciseComponent} from '../components/exercises/pyramids-exerci
 import {WordListExerciseAlternativeComponent} from '../components/exercises/word-list-exercise-alternative/word-list-exercise-alternative.component';
 import {MouseDialogExerciseComponent} from '../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
 import {IntroductionExerciseComponent} from '../components/exercises/introduction-exercise/introduction-exercise.component';
+import {InstrumentalQuestionnaireExerciseComponent} from '../components/exercises/instrumental-questionnaire-exercise/instrumental-questionnaire-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,11 @@ export class ExercisesService {
       class: IntroductionExerciseComponent,
       title: 'Introducción a VIRTRA-EL'
     },
+    {
+      id: 'e11',
+      class: InstrumentalQuestionnaireExerciseComponent,
+      title: 'Cuestionario final sesión'
+    }
   ];
 
   constructor() { }

@@ -1,0 +1,353 @@
+<!--
+  - INTRO
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-button (click)="nextPhase()">Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION1
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="telephone">
+        <ion-row>
+          <ion-col><span>A la hora de usar el teléfono</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="plenamente"></ion-radio>
+            <span>Soy capaz de usar el teléfono plenamente</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="algunos"></ion-radio>
+            <span>Soy capaz de marcar bien algunos números familiares</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="contestar"></ion-radio>
+            <span>Soy capaz de contestar al teléfono, pero no marcar</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span>No soy capaz de usar el teléfono</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col><ion-button *ngIf="this.telephone !== null" (click)="nextPhase()">Continuar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION2
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="shopping">
+        <ion-row>
+          <ion-col><span>A la hora de hacer compras</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Realizo todas las compras necesarias de forma independiente</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="algunas"></ion-radio>
+            <span>Solo realizo pequeñas compras de forma independiente</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="acompañado"></ion-radio>
+            <span>Necesito ir acompañado/a para cualquier compra</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>Soy totalmente incapaz de comprar</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.shopping !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION3
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="cooking">
+        <ion-row>
+          <ion-col><span>A la hora de hacer la comida</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="capaz"></ion-radio>
+            <span>Soy capaz de organizar, preparar y servir las comidas</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="parcial"></ion-radio>
+            <span>Soy capaz de preparar las comidas si me dan los ingredientes</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="nodieta"></ion-radio>
+            <span>Soy capaz de preparar, calentar y servir las comidas, pero no sigo una dieta adecuada</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>Necesito que me preparen y sirvan las comidas</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.cooking !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION4
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="householdChores">
+        <ion-row>
+          <ion-col><span>A la hora de el cuidado de la casa</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Soy capaz de mantener la casa solo/a o con ayuda ocasional</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="parcial"></ion-radio>
+            <span>Solo soy capaz de hacer tareas ligeras, como limpiar los platos o hacer la cama</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="tareasligeras"></ion-radio>
+            <span>Soy capaz de hacer tareas ligeras, pero no puedo mantener un adecuado nivel de limpieza</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="ayuda"></ion-radio>
+            <span>Necesito ayuda en todas las labores de la casa</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="noparticipa"></ion-radio>
+            <span>No participo en ninguna labor de la casa</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.householdChores !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION5
+  -->
+<ion-card *ngIf="exercisePhase === 5">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="laundry">
+        <ion-row>
+          <ion-col><span>A la hora de lavar la ropa</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Soy capaz de lavar toda mi ropa</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="parcial"></ion-radio>
+            <span>Solo soy capaz de lavar prendas pequeñas</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>Toda la ropa me la debe lavar otra persona</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.laundry !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION6
+  -->
+<ion-card *ngIf="exercisePhase === 6">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="transport">
+        <ion-row>
+          <ion-col><span>A la hora de utilizar medios de transporte</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Soy capaz de viajar solo en transporte público o soy capaz de conducir mi propio coche</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="acompañado"></ion-radio>
+            <span>Solo viajo en transporte público si voy acompañado</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="ayudaotros"></ion-radio>
+            <span>Solo uso el taxo o el automóvil con ayuda de otros</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>No soy capaz de viajar</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.transport !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION7
+  -->
+<ion-card *ngIf="exercisePhase === 7">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="medicine">
+        <ion-row>
+          <ion-col><span>A la hora de tomar mis medicamentos</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Soy capaz de tomar mi medicación a la hora y con la dosis correcta</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="parcial"></ion-radio>
+            <span>Solo soy capaz de tomar mi medicación cuando es preparada previamente por otra persona</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>No soy capaz de tomar mi medicación yo solo</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.medicine !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION8
+  -->
+<ion-card *ngIf="exercisePhase === 8">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="economicAffairs">
+        <ion-row>
+          <ion-col><span>A la hora de manejar los asuntos económicos</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="independiente"></ion-radio>
+            <span>Soy capaz de encargarme de mis asuntos económicos</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="parcial"></ion-radio>
+            <span>Solo realizo las compras de cada día, pero necesito ayuda en las grandes compras y en los bancos</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="incapaz"></ion-radio>
+            <span>Soy incapaz de manejar dinero</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()">Atrás</ion-button>
+          <ion-button *ngIf="this.economicAffairs !== null" (click)="nextPhase()">Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
