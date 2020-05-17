@@ -474,7 +474,7 @@ export class NumbersAndVowelsExerciseComponent implements OnInit {
         break;
       case ExercisePhase.COUNTDOWN:
         showA = true;
-        titleA = '¡Dictado de Números y Vocales!';
+        titleA = 'Vamos a comenzar el ejercicio en:';
         descriptionA = '';
         break;
       case ExercisePhase.ERR_1:

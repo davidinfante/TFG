@@ -21,6 +21,7 @@ import {WordListExerciseAlternativeComponent} from '../../components/exercises/w
 import {MouseDialogExerciseComponent} from '../../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
 import {IntroductionExerciseComponent} from '../../components/exercises/introduction-exercise/introduction-exercise.component';
 import {InstrumentalQuestionnaireExerciseComponent} from '../../components/exercises/instrumental-questionnaire-exercise/instrumental-questionnaire-exercise.component';
+import {ClassifyObjectsExerciseComponent} from '../../components/exercises/classify-objects-exercise/classify-objects-exercise.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import {InstrumentalQuestionnaireExerciseComponent} from '../../components/exerc
     MouseDialogExerciseComponent,
     IntroductionExerciseComponent,
     InstrumentalQuestionnaireExerciseComponent,
+    ClassifyObjectsExerciseComponent,
   ],
   entryComponents: [
     WordListExerciseComponent,
@@ -58,6 +60,7 @@ import {InstrumentalQuestionnaireExerciseComponent} from '../../components/exerc
     MouseDialogExerciseComponent,
     IntroductionExerciseComponent,
     InstrumentalQuestionnaireExerciseComponent,
+    ClassifyObjectsExerciseComponent,
   ]
 })
 export class SessionPageModule {}

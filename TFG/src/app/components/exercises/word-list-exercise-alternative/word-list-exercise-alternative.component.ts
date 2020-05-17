@@ -203,7 +203,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
         break;
       case ExercisePhase.COUNTDOWN:
         showA = true;
-        titleA = 'El ejercicio comenzará en:';
+        titleA = 'Vamos a comenzar el ejercicio en:';
         descriptionA = '';
         break;
       case ExercisePhase.WRITE:

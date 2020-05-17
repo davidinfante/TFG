@@ -11,6 +11,7 @@ import {WordListExerciseAlternativeComponent} from '../components/exercises/word
 import {MouseDialogExerciseComponent} from '../components/exercises/mouse-dialog-exercise/mouse-dialog-exercise.component';
 import {IntroductionExerciseComponent} from '../components/exercises/introduction-exercise/introduction-exercise.component';
 import {InstrumentalQuestionnaireExerciseComponent} from '../components/exercises/instrumental-questionnaire-exercise/instrumental-questionnaire-exercise.component';
+import {ClassifyObjectsExerciseComponent} from '../components/exercises/classify-objects-exercise/classify-objects-exercise.component';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,11 @@ export class ExercisesService {
       id: 'e11',
       class: InstrumentalQuestionnaireExerciseComponent,
       title: 'Cuestionario final sesión'
+    },
+    {
+      id: 'e12',
+      class: ClassifyObjectsExerciseComponent,
+      title: 'Clasificación y memorización de imágenes'
     }
   ];
 

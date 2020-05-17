@@ -115,47 +115,6 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   }
 
   /**
-   * Changes the text and visibility of the assistant
-   * during the exercise
-   */
-  private changeAssistantText(): void {
-    let showA;
-    let titleA;
-    let descriptionA;
-
-    switch (this.exercisePhase) {
-      case ExercisePhase.INTRO:
-        showA = true;
-        titleA = '¿Qué palabra sobra?';
-        descriptionA = '¡Genial! Vamos a realizar un ejercicio de razonamiento. En este ejercicio te presentaré una serie ' +
-          'de palabras. Entre ellas hay una que no está relacionada con las demás. Recuerda, cuando comiences el ejercicio, ' +
-          'deberás seleccionar la palabra que consideres correcta y pulsar el botón Listo. Dispondrás de un botón Ayuda, por si ' +
-          'necesitas alguna pista, pero ¡es mejor si lo intentas hacer tú solo! Cuando estés listo pulsa Continuar.';
-        break;
-      case ExercisePhase.COUNTDOWN:
-        showA = true;
-        titleA = 'El ejercicio comenzará en:';
-        descriptionA = '';
-        break;
-      case ExercisePhase.EXERCISE:
-        showA = false;
-        titleA = '';
-        descriptionA = '';
-        break;
-      case ExercisePhase.END:
-        showA = true;
-        titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
-        break;
-    }
-    exerciseManager.notifyAssistant({
-      show: showA,
-      title: titleA,
-      description: descriptionA
-    });
-  }
-
-  /**
    * Starts the countdown before starting the exercise
    */
   private startCountdown(): void {
@@ -191,5 +150,46 @@ export class SemanticSeriesExerciseComponent implements OnInit {
     this.checkedAnswer = true;
     // Change the Done button to Continue button
     this.continueButton = true;
+  }
+
+  /**
+   * Changes the text and visibility of the assistant
+   * during the exercise
+   */
+  private changeAssistantText(): void {
+    let showA;
+    let titleA;
+    let descriptionA;
+
+    switch (this.exercisePhase) {
+      case ExercisePhase.INTRO:
+        showA = true;
+        titleA = '¿Qué palabra sobra?';
+        descriptionA = '¡Genial! Vamos a realizar un ejercicio de razonamiento. En este ejercicio te presentaré una serie ' +
+          'de palabras. Entre ellas hay una que no está relacionada con las demás. Recuerda, cuando comiences el ejercicio, ' +
+          'deberás seleccionar la palabra que consideres correcta y pulsar el botón Listo. Dispondrás de un botón Ayuda, por si ' +
+          'necesitas alguna pista, pero ¡es mejor si lo intentas hacer tú solo! Cuando estés listo pulsa Continuar.';
+        break;
+      case ExercisePhase.COUNTDOWN:
+        showA = true;
+        titleA = 'Vamos a comenzar el ejercicio en:';
+        descriptionA = '';
+        break;
+      case ExercisePhase.EXERCISE:
+        showA = false;
+        titleA = '';
+        descriptionA = '';
+        break;
+      case ExercisePhase.END:
+        showA = true;
+        titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
+        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
+        break;
+    }
+    exerciseManager.notifyAssistant({
+      show: showA,
+      title: titleA,
+      description: descriptionA
+    });
   }
 }
