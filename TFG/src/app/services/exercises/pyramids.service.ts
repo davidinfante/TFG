@@ -1040,7 +1040,7 @@ export class PyramidsService {
   }
 
   /**
-   * Returns a positions exercise by it's Id
+   * Returns a pyramids exercise by it's Id
    */
   searchPositionsById(id: number) {
     return {

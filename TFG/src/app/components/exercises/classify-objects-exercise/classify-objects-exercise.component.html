@@ -13,9 +13,68 @@
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
     <ion-button (click)="changeDemoPhase()">Terminar prueba</ion-button>
-    <!--
-      - TO DO
-      -->
+      <ion-item-group>
+        <!-- Items - Objetos -->
+        <ion-row>
+          <ion-col><span>Objetos</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(0)" size="auto">
+            <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
+              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <ion-checkbox *ngIf="ser.img !== null" [(ngModel)]="ser.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- Transport - Transporte -->
+        <ion-row>
+          <ion-col><span>Transporte</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(1)" size="auto">
+            <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
+              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- Body - Partes del Cuerpo -->
+        <ion-row>
+          <ion-col><span>Partes del Cuerpo</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(2)" size="auto">
+            <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
+              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- Instruments - Instrumentos -->
+        <ion-row>
+          <ion-col><span>Instrumentos</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(3)" size="auto">
+            <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
+              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- Furniture - Muebles -->
+        <ion-row>
+          <ion-col><span>Muebles</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(4)" size="auto">
+            <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
+              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
   </ion-card-content>
 </ion-card>
 

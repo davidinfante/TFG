@@ -109,6 +109,16 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
   }
 
   /**
+   * Checks if the demo answer is correct
+   * and advances to next phase
+   */
+  private demoCheckAnswer(): void {
+    if (this.classifyObjectsService.demoCheckAnswer()) {
+      this.changeDemoPhase();
+    }
+  }
+
+  /**
    * Gets the next exercise series
    */
   private next(): void {

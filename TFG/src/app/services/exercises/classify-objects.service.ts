@@ -1759,6 +1759,98 @@ export class ClassifyObjectsService {
       numberOfMatches: CheckboxArray.prototype.numberOfMatches
     },
   ];
+  /**
+   * Exercise Demo
+   */
+  private demo: CheckboxArray[] = [
+    {
+      /**
+       * Items
+       */
+      id: 0,
+      positions: [
+        {value: false, isChecked: false, img: 'in3'},
+        {value: false, isChecked: false, img: 'tr3'},
+        {value: false, isChecked: false, img: 'mu4'},
+        {value: false, isChecked: false, img: 'tr4'},
+        {value: false, isChecked: false, img: 'cu2'},
+        {value: false, isChecked: false, img: 'mu1'},
+        {value: false, isChecked: false, img: 'cu3'},
+        {value: false, isChecked: false, img: 'cu4'},
+        {value: false, isChecked: false, img: 'in1'},
+        {value: false, isChecked: false, img: 'in4'},
+        {value: false, isChecked: false, img: 'tr1'},
+        {value: false, isChecked: false, img: 'cu1'},
+        {value: false, isChecked: false, img: 'tr2'},
+        {value: false, isChecked: false, img: 'mu3'},
+        {value: false, isChecked: false, img: 'in2'},
+        {value: false, isChecked: false, img: 'mu2'},
+      ],
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
+    },
+    {
+      /**
+       * Transport - Transporte
+       */
+      id: 1,
+      positions: [
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+      ],
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
+    },
+    {
+      /**
+       * Body - Cuerpo
+       */
+      id: 2,
+      positions: [
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+      ],
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
+    },
+    {
+      /**
+       * Instruments - Instrumentos
+       */
+      id: 3,
+      positions: [
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+      ],
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
+    },
+    {
+      /**
+       * Furniture - Muebles
+       */
+      id: 4,
+      positions: [
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+        {value: false, isChecked: false, img: null},
+      ],
+      allValueAndIsCheckedMatch: CheckboxArray.prototype.allValueAndIsCheckedMatch,
+      resetIsChecked: CheckboxArray.prototype.resetIsChecked,
+      numberOfMatches: CheckboxArray.prototype.numberOfMatches
+    },
+  ];
 
   constructor() { }
 
@@ -1831,5 +1923,117 @@ export class ClassifyObjectsService {
     }
 
     return counter;
+  }
+
+  /**
+   * DEMO
+   */
+
+  /**
+   * Returns a positions exercise by it's Id
+   */
+  demoSearchPositionsById(id: number) {
+    return {
+      ...this.demo.find(ser => {
+        return ser.id === id;
+      })
+    };
+  }
+
+  /**
+   * Get the positions array by it's Id
+   */
+  demoGetPositionsArray(id: number) {
+    return [...this.demoSearchPositionsById(id).positions];
+  }
+
+  /**
+   * Checks if the demo answer is correct
+   */
+  demoCheckAnswer(): boolean {
+    for (let i = 0; i < this.demo.length; i++) {
+      for (const pos of this.demo[i].positions) {
+        switch (i) {
+          case 1:
+            if (pos.img !== 'tr1' && pos.img !== 'tr2' && pos.img !== 'tr3' && pos.img !== 'tr4') {
+              return false;
+            }
+            break;
+          case 2:
+            if (pos.img !== 'cu1' && pos.img !== 'cu2' && pos.img !== 'cu3' && pos.img !== 'cu4') {
+              return false;
+            }
+            break;
+          case 3:
+            if (pos.img !== 'in1' && pos.img !== 'in2' && pos.img !== 'in3' && pos.img !== 'in4') {
+              return false;
+            }
+            break;
+          case 4:
+            if (pos.img !== 'mu1' && pos.img !== 'mu2' && pos.img !== 'mu3' && pos.img !== 'mu4') {
+              return false;
+            }
+            break;
+        }
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Changes the position of an item by
+   * removing it from one of the demo series
+   * and adds it to other demo series
+   */
+  demoChangeItem() {
+    // Checks if both imgs are selected
+    let selected1, selected2 = false;
+    // Selected imgs index in its own positions array
+    let indexImgSelected1, indexImgSelected2 = null;
+    // Iterator
+    let indexPosition = 0;
+    // Demo Series Id of the selected imgs
+    let demoId1, demoId2 = null;
+    // Checkbox Items
+    let imgSelected1, imgSelected2 = null;
+
+    // Search for the first two checked
+    // checkboxes to obtain it's values
+    for (const de of this.demo) {
+      indexPosition = 0;
+      for (const pos of de.positions) {
+        if (pos.isChecked) {
+          if (!selected1) {
+            selected1 = true;
+            indexImgSelected1 = indexPosition;
+            demoId1 = de.id;
+            imgSelected1 = pos;
+          } else if (!selected2) {
+            selected2 = true;
+            indexImgSelected2 = indexPosition;
+            demoId2 = de.id;
+            imgSelected2 = pos;
+          }
+        }
+        ++indexPosition;
+      }
+    }
+
+    // Only swap if two checkboxes are checked
+    if (selected1 && selected2) {
+      // Only swap if they are from different sections
+      if (demoId1 !== demoId2) {
+        // Remove values
+        this.demo[demoId1].positions.splice(indexImgSelected1, 1);
+        this.demo[demoId2].positions.splice(indexImgSelected2, 1);
+        // Add values
+        this.demo[demoId1].positions.push(imgSelected2);
+        this.demo[demoId2].positions.push(imgSelected1);
+      }
+      // Resets checked checkboxes
+      for (const de of this.demo) {
+        de.resetIsChecked();
+      }
+    }
   }
 }
