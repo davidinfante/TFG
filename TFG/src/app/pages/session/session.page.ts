@@ -38,7 +38,7 @@ export class SessionPage implements OnInit, AfterViewInit {
   /**
    * Session's attributes
    */
-  private sessionId: string;
+  private sessionId: number;
   private session: Session;
   private currentExercise: Exercise;
   private currentExerciseIndex: number;
@@ -67,8 +67,11 @@ export class SessionPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.sessionId = 's1';
+    // Get the actual session from the database
+    this.sessionId = 1;
+    // Get the current exercise index from the database
     this.currentExerciseIndex = 0;
+
     this.sessionPhase = SessionPhase.NOEXERCISE;
     this.viewContainerRef = null;
     this.componentRef = null;
@@ -77,7 +80,7 @@ export class SessionPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // Change the assistant text with the session's title and description
-    exerciseManager.notifyAssistant({show: true, title: this.session.title, description: this.session.description});
+    this.changeAssistantText(true, this.session.title, this.session.description);
   }
 
   /**
@@ -111,8 +114,42 @@ export class SessionPage implements OnInit, AfterViewInit {
       this.sessionPhase = SessionPhase.END;
       this.componentRef.destroy();
 
-      exerciseManager.notifyAssistant({show: true, title: 'Fin de la sesión', description: 'La sesión ha finalizado'});
+      this.changeAssistantText(true, 'Fin de la sesión', 'La sesión ha finalizado');
     }
+  }
+
+  /**
+   * Gets the next session
+   */
+  private nextSession(): void {
+    // Get the actual session from the database
+    if (this.sessionsService.getAllSessions().length > this.sessionId) {
+      ++this.sessionId;
+
+      // Get the current exercise index from the database
+      this.currentExerciseIndex = 0;
+
+      this.sessionPhase = SessionPhase.NOEXERCISE;
+      this.viewContainerRef = null;
+      this.componentRef = null;
+      this.session = this.sessionsService.getSession(this.sessionId);
+
+      // Change the assistant text with the session's title and description
+      this.changeAssistantText(true, this.session.title, this.session.description);
+    } else {
+      // No more sessions left
+    }
+  }
+
+  /**
+   * Changes the text and visibility of the assistant
+   */
+  private changeAssistantText(showA: boolean, titleA: string, descriptionA: string): void {
+    exerciseManager.notifyAssistant({
+      show: showA,
+      title: titleA,
+      description: descriptionA
+    });
   }
 
 }

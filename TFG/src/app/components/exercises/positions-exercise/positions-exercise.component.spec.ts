@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { PositionsExerciseComponent } from './positions-exercise.component';
+import {PositionsExerciseService} from '../../../services/exercises/positions-exercise.service';
 
 describe('PositionsExerciseComponent', () => {
   let component: PositionsExerciseComponent;
@@ -10,7 +11,8 @@ describe('PositionsExerciseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PositionsExerciseComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers: [PositionsExerciseService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PositionsExerciseComponent);

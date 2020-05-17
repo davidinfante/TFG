@@ -4,7 +4,7 @@ import {ExerciseAttributes} from './exercise-attributes';
  * Basic information about a session
  */
 export class Session {
-  id: string;
+  id: number;
   title: string;
   description: string;
   exercises: ExerciseAttributes[];

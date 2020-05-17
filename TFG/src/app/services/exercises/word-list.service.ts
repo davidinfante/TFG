@@ -36,7 +36,7 @@ export class WordListService {
     'pavo',
     'armario',
     'jazmin',
-    'coñac'
+    'conac'
   ];
   /**
    * Alternative words list

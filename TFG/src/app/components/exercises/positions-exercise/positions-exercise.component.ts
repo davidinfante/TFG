@@ -120,6 +120,7 @@ export class PositionsExerciseComponent implements OnInit {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
+        this.changeAssistantText();
       } else {
         this.exercisePhase = ExercisePhase.ANSWER;
         this.changeAssistantText();

@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { WordListExerciseAlternativeComponent } from './word-list-exercise-alternative.component';
+import {WordListService} from '../../../services/exercises/word-list.service';
+import {FunctionsService} from '../../../services/functions.service';
 
 describe('WordListExerciseAlternativeComponent', () => {
   let component: WordListExerciseAlternativeComponent;
@@ -10,7 +12,8 @@ describe('WordListExerciseAlternativeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ WordListExerciseAlternativeComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers: [WordListService, FunctionsService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WordListExerciseAlternativeComponent);

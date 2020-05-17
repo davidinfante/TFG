@@ -21,81 +21,83 @@ import {ClassifyObjectsExerciseComponent} from '../components/exercises/classify
  */
 export class ExercisesService {
   private exercises: Exercise[] = [
+    // Memory
     {
-      id: 'e1',
-      class: LogicalSeriesExerciseComponent,
-      title: '¡Completa la serie!'
-    },
-    {
-      id: 'e2',
-      class: WordListExerciseComponent,
-      title: '¡Memoriza la lista de palabras!'
-    },
-    {
-      id: 'e3',
-      class: SemanticSeriesExerciseComponent,
-      title: '¡Selecciona la palabra que no tenga algo en común con el resto!'
-    },
-    {
-      id: 'e4',
-      class: PositionsExerciseComponent,
-      title: '¡Memoriza las posiciones!'
-    },
-    {
-      id: 'e5',
-      class: DirectNumbersExerciseComponent,
-      title: '¡Dictado de Números!'
-    },
-    {
-      id: 'e6',
+      id: 1,
       class: NumbersAndVowelsExerciseComponent,
       title: '¡Dictado de Números y Vocales!'
     },
     {
-      id: 'e7',
-      class: PyramidsExerciseComponent,
-      title: '¡Pirámides!'
+      id: 3,
+      class: ClassifyObjectsExerciseComponent,
+      title: 'Clasificación y memorización de imágenes'
     },
     {
-      id: 'e8',
+      id: 19,
       class: WordListExerciseAlternativeComponent,
       title: '¡Lista de Palabras (Largo Plazo)!'
     },
     {
-      id: 'e9',
-      class: MouseDialogExerciseComponent,
-      title: '¡Prueba de Puntería!'
+      id: 7,
+      class: DirectNumbersExerciseComponent,
+      title: '¡Dictado de Números!'
     },
     {
-      id: 'e10',
+      id: 8,
+      class: WordListExerciseComponent,
+      title: '¡Memoriza la lista de palabras!'
+    },
+    {
+      id: 25,
+      class: PositionsExerciseComponent,
+      title: '¡Memoriza las posiciones!'
+    },
+
+    // Attention
+    {
+      id: 6,
+      class: PyramidsExerciseComponent,
+      title: '¡Pirámides!'
+    },
+
+    // Reasoning exercises
+    {
+      id: 11,
+      class: SemanticSeriesExerciseComponent,
+      title: '¡Selecciona la palabra que no tenga algo en común con el resto!'
+    },
+    {
+      id: 12,
+      class: LogicalSeriesExerciseComponent,
+      title: '¡Completa la serie!'
+    },
+
+    // Planning
+
+    // Tests
+    {
+      id: 30,
       class: IntroductionExerciseComponent,
       title: 'Introducción a VIRTRA-EL'
     },
     {
-      id: 'e11',
+      id: 32,
+      class: MouseDialogExerciseComponent,
+      title: '¡Prueba de Puntería!'
+    },
+    {
+      id: 33,
       class: InstrumentalQuestionnaireExerciseComponent,
       title: 'Cuestionario final sesión'
     },
-    {
-      id: 'e12',
-      class: ClassifyObjectsExerciseComponent,
-      title: 'Clasificación y memorización de imágenes'
-    }
   ];
 
   constructor() { }
 
   /**
-   * Return all existent exercises
-   */
-  getAllExercises() {
-    return  [...this.exercises];
-  }
-
-  /**
    * Returns an exercise by it's Id
    */
-  getExercise(id: string) {
+  getExercise(id: number) {
     return {
       ...this.exercises.find(exercise => {
         return exercise.id === id;

@@ -4,7 +4,7 @@ import {EventEmitter} from '@angular/core';
  * Manages the information passed by exercises to sessions
  * and assistants and vice versa
  */
-class ExerciseManager {
+export class ExerciseManager {
   /**
    * Emits and event when the assistant text changes
    */
@@ -31,14 +31,14 @@ class ExerciseManager {
   /**
    * Notify the session with the finalization of an exercise
    */
-  notifyEnd(notification: {id: string, score: number, success: boolean}): void {
+  notifyEnd(notification: {id: number, score: number, success: boolean}): void {
     this.exerciseEnded.emit(notification);
   }
 
   /**
    * Emit the exercise it's parameter values
    */
-  notifyExerciseInfo(notification: {id: string, duration: number, repetitions: number}): void {
+  notifyExerciseInfo(notification: {id: number, duration: number, repetitions: number}): void {
     this.exerciseInfo.emit(notification);
   }
 }

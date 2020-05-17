@@ -2,7 +2,7 @@
  * Basic information of an exercise
  */
 export class Exercise {
-  id: string;
+  id: number;
   class: any;
   title: string;
 

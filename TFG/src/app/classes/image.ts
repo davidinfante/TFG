@@ -14,3 +14,6 @@ export class IdImage {
   constructor() {
   }
 }
+
+export class Image {
+}

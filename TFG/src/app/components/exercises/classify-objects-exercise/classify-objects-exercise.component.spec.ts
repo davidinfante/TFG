@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ClassifyObjectsExerciseComponent } from './classify-objects-exercise.component';
+import {ClassifyObjectsService} from '../../../services/exercises/classify-objects.service';
 
 describe('ClassifyObjectsExerciseComponent', () => {
   let component: ClassifyObjectsExerciseComponent;
@@ -10,7 +11,8 @@ describe('ClassifyObjectsExerciseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ClassifyObjectsExerciseComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers: [ClassifyObjectsService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ClassifyObjectsExerciseComponent);
