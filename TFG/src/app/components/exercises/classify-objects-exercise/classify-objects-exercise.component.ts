@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {ClassifyObjectsService} from '../../../services/exercises/classify-objects.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phases of the exercise
@@ -30,13 +30,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Direct Numbers Exercise's own attributes
    */
@@ -52,13 +46,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
 
   constructor(private classifyObjectsService: ClassifyObjectsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-        this.type = data.type,
-        this.duration = data.duration,
-        this.maxTime = data.maxTime,
-        this.dependsOn = data.dependsOn,
-        this.repetitions = data.repetitions,
-        this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -78,7 +66,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });
@@ -202,7 +190,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
     } else if (this.actualSeries >= 4) {
       this.timeLeft = 90;
     }
-    this.duration = this.timeLeft;
+    this.exerciseAttributes.duration = this.timeLeft;
   }
 
   /**

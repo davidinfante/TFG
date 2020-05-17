@@ -110,7 +110,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 7">
   <ion-card-content>
-    <h1>{{ this.timeLeft + '/' + this.duration}} segundos</h1>
+    <h1>{{ this.timeLeft + '/' + this.exerciseAttributes.duration}} segundos</h1>
       <ion-row>
         <div *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)">
           <ion-col *ngIf="ser.value" size="auto">

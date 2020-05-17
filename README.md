@@ -35,38 +35,25 @@ Here's a diagram:
   - The session's id (the standard is s + number e.g. `s1`)
   - The title as a string
   - A description as a string
-  - An array with the session's exercises (id, type, duration, maxTime, dependsOn, repetitions, 
-  durationKind)
+  - An array with the session's exercises (id, duration, repetitions)
 
 ### How to add new Exercises:
 - Create or use any components you may need and pack them up in a component with the full exercise
   - Your main component class must have these attributes
   ```
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   ``` 
   - Include the object `exerciseManager` in your main exercise class
   - Add this code in the constructor
   ```
   exerciseManager.exerciseInfo.subscribe( data => {
-    this.id = data.id,
-    this.type = data.type,
-    this.duration = data.duration,
-    this.maxTime = data.maxTime,
-    this.dependsOn = data.dependsOn,
-    this.repetitions = data.repetitions,
-    this.durationKind = data.durationKind;
+    this.exerciseAttributes = data;
   });
   ```
   - Add this code to the function that is called when the exercise end
    ```
   exerciseManager.notifyEnd({
-    id: this.id,
+    id: this.exerciseAttributes.id,
     score: (The exercise's score as a number),
     success: true
   });

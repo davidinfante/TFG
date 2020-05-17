@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {FunctionsService} from '../../../services/functions.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phases of the exercise
@@ -21,13 +21,7 @@ export class MouseDialogExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Mouse Dialog Exercise's own attributes
    */
@@ -37,13 +31,7 @@ export class MouseDialogExerciseComponent implements OnInit {
 
   constructor(private functionsService: FunctionsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-        this.type = data.type,
-        this.duration = data.duration,
-        this.maxTime = data.maxTime,
-        this.dependsOn = data.dependsOn,
-        this.repetitions = data.repetitions,
-        this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -59,7 +47,7 @@ export class MouseDialogExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });
@@ -79,7 +67,7 @@ export class MouseDialogExerciseComponent implements OnInit {
    * of repetitions is complete
    */
   private nextIteration(): void {
-    if (this.repetition < this.repetitions) {
+    if (this.repetition < this.exerciseAttributes.repetitions) {
       ++this.repetition;
     } else {
       this.exercisePhase = ExercisePhase.END;

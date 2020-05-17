@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {WordListService} from '../../../services/exercises/word-list.service';
 import {FunctionsService} from '../../../services/functions.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phase of the exercise
@@ -29,13 +29,7 @@ export class WordListExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Word List Exercise's own attributes
    */
@@ -57,13 +51,7 @@ export class WordListExerciseComponent implements OnInit {
   ) {
     // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-      this.type = data.type,
-      this.duration = data.duration,
-      this.maxTime = data.maxTime,
-      this.dependsOn = data.dependsOn,
-      this.repetitions = data.repetitions,
-      this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -71,7 +59,7 @@ export class WordListExerciseComponent implements OnInit {
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
     this.countdownTimeLeft = 3;
-    this.timeLeft = this.duration;
+    this.timeLeft = this.exerciseAttributes.duration;
     this.answeredList = [];
     this.repetition = 0;
     this.score = 0;
@@ -91,7 +79,7 @@ export class WordListExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });
@@ -114,19 +102,11 @@ export class WordListExerciseComponent implements OnInit {
   }
 
   /**
-   * Shows the medal obtained and the ending of the exercise
-   */
-  private getMedal(): void {
-    this.exercisePhase = ExercisePhase.END;
-    this.changeAssistantText();
-  }
-
-  /**
    * Changes the phase to REPEAT
    */
   private repeat(): void {
     // If repetitions haven't been reached yet
-    if (this.repetition < this.repetitions) {
+    if (this.repetition < this.exerciseAttributes.repetitions) {
       this.exercisePhase = ExercisePhase.REPEAT;
       this.changeAssistantText();
     } else {
@@ -175,7 +155,7 @@ export class WordListExerciseComponent implements OnInit {
    */
   private pauseTimer(): void {
     clearInterval(this.interval);
-    this.timeLeft = this.duration;
+    this.timeLeft = this.exerciseAttributes.duration;
   }
 
   /**

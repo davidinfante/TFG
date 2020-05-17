@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PyramidsService} from '../../../services/exercises/pyramids.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phase of the exercise
@@ -26,13 +26,7 @@ export class PyramidsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Pyramids Exercise's own attributes
    */
@@ -51,13 +45,7 @@ export class PyramidsExerciseComponent implements OnInit {
 
   constructor(private pyramidsService: PyramidsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-        this.type = data.type,
-        this.duration = data.duration,
-        this.maxTime = data.maxTime,
-        this.dependsOn = data.dependsOn,
-        this.repetitions = data.repetitions,
-        this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -70,7 +58,7 @@ export class PyramidsExerciseComponent implements OnInit {
     this.score = 0;
 
     this.countdownTimeLeft = 3;
-    this.timeLeft = this.duration;
+    this.timeLeft = this.exerciseAttributes.duration;
   }
 
   /**
@@ -78,7 +66,7 @@ export class PyramidsExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });
@@ -211,7 +199,7 @@ export class PyramidsExerciseComponent implements OnInit {
     clearInterval(this.cdInterval);
     clearInterval(this.interval);
     this.countdownTimeLeft = 1;
-    this.timeLeft = this.duration;
+    this.timeLeft = this.exerciseAttributes.duration;
   }
 
   /**

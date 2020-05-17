@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {DirectNumbersService} from '../../../services/exercises/direct-numbers.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phases of the exercise
@@ -44,13 +44,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Direct Numbers Exercise's own attributes
    */
@@ -72,13 +66,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
 
   constructor(private directNumbersService: DirectNumbersService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-        this.type = data.type,
-        this.duration = data.duration,
-        this.maxTime = data.maxTime,
-        this.dependsOn = data.dependsOn,
-        this.repetitions = data.repetitions,
-        this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -101,7 +89,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });

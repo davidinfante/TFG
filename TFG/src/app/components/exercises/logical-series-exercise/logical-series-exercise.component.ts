@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {LogicalSeriesService} from '../../../services/exercises/logical-series.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phases of the exercise
@@ -29,13 +29,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Local Series Exercise's own attributes
    */
@@ -60,13 +54,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
 
   constructor(private logicalSeriesService: LogicalSeriesService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-      this.type = data.type,
-      this.duration = data.duration,
-      this.maxTime = data.maxTime,
-      this.dependsOn = data.dependsOn,
-      this.repetitions = data.repetitions,
-      this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -136,7 +124,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });

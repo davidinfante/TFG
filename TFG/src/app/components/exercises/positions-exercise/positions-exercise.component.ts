@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DurationKind} from '../../../enum/duration-kind.enum';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PositionsExerciseService} from '../../../services/exercises/positions-exercise.service';
+import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 
 /**
  * Phase of the exercise
@@ -37,13 +37,7 @@ export class PositionsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
-  private id: string;
-  private type: number;
-  private duration: number;
-  private maxTime: number;
-  private dependsOn: number;
-  private repetitions: number;
-  private durationKind: DurationKind;
+  private exerciseAttributes: ExerciseAttributes;
   /**
    * Positions Exercise's own attributes
    */
@@ -61,13 +55,7 @@ export class PositionsExerciseComponent implements OnInit {
 
   constructor(private positionsExerciseService: PositionsExerciseService) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.id = data.id,
-        this.type = data.type,
-        this.duration = data.duration,
-        this.maxTime = data.maxTime,
-        this.dependsOn = data.dependsOn,
-        this.repetitions = data.repetitions,
-        this.durationKind = data.durationKind;
+      this.exerciseAttributes = data;
     });
   }
 
@@ -105,7 +93,7 @@ export class PositionsExerciseComponent implements OnInit {
    */
   private endExercise(): void {
     exerciseManager.notifyEnd({
-      id: this.id,
+      id: this.exerciseAttributes.id,
       score: this.score,
       success: true
     });

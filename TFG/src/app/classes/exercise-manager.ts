@@ -1,5 +1,4 @@
 import {EventEmitter} from '@angular/core';
-import {DurationKind} from '../enum/duration-kind.enum';
 
 /**
  * Manages the information passed by exercises to sessions
@@ -39,13 +38,7 @@ class ExerciseManager {
   /**
    * Emit the exercise it's parameter values
    */
-  notifyExerciseInfo(notification: {id: string,
-                                    type: number,
-                                    duration: number,
-                                    maxTime: number,
-                                    dependsOn: number,
-                                    repetitions: number,
-                                    durationKind: DurationKind}): void {
+  notifyExerciseInfo(notification: {id: string, duration: number, repetitions: number}): void {
     this.exerciseInfo.emit(notification);
   }
 }
