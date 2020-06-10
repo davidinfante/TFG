@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 /**
  * Updates a user's currentExercise
  */
-router.put('/:id/currentExercise', async (req, res) => {
+router.post('/:id/currentExercise', async (req, res) => {
     const us = await user.find(id => {
         return id === req.params.id;
     });
@@ -39,7 +39,7 @@ router.put('/:id/currentExercise', async (req, res) => {
 /**
  * Updates a user's session
  */
-router.put('/:id/session', async (req, res) => {
+router.post('/:id/session', async (req, res) => {
     const us = await user.find(id => {
         return id === req.params.id;
     });

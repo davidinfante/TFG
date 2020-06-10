@@ -26,13 +26,15 @@ export class UserService {
    * Updates the user's current exercise
    */
   updateCurrentExercise(id: number, currExer: number): Observable<any> {
-    return this.httpClient.put(this.functionsService.getBackendUrl() + this.path + '/' + id + '/currentExercise', {currExer});
+    return this.httpClient.post(this.functionsService.getBackendUrl() + this.path + '/' + id + '/currentExercise',
+      {currentExercise: currExer}, {responseType: 'text'});
   }
 
   /**
    * Updates the user's session
    */
-  updateSession(id: number, session: number): Observable<any> {
-    return this.httpClient.put(this.functionsService.getBackendUrl() + this.path + '/' + id + '/session', {session});
+  updateSession(id: number, sess: number): Observable<any> {
+    return this.httpClient.post(this.functionsService.getBackendUrl() + this.path + '/' + id + '/session',
+      {session: sess}, {responseType: 'text'});
   }
 }
