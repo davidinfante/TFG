@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import {LogicalSeries} from '../../classes/exercises/logical-series';
+import {FunctionsService} from '../functions.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogicalSeriesService {
-  private placeholder = {
+  private path = '/api/logicalSeries';
+  /*private placeholder = {
     src: '../../../../assets/exercises/LogicalSeriesExercise/placeholder.png',
     height: 98,
     width: 98
-  };
+  };*/
   private logicalSeries: LogicalSeries[] = [
     /**
      * Demo
@@ -17,61 +21,31 @@ export class LogicalSeriesService {
     {
       id: 0,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png',
-          height: 98,
-          width: 98
-        },
+        'demo4',
+        'demo1',
+        'demo4',
+        'demo1',
+        'demo4',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png',
-        height: 98,
-        width: 98,
+        id: 'demo1',
         value: '3'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png',
-          height: 98,
-          width: 98,
+          id: 'demo4',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure3.png',
-          height: 98,
-          width: 98,
+          id: 'demo3',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png',
-          height: 98,
-          width: 98,
+          id: 'demo1',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/demo/figure2.png',
-          height: 98,
-          width: 98,
+          id: 'demo2',
           value: '4'
         },
       ],
@@ -83,56 +57,30 @@ export class LogicalSeriesService {
     {
       id: 1,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure1.png',
-          height: 98,
-          width: 98
-        }
+        'series1-2',
+        'series1-1',
+        'series1-2',
+        'series1-1',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure2.png',
-        height: 98,
-        width: 98,
+        id: 'series1-2',
         value: '2'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure1.png',
-          height: 98,
-          width: 98,
+          id: 'series1-1',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure2.png',
-          height: 98,
-          width: 98,
+          id: 'series1-2',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure3.png',
-          height: 98,
-          width: 98,
+          id: 'series1-3',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series1/figure4.png',
-          height: 98,
-          width: 98,
+          id: 'series1-4',
           value: '4'
         },
       ],
@@ -141,56 +89,30 @@ export class LogicalSeriesService {
     {
       id: 2,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure3.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure4.png',
-          height: 98,
-          width: 98
-        },
+        'series2-1',
+        'series2-2',
+        'series2-3',
+        'series2-4',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure5.png',
-        height: 98,
-        width: 98,
+        id: 'series2-5',
         value: '2'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure1.png',
-          height: 98,
-          width: 98,
+          id: 'series2-1',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure5.png',
-          height: 98,
-          width: 98,
+          id: 'series2-5',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure3.png',
-          height: 98,
-          width: 98,
+          id: 'series2-3',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series2/figure6.png',
-          height: 98,
-          width: 98,
+          id: 'series2-6',
           value: '4'
         },
       ],
@@ -199,61 +121,31 @@ export class LogicalSeriesService {
     {
       id: 3,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure3.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure4.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure5.png',
-          height: 98,
-          width: 98
-        },
+        'series3-1',
+        'series3-2',
+        'series3-3',
+        'series3-4',
+        'series3-5',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure6.png',
-        height: 98,
-        width: 98,
+        id: 'series3-6',
         value: '2'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure7.png',
-          height: 98,
-          width: 98,
+          id: 'series3-7',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure6.png',
-          height: 98,
-          width: 98,
+          id: 'series3-6',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure3.png',
-          height: 98,
-          width: 98,
+          id: 'series3-3',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series3/figure8.png',
-          height: 98,
-          width: 98,
+          id: 'series3-8',
           value: '4'
         },
       ],
@@ -262,61 +154,31 @@ export class LogicalSeriesService {
     {
       id: 4,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure3.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure4.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure5.png',
-          height: 98,
-          width: 98
-        },
+        'series4-1',
+        'series4-2',
+        'series4-3',
+        'series4-4',
+        'series4-5',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure6.png',
-        height: 98,
-        width: 98,
+        id: 'series4-6',
         value: '2'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure8.png',
-          height: 98,
-          width: 98,
+          id: 'series4-8',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure6.png',
-          height: 98,
-          width: 98,
+          id: 'series4-6',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure7.png',
-          height: 98,
-          width: 98,
+          id: 'series4-7',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series4/figure3.png',
-          height: 98,
-          width: 98,
+          id: 'series4-3',
           value: '4'
         },
       ],
@@ -325,51 +187,29 @@ export class LogicalSeriesService {
     {
       id: 5,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure3.png',
-          height: 98,
-          width: 98
-        },
+        'series5-1',
+        'series5-2',
+        'series5-3',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure5.png',
-        height: 98,
-        width: 98,
+        id: 'series5-5',
         value: '1'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure5.png',
-          height: 98,
-          width: 98,
+          id: 'series5-5',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure6.png',
-          height: 98,
-          width: 98,
+          id: 'series5-6',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure7.png',
-          height: 98,
-          width: 98,
+          id: 'series5-7',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series5/figure4.png',
-          height: 98,
-          width: 98,
+          id: 'series5-4',
           value: '4'
         },
       ],
@@ -378,51 +218,29 @@ export class LogicalSeriesService {
     {
       id: 6,
       sampleImg: [
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure1.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure2.png',
-          height: 98,
-          width: 98
-        },
-        {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure3.png',
-          height: 98,
-          width: 98
-        },
+        'series6-1',
+        'series6-2',
+        'series6-3',
       ],
       correctOption: {
-        src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure5.png',
-        height: 98,
-        width: 98,
+        id: 'series6-5',
         value: '3'
       },
       buttons: [
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure4.png',
-          height: 98,
-          width: 98,
+          id: 'series6-4',
           value: '1'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure6.png',
-          height: 98,
-          width: 98,
+          id: 'series6-6',
           value: '2'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure5.png',
-          height: 98,
-          width: 98,
+          id: 'series6-5',
           value: '3'
         },
         {
-          src: '../../../../assets/exercises/LogicalSeriesExercise/series6/figure7.png',
-          height: 98,
-          width: 98,
+          id: 'series6-7',
           value: '4'
         },
       ],
@@ -430,14 +248,24 @@ export class LogicalSeriesService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private functionsService: FunctionsService,
+    private httpClient: HttpClient
+  ) { }
+
+  /**
+   * Gets all images from the database
+   */
+  queryImages(): Observable<any> {
+    return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
+  }
 
   /**
    * Returns the placeholder img
    */
-  getPlaceHolder() {
+  /*getPlaceHolder() {
     return this.placeholder;
-  }
+  }*/
 
   /**
    * Returns a series by it's Id
@@ -465,13 +293,11 @@ export class LogicalSeriesService {
   }
 
   /**
-   * Returns the correct option src/height/width of a series
+   * Returns the correct option id of a series
    */
-  getCorrectOptionSrc(id: number) {
+  getCorrectOptionId(id: number) {
     return {
-      src: this.getSeries(id).correctOption.src,
-      height: this.getSeries(id).correctOption.height,
-      width: this.getSeries(id).correctOption.width
+      id: this.getSeries(id).correctOption.id,
     };
   }
 

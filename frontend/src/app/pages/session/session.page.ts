@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -12,6 +11,7 @@ import {ExercisesService} from '../../services/exercises.service';
 import {AdDirective} from '../../directives/ad-directive.directive';
 import {Exercise} from '../../classes/exercise';
 import {exerciseManager} from '../../classes/exercise-manager';
+import {UserService} from '../../services/user.service';
 
 /**
  * Phase of the session
@@ -30,7 +30,7 @@ export enum SessionPhase {
 /**
  * Class that dynamically loads the exercises of a session
  */
-export class SessionPage implements OnInit, AfterViewInit {
+export class SessionPage implements OnInit {
   /**
    * Exercise creator directive
    */
@@ -38,6 +38,7 @@ export class SessionPage implements OnInit, AfterViewInit {
   /**
    * Session's attributes
    */
+  private userId = 0;
   private sessionId: number;
   private session: Session;
   private currentExercise: Exercise;
@@ -53,13 +54,18 @@ export class SessionPage implements OnInit, AfterViewInit {
     private componentFactoryResolver: ComponentFactoryResolver,
     private sessionsService: SessionsService,
     private exercisesService: ExercisesService,
+    private userService: UserService
   ) {
     // Subscribe to the ending exercise event
     exerciseManager.exerciseEnded.subscribe( data => {
       if (this.currentExercise.id === data.id && data.success) {
         // Do something with the score
         // data.score bla bla bla
-        this.nextExercise();
+
+        // Update the current exercise index in the database
+        this.userService.updateCurrentExercise(this.userId, this.currentExerciseIndex).subscribe( res => {
+          this.nextExercise();
+        });
       } else {
         console.log('An error has occurred while ending the exercise');
       }
@@ -67,20 +73,18 @@ export class SessionPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // Get the actual session from the database
-    this.sessionId = 1;
-    // Get the current exercise index from the database
-    this.currentExerciseIndex = 0;
+    // Get the actual session and current exercise index from the user database
+    this.userService.getUserSession(this.userId).subscribe(res => {
+      this.sessionId = res.session;
+      this.currentExerciseIndex = res.currentExercise;
 
-    this.sessionPhase = SessionPhase.NOEXERCISE;
-    this.viewContainerRef = null;
-    this.componentRef = null;
-    this.session = this.sessionsService.getSession(this.sessionId);
-  }
-
-  ngAfterViewInit() {
-    // Change the assistant text with the session's title and description
-    this.changeAssistantText(true, this.session.title, this.session.description);
+      this.sessionPhase = SessionPhase.NOEXERCISE;
+      this.viewContainerRef = null;
+      this.componentRef = null;
+      this.session = this.sessionsService.getSession(this.sessionId);
+      // Change the assistant text with the session's title and description
+      this.changeAssistantText(true, this.session.title, this.session.description);
+    });
   }
 
   /**
@@ -123,22 +127,26 @@ export class SessionPage implements OnInit, AfterViewInit {
    */
   private nextSession(): void {
     // Get the actual session from the database
-    if (this.sessionsService.getAllSessions().length > this.sessionId) {
-      ++this.sessionId;
+    this.userService.getUserSession(this.userId).subscribe(res => {
+      this.sessionId = res.session;
+      if (this.sessionsService.getAllSessions().length > this.sessionId) {
+        ++this.sessionId;
 
-      // Get the current exercise index from the database
-      this.currentExerciseIndex = 0;
+        // Update the session and current exercise index in the database
+        this.userService.updateSession(this.userId, this.sessionId).subscribe( re => {});
+        this.userService.updateCurrentExercise(this.userId, 0).subscribe( r => {});
+        this.currentExerciseIndex = 0;
+        this.sessionPhase = SessionPhase.NOEXERCISE;
+        this.viewContainerRef = null;
+        this.componentRef = null;
+        this.session = this.sessionsService.getSession(this.sessionId);
 
-      this.sessionPhase = SessionPhase.NOEXERCISE;
-      this.viewContainerRef = null;
-      this.componentRef = null;
-      this.session = this.sessionsService.getSession(this.sessionId);
-
-      // Change the assistant text with the session's title and description
-      this.changeAssistantText(true, this.session.title, this.session.description);
-    } else {
-      // No more sessions left
-    }
+        // Change the assistant text with the session's title and description
+        this.changeAssistantText(true, this.session.title, this.session.description);
+      } else {
+        // No more sessions left
+      }
+    });
   }
 
   /**

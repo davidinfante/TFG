@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
+import {FunctionsService} from '../functions.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NumbersAndVowelsService {
-  private pizarraIntro = {
-    src: '../../../../assets/exercises/DirectNumbersExercise/pizarraIntro.png',
+  private path = '/api/numbersAndVowels';
+  /*private pizarraIntro = {
+    src: '../../../../assets/exercises/NumbersAndVowelsExercise/pizarraIntro.png',
     height: 300,
     width: 400
   };
   private pizarra = {
-    src: '../../../../assets/exercises/DirectNumbersExercise/pizarra.png',
+    src: '../../../../assets/exercises/NumbersAndVowelsExercise/pizarra.png',
     height: 300,
     width: 400
-  };
+  };*/
   private demoSeries = [
     {
       id: 1,
@@ -139,21 +143,31 @@ export class NumbersAndVowelsService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private functionsService: FunctionsService,
+    private httpClient: HttpClient
+  ) { }
+
+  /**
+   * Gets all images from the database
+   */
+  queryImages(): Observable<any> {
+    return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
+  }
 
   /**
    * Returns the pizarraIntro img
    */
-  getPizarraIntro() {
+  /*getPizarraIntro() {
     return this.pizarraIntro;
-  }
+  }*/
 
   /**
    * Returns the izarra img
    */
-  getPizarra() {
+  /*getPizarra() {
     return this.pizarra;
-  }
+  }*/
 
   /**
    * Returns a demo series by it's Id

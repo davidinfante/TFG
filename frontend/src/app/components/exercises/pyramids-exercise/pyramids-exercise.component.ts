@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PyramidsService} from '../../../services/exercises/pyramids.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {IdImage} from "../../../classes/image";
 
 /**
  * Phase of the exercise
@@ -42,6 +43,10 @@ export class PyramidsExerciseComponent implements OnInit {
   private cdInterval;
   private countdownTimeLeft: number;
   private timeLeft: number;
+  /**
+   * Images
+   */
+  private imgs: IdImage[];
 
   constructor(private pyramidsService: PyramidsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -50,6 +55,10 @@ export class PyramidsExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pyramidsService.queryImages().subscribe( res => {
+      this.imgs = res;
+    });
+
     this.exercisePhase = ExercisePhase.INTRO1;
     this.changeAssistantText();
     this.actualPyramids = 0;
@@ -70,6 +79,17 @@ export class PyramidsExerciseComponent implements OnInit {
       score: this.score,
       success: true
     });
+  }
+
+  /**
+   * Gets an image by its id
+   */
+  private getImage(id: string) {
+    return {
+      ...this.imgs.find(img => {
+        return img.id === id;
+      })
+    };
   }
 
   /**

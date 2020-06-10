@@ -21,7 +21,7 @@
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(0)" size="auto">
             <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
-              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <img *ngIf="ser.img !== null" [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
               <ion-checkbox *ngIf="ser.img !== null" [(ngModel)]="ser.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -33,7 +33,7 @@
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(1)" size="auto">
             <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
-              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <img *ngIf="ser.img !== null" [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
               <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -45,7 +45,7 @@
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(2)" size="auto">
             <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
-              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <img *ngIf="ser.img !== null" [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
               <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -57,7 +57,7 @@
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(3)" size="auto">
             <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
-              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <img *ngIf="ser.img !== null" [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
               <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -69,7 +69,7 @@
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(4)" size="auto">
             <ion-item (click)="classifyObjectsService.demoChangeItem(); demoCheckAnswer()">
-              <img *ngIf="ser.img !== null" [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+              <img *ngIf="ser.img !== null" [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
               <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -114,7 +114,7 @@
       <ion-row>
         <div *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)">
           <ion-col *ngIf="ser.value" size="auto">
-            <img [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+            <img [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
           </ion-col>
         </div>
       </ion-row>
@@ -132,7 +132,7 @@
       <ion-row>
         <ion-col *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)" size="auto">
           <ion-item>
-            <img [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+            <img [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
             <ion-checkbox [(ngModel)]="ser.isChecked"></ion-checkbox>
           </ion-item>
         </ion-col>
@@ -150,7 +150,7 @@
     <ion-button (click)="next()">Continuar</ion-button>
     <ion-row>
       <ion-col *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)" size="auto">
-        <img [src]="classifyObjectsService.getImage(ser.img).src" [height]="classifyObjectsService.getImage(ser.img).height" [width]="classifyObjectsService.getImage(ser.img).width"/>
+        <img [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
       </ion-col>
     </ion-row>
     <h1>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>

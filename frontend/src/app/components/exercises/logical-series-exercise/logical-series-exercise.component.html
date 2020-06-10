@@ -9,14 +9,14 @@
       otro cuadrado. ¿Adivinas que iría después del último cuadrado?
     </ion-card-subtitle>
     <ion-grid>
-      <ion-row>
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/demo/figure1.png" height="98" width="98"/>
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/demo/figure4.png" height="98" width="98"/>
+      <ion-row *ngIf="this.imgs">
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo1').img.src" [height]="this.getImage('demo1').img.height" [width]="this.getImage('demo1').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo1').img.src" [height]="this.getImage('demo1').img.height" [width]="this.getImage('demo1').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
 
-        <img class="ion-margin" src="../../../../assets/exercises/LogicalSeriesExercise/placeholder.png" height="98" width="98"/>
+        <img class="ion-margin" [src]="this.getImage('placeholder').img.src" [height]="this.getImage('placeholder').img.height" [width]="this.getImage('placeholder').img.width"/>
       </ion-row>
       <ion-row>
         <ion-button (click)="startDemo()">Continuar</ion-button>
@@ -40,12 +40,12 @@
       -->
     <ion-row>
       <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
-        <img class="ion-margin" [src]="img.src" [height]="img.height" [width]="img.width"/>
+        <img class="ion-margin" [src]="this.getImage(img).img.src" [height]="this.getImage(img).img.height" [width]="this.getImage(img).img.width"/>
       </div>
       <!--
       - Placeholder Image
       -->
-      <img class="ion-margin" class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
     </ion-row>
     <ion-row>
       <ion-card-subtitle>
@@ -60,7 +60,7 @@
           <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
             <ion-item>
               <ion-col>
-                <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+                <img class="ion-margin" [src]="this.getImage(but.id).img.src" [height]="this.getImage(but.id).img.height" [width]="this.getImage(but.id).img.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
                 <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
                 <span>{{ but.value }}</span>
               </ion-col>
@@ -92,7 +92,7 @@
       -->
     <ion-row>
       <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
-        <img class="ion-margin" [src]="img.src" [height]="img.height" [width]="img.width"/>
+        <img class="ion-margin" [src]="this.getImage(img).img.src" [height]="this.getImage(img).img.height" [width]="this.getImage(img).img.width"/>
       </div>
       <!--
       - Placeholder Image
@@ -112,7 +112,7 @@
         <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
           <ion-item>
             <ion-col>
-              <img class="ion-margin" [src]="but.src" [height]="but.height" [width]="but.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+              <img class="ion-margin" [src]="this.getImage(but.id).img.src" [height]="this.getImage(but.id).img.height" [width]="this.getImage(but.id).img.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
               <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
               <span>{{ but.value }}</span>
             </ion-col>

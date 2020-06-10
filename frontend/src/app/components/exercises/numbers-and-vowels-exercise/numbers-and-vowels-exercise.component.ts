@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {NumbersAndVowelsService} from '../../../services/exercises/numbers-and-vowels.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {IdImage} from '../../../classes/image';
 
 /**
  * Phases of the exercise
@@ -63,6 +64,10 @@ export class NumbersAndVowelsExerciseComponent implements OnInit {
   private interval;
   private cdInterval;
   private countdownTimeLeft: number;
+  /**
+   * Images
+   */
+  private imgs: IdImage[];
 
   constructor(private numbersAndVowelsService: NumbersAndVowelsService) {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -71,6 +76,10 @@ export class NumbersAndVowelsExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.numbersAndVowelsService.queryImages().subscribe( res => {
+      this.imgs = res;
+    });
+
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
     this.countdownTimeLeft = 3;
@@ -93,6 +102,17 @@ export class NumbersAndVowelsExerciseComponent implements OnInit {
       score: this.score,
       success: true
     });
+  }
+
+  /**
+   * Gets an image by its id
+   */
+  private getImage(id: string) {
+    return {
+      ...this.imgs.find(img => {
+        return img.id === id;
+      })
+    };
   }
 
   /**

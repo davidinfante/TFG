@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {FunctionsService} from '../functions.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DirectNumbersService {
-  private pizarraIntro = {
+  private path = '/api/directNumbers';
+  /*private pizarraIntro = {
     src: '../../../../assets/exercises/DirectNumbersExercise/pizarraIntro.png',
     height: 300,
     width: 400
@@ -13,7 +17,7 @@ export class DirectNumbersService {
     src: '../../../../assets/exercises/DirectNumbersExercise/pizarra.png',
     height: 300,
     width: 400
-  };
+  };*/
   private demoSeries = [
     {
       id: 1,
@@ -115,21 +119,31 @@ export class DirectNumbersService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private functionsService: FunctionsService,
+    private httpClient: HttpClient
+  ) { }
+
+  /**
+   * Gets all images from the database
+   */
+  queryImages(): Observable<any> {
+    return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
+  }
 
   /**
    * Returns the pizarraIntro img
    */
-  getPizarraIntro() {
+  /*getPizarraIntro() {
     return this.pizarraIntro;
-  }
+  }*/
 
   /**
    * Returns the izarra img
    */
-  getPizarra() {
+  /*getPizarra() {
     return this.pizarra;
-  }
+  }*/
 
   /**
    * Returns a demo series by it's Id

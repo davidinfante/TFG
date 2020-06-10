@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {LogicalSeriesService} from '../../../services/exercises/logical-series.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {IdImage} from '../../../classes/image';
 
 /**
  * Phases of the exercise
@@ -51,6 +52,10 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private interval;
   private countdownTimeLeft: number;
+  /**
+   * Images
+   */
+  private imgs: IdImage[];
 
   constructor(private logicalSeriesService: LogicalSeriesService) {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -59,6 +64,10 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.logicalSeriesService.queryImages().subscribe( res => {
+      this.imgs = res;
+    });
+
     this.actualSeries = 0;
     this.continueButton = false;
     this.radioValue = null;
@@ -68,6 +77,28 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.showPlaceholder = true;
     this.checkedAnswer = false;
     this.score = 0;
+  }
+
+  /**
+   * Ends the exercise notifying the session
+   */
+  private endExercise(): void {
+    exerciseManager.notifyEnd({
+      id: this.exerciseAttributes.id,
+      score: this.score,
+      success: true
+    });
+  }
+
+  /**
+   * Gets an image by its id
+   */
+  private getImage(id: string) {
+    return {
+      ...this.imgs.find(img => {
+        return img.id === id;
+      })
+    };
   }
 
   /**
@@ -120,17 +151,6 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   }
 
   /**
-   * Ends the exercise notifying the session
-   */
-  private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
-    });
-  }
-
-  /**
    * Starts the countdown before starting the exercise
    */
   private startCountdown(): void {
@@ -178,13 +198,13 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private changePlaceHolderImg(): void {
     if (this.showPlaceholder) {
-      this.placeholderSrc = this.logicalSeriesService.getPlaceHolder().src;
-      this.placeholderH = this.logicalSeriesService.getPlaceHolder().height;
-      this.placeholderW = this.logicalSeriesService.getPlaceHolder().width;
+      this.placeholderSrc = this.getImage('placeholder').img.src;
+      this.placeholderH = this.getImage('placeholder').img.height;
+      this.placeholderW = this.getImage('placeholder').img.width;
     } else {
-      this.placeholderSrc = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).src;
-      this.placeholderH = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).height;
-      this.placeholderW = this.logicalSeriesService.getCorrectOptionSrc(this.actualSeries).width;
+      this.placeholderSrc = this.getImage(this.logicalSeriesService.getCorrectOptionId(this.actualSeries).id).img.src;
+      this.placeholderH = this.getImage(this.logicalSeriesService.getCorrectOptionId(this.actualSeries).id).img.height;
+      this.placeholderW = this.getImage(this.logicalSeriesService.getCorrectOptionId(this.actualSeries).id).img.width;
     }
     /**
      * Get placeholder the first time it's called

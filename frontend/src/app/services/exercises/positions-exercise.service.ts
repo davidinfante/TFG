@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import {CheckboxArray} from '../../classes/checkboxArray';
+import {FunctionsService} from '../functions.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PositionsExerciseService {
-  private tejado = {
+  private path = '/api/positions';
+  /*private tejado = {
     src: '../../../../assets/exercises/PositionsExercise/tejado.png',
     height: 136,
     width: 468
@@ -19,7 +23,7 @@ export class PositionsExerciseService {
     src: '../../../../assets/exercises/PositionsExercise/ventana-open.png',
     height: 98,
     width: 98
-  };
+  };*/
   private positions: CheckboxArray[] = [
     {
       id: 1,
@@ -79,28 +83,38 @@ export class PositionsExerciseService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private functionsService: FunctionsService,
+    private httpClient: HttpClient
+  ) { }
+
+  /**
+   * Gets all images from the database
+   */
+  queryImages(): Observable<any> {
+    return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
+  }
 
   /**
    * Returns the tejado img
    */
-  getTejado() {
+  /*getTejado() {
     return this.tejado;
-  }
+  }*/
 
   /**
    * Returns the ventanaClose img
    */
-  getVentanaClose() {
+  /*getVentanaClose() {
     return this.ventanaClose;
-  }
+  }*/
 
   /**
    * Returns the ventanaOpen img
    */
-  getVentanaOpen() {
+  /*getVentanaOpen() {
     return this.ventanaOpen;
-  }
+  }*/
 
   /**
    * Returns a positions exercise by it's Id

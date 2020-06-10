@@ -9,10 +9,10 @@
           <ion-button (click)="intro2()">Continuar</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c1').src" [height]="pyramidsService.getImage('c1').height" [width]="pyramidsService.getImage('c1').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c2').src" [height]="pyramidsService.getImage('c2').height" [width]="pyramidsService.getImage('c2').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('c3').src" [height]="pyramidsService.getImage('c3').height" [width]="pyramidsService.getImage('c3').width"/></ion-col>
+      <ion-row *ngIf="this.imgs">
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('c1').img.src" [height]="this.getImage('c1').img.height" [width]="this.getImage('c1').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('c2').img.src" [height]="this.getImage('c2').img.height" [width]="this.getImage('c2').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('c3').img.src" [height]="this.getImage('c3').img.height" [width]="this.getImage('c3').img.width"/></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -30,11 +30,11 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d24').src" [height]="pyramidsService.getImage('d24').height" [width]="pyramidsService.getImage('d24').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d4').src" [height]="pyramidsService.getImage('d4').height" [width]="pyramidsService.getImage('d4').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d19').src" [height]="pyramidsService.getImage('d19').height" [width]="pyramidsService.getImage('d19').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d22').src" [height]="pyramidsService.getImage('d22').height" [width]="pyramidsService.getImage('d22').width"/></ion-col>
-        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="pyramidsService.getImage('d25').src" [height]="pyramidsService.getImage('d25').height" [width]="pyramidsService.getImage('d25').width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('d24').img.src" [height]="this.getImage('d24').img.height" [width]="this.getImage('d24').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('d4').img.src" [height]="this.getImage('d4').img.height" [width]="this.getImage('d4').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('d19').img.src" [height]="this.getImage('d19').img.height" [width]="this.getImage('d19').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('d22').img.src" [height]="this.getImage('d22').img.height" [width]="this.getImage('d22').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('d25').img.src" [height]="this.getImage('d25').img.height" [width]="this.getImage('d25').img.width"/></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -51,7 +51,7 @@
         <ion-row>
           <ion-col *ngFor="let pyr of pyramidsService.getPositionsArray(actualPyramids)" size="auto">
             <ion-item>
-              <img [src]="pyramidsService.getImage(pyr.img).src" [height]="pyramidsService.getImage(pyr.img).height" [width]="pyramidsService.getImage(pyr.img).width"/>
+              <img [src]="this.getImage(pyr.img).img.src" [height]="this.getImage(pyr.img).img.height" [width]="this.getImage(pyr.img).img.width"/>
               <ion-checkbox [(ngModel)]="pyr.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>
@@ -96,7 +96,7 @@
         <ion-row>
           <ion-col *ngFor="let pyr of pyramidsService.getPositionsArray(actualPyramids)" size="auto">
             <ion-item>
-              <img [src]="pyramidsService.getImage(pyr.img).src" [height]="pyramidsService.getImage(pyr.img).height" [width]="pyramidsService.getImage(pyr.img).width"/>
+              <img [src]="this.getImage(pyr.img).img.src" [height]="this.getImage(pyr.img).img.height" [width]="this.getImage(pyr.img).img.width"/>
               <ion-checkbox [(ngModel)]="pyr.isChecked"></ion-checkbox>
             </ion-item>
           </ion-col>

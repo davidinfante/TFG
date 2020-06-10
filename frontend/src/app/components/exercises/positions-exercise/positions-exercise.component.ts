@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PositionsExerciseService} from '../../../services/exercises/positions-exercise.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {IdImage} from "../../../classes/image";
 
 /**
  * Phase of the exercise
@@ -52,6 +53,10 @@ export class PositionsExerciseComponent implements OnInit {
   private interval;
   private countdownTimeLeft: number;
   private timeLeft: number;
+  /**
+   * Images
+   */
+  private imgs: IdImage[];
 
   constructor(private positionsExerciseService: PositionsExerciseService) {
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -60,6 +65,10 @@ export class PositionsExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.positionsExerciseService.queryImages().subscribe( res => {
+      this.imgs = res;
+    });
+
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
     this.countdownTimeLeft = 3;
@@ -68,6 +77,28 @@ export class PositionsExerciseComponent implements OnInit {
     this.repeatedBuilding = false;
     this.lastError = null;
     this.score = 0;
+  }
+
+  /**
+   * Ends the exercise notifying the session
+   */
+  private endExercise(): void {
+    exerciseManager.notifyEnd({
+      id: this.exerciseAttributes.id,
+      score: this.score,
+      success: true
+    });
+  }
+
+  /**
+   * Gets an image by its id
+   */
+  private getImage(id: string) {
+    return {
+      ...this.imgs.find(img => {
+        return img.id === id;
+      })
+    };
   }
 
   /**
@@ -86,17 +117,6 @@ export class PositionsExerciseComponent implements OnInit {
     this.exercisePhase = ExercisePhase.BUILDING;
     this.changeAssistantText();
     this.startTimer();
-  }
-
-  /**
-   * Ends the exercise notifying the session
-   */
-  private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
-    });
   }
 
   /**

@@ -5,7 +5,7 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <img [src]="directNumbersService.getPizarraIntro().src" [height]="directNumbersService.getPizarraIntro().height" [width]="directNumbersService.getPizarraIntro().width"/>
+        <img *ngIf="this.imgs" [src]="this.getImage('pizarraIntro').img.src" [height]="this.getImage('pizarraIntro').img.height" [width]="this.getImage('pizarraIntro').img.width"/>
       </ion-row>
       <ion-row>
         <ion-button (click)="startDemo()">Continuar</ion-button>
@@ -31,7 +31,7 @@
     <ion-grid>
       <ion-row>
         <div class="blackboard">
-          <img [src]="directNumbersService.getPizarra().src" [height]="directNumbersService.getPizarra().height" [width]="directNumbersService.getPizarra().width"/>
+          <img [src]="this.getImage('pizarra').img.src" [height]="this.getImage('pizarra').img.height" [width]="this.getImage('pizarra').img.width"/>
           <span class="characters">{{ this.actualChar }}</span>
         </div>
       </ion-row>
@@ -47,7 +47,7 @@
     <ion-grid>
       <ion-row>
         <div class="blackboard">
-          <img [src]="directNumbersService.getPizarra().src" [height]="directNumbersService.getPizarra().height" [width]="directNumbersService.getPizarra().width"/>
+          <img [src]="this.getImage('pizarra').img.src" [height]="this.getImage('pizarra').img.height" [width]="this.getImage('pizarra').img.width"/>
           <span class="answer">{{ this.answer }}</span>
         </div>
         <ion-grid>

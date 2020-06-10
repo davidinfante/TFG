@@ -1,32 +1,13 @@
 /**
- * Sample image properties
- */
-export class LogicalSeriesSampleImg {
-  src: string;
-  height: number;
-  width: number;
-
-  constructor() {
-    this.src = '';
-    this.height = 0;
-    this.width = 0;
-  }
-}
-
-/**
  * Answer Button Properties
  */
 export class LogicalSeriesButtons {
-  src: string;
-  height: number;
-  width: number;
+  id: string;
   value: string;
   backgroundColor?: string;
 
   constructor() {
-    this.src = '';
-    this.height = 0;
-    this.width = 0;
+    this.id = '';
     this.value = '';
     this.backgroundColor = '';
   }
@@ -37,7 +18,7 @@ export class LogicalSeriesButtons {
  */
 export class LogicalSeries {
   id: number;
-  sampleImg: LogicalSeriesSampleImg[];
+  sampleImg: string[];
   correctOption: LogicalSeriesButtons;
   buttons: LogicalSeriesButtons[];
 

@@ -8,8 +8,16 @@ import { Injectable } from '@angular/core';
  */
 export class FunctionsService {
 
+  private backendUrl = 'http://localhost:3000';
+
   constructor() { }
 
+  /**
+   * Returns the backend Url
+   */
+  getBackendUrl(): string {
+    return this.backendUrl;
+  }
   /**
    * Detects if the device is a mobile device
    */

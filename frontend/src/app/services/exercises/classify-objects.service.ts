@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import {IdImage} from '../../classes/image';
 import {CheckboxArray} from '../../classes/checkboxArray';
+import {FunctionsService} from '../functions.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassifyObjectsService {
-  private images: IdImage[] = [
+  private path = '/api/classifyObjects';
+  /*private images: IdImage[] = [
     /**
      * Food - Comida (co)
      */
-    {
+    /*{
       id: 'co1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/comida/2316.png',
@@ -157,7 +161,7 @@ export class ClassifyObjectsService {
     /**
      * Body - Cuerpo (cu)
      */
-    {
+    /*{
       id: 'cu1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/cuerpo/2663.png',
@@ -256,7 +260,7 @@ export class ClassifyObjectsService {
     /**
      * Sports - Deportes (de)
      */
-    {
+    /*{
       id: 'de1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/deportes/2889.png',
@@ -379,7 +383,7 @@ export class ClassifyObjectsService {
     /**
      * Fruits - Fruta (fr)
      */
-    {
+    /*{
       id: 'fr1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/fruta/2329.png',
@@ -510,7 +514,7 @@ export class ClassifyObjectsService {
     /**
      * Tools - Herramientas (he)
      */
-    {
+    /*{
       id: 'he1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/herramientas/2706.png',
@@ -633,7 +637,7 @@ export class ClassifyObjectsService {
     /**
      * Instruments - Instrumentos (in)
      */
-    {
+    /*{
       id: 'in1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/instrumentos/2318.png',
@@ -836,7 +840,7 @@ export class ClassifyObjectsService {
     /**
      * Furniture - Muebles (mu)
      */
-    {
+    /*{
       id: 'mu1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/muebles/2258.png',
@@ -943,7 +947,7 @@ export class ClassifyObjectsService {
     /**
      * Profession - Profesiones (pr)
      */
-    {
+    /*{
       id: 'pr1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/profesiones/2457.png',
@@ -1090,7 +1094,7 @@ export class ClassifyObjectsService {
     /**
      * Clothes - Ropa (ro)
      */
-    {
+    /*{
       id: 'ro1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/ropa/2308.png',
@@ -1213,7 +1217,7 @@ export class ClassifyObjectsService {
     /**
      * Transport - Transporte (tr)
      */
-    {
+    /*{
       id: 'tr1',
       img: {
         src: '../../../../assets/exercises/ClassifyObjectsExercise/transporte/2263.png',
@@ -1309,7 +1313,7 @@ export class ClassifyObjectsService {
         width: 80
       }
     },
-  ];
+  ];*/
   private series: CheckboxArray[] = [
     /**
      * Exercise Series
@@ -1852,28 +1856,38 @@ export class ClassifyObjectsService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private functionsService: FunctionsService,
+    private httpClient: HttpClient
+  ) { }
 
   /**
    * Searches an image by it's Id
    */
-  searchImage(id: string) {
+  /*searchImage(id: string) {
     return {
       ...this.images.find(img => {
         return img.id === id;
       })
     };
-  }
+  }*/
 
   /**
    * Returns the image's src/height/width
    */
-  getImage(id: string) {
+  /*getImage(id: string) {
     return {
       src: this.searchImage(id).img.src,
       height: this.searchImage(id).img.height,
       width: this.searchImage(id).img.width
     };
+  }*/
+
+  /**
+   * Gets all images from the database
+   */
+  queryImages(): Observable<any> {
+    return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
   }
 
   /**
