@@ -3,6 +3,8 @@ import {WordListService} from '../../../services/exercises/word-list.service';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {FunctionsService} from '../../../services/functions.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phase of the exercise
@@ -25,6 +27,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Word List Exercise Alternative's own attributes
@@ -33,7 +36,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   private answeredList: string[];
   @Input() answer: string;
   private alternativeWord: number;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -42,11 +45,13 @@ export class WordListExerciseAlternativeComponent implements OnInit {
 
   constructor(
     private wordListService: WordListService,
-    private functionsService: FunctionsService
+    private functionsService: FunctionsService,
+    private exerciseResultsService: ExerciseResultsService
   ) {
     // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -56,17 +61,18 @@ export class WordListExerciseAlternativeComponent implements OnInit {
     this.countdownTimeLeft = 3;
     this.answeredList = [];
     this.alternativeWord = -1;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -109,7 +115,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
     const correct = this.wordListService.getAnswerList().includes(answer) && !this.answeredList.includes(answer);
     if (correct) {
       this.answeredList.push(answer);
-      ++this.score;
+      ++this.score.correctCount;
     }
     this.answer = null;
   }
@@ -152,7 +158,9 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   private yesButton(): void {
     // If the current alternative word exists in the wordList
     if (this.wordListService.getWordList().includes(this.wordListService.getAlternativeList()[this.alternativeWord])) {
-      ++this.score;
+      ++this.score.correctCount;
+    } else {
+      ++this.score.failCount;
     }
     this.nextAlternativeWord();
   }
@@ -164,7 +172,9 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   private noButton(): void {
     // If the current alternative word does not exist in the wordList
     if (!this.wordListService.getWordList().includes(this.wordListService.getAlternativeList()[this.alternativeWord])) {
-      ++this.score;
+      ++this.score.correctCount;
+    } else {
+      ++this.score.failCount;
     }
     this.nextAlternativeWord();
   }

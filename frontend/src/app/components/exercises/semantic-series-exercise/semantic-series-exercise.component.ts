@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {SemanticSeriesService} from '../../../services/exercises/semantic-series.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phase of the exercise
@@ -22,6 +24,7 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Semantic Series Exercise's own attributes
@@ -31,16 +34,20 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   private radioValue: string;
   private checkedAnswer: boolean;
   private continueButton: boolean;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
   private interval;
   private countdownTimeLeft: number;
 
-  constructor(private semanticSeriesService: SemanticSeriesService) {
+  constructor(
+    private semanticSeriesService: SemanticSeriesService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -52,7 +59,7 @@ export class SemanticSeriesExerciseComponent implements OnInit {
     this.radioValue = null;
     this.checkedAnswer = false;
     this.continueButton = false;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
@@ -95,10 +102,11 @@ export class SemanticSeriesExerciseComponent implements OnInit {
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -130,7 +138,9 @@ export class SemanticSeriesExerciseComponent implements OnInit {
   private checkAnswer(): void {
     // Detects if the selected answer is correct
     if (this.radioValue === this.semanticSeriesService.getCorrectOptionValue(this.actualSeries)) {
-      ++this.score;
+      ++this.score.correctCount;
+    } else {
+      ++this.score.failCount;
     }
     // Change the answer buttons color
     this.semanticSeriesService.changeButtonsColor(this.actualSeries);

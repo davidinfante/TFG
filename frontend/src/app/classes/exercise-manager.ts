@@ -1,4 +1,5 @@
 import {EventEmitter} from '@angular/core';
+import {ExerciseAttributes} from './exercise-attributes';
 
 /**
  * Manages the information passed by exercises to sessions
@@ -31,14 +32,14 @@ export class ExerciseManager {
   /**
    * Notify the session with the finalization of an exercise
    */
-  notifyEnd(notification: {id: number, score: number, success: boolean}): void {
+  notifyEnd(notification: {id: number, success: boolean}): void {
     this.exerciseEnded.emit(notification);
   }
 
   /**
    * Emit the exercise it's parameter values
    */
-  notifyExerciseInfo(notification: {id: number, duration: number, repetitions: number}): void {
+  notifyExerciseInfo(notification: {userId: number, attributes: ExerciseAttributes}): void {
     this.exerciseInfo.emit(notification);
   }
 }

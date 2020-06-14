@@ -8,16 +8,6 @@ import {FunctionsService} from '../functions.service';
 })
 export class DirectNumbersService {
   private path = '/api/directNumbers';
-  /*private pizarraIntro = {
-    src: '../../../../assets/exercises/DirectNumbersExercise/pizarraIntro.png',
-    height: 300,
-    width: 400
-  };
-  private pizarra = {
-    src: '../../../../assets/exercises/DirectNumbersExercise/pizarra.png',
-    height: 300,
-    width: 400
-  };*/
   private demoSeries = [
     {
       id: 1,
@@ -130,20 +120,6 @@ export class DirectNumbersService {
   queryImages(): Observable<any> {
     return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
   }
-
-  /**
-   * Returns the pizarraIntro img
-   */
-  /*getPizarraIntro() {
-    return this.pizarraIntro;
-  }*/
-
-  /**
-   * Returns the izarra img
-   */
-  /*getPizarra() {
-    return this.pizarra;
-  }*/
 
   /**
    * Returns a demo series by it's Id

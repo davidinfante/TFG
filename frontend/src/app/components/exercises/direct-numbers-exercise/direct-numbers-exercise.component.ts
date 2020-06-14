@@ -3,6 +3,8 @@ import {exerciseManager} from '../../../classes/exercise-manager';
 import {DirectNumbersService} from '../../../services/exercises/direct-numbers.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phases of the exercise
@@ -45,6 +47,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Direct Numbers Exercise's own attributes
@@ -57,7 +60,7 @@ export class DirectNumbersExerciseComponent implements OnInit {
   private duringDemo: boolean;
   private timeChangeChar: number;
   private answer: string;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -69,9 +72,13 @@ export class DirectNumbersExerciseComponent implements OnInit {
    */
   private imgs: IdImage[];
 
-  constructor(private directNumbersService: DirectNumbersService) {
+  constructor(
+    private directNumbersService: DirectNumbersService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -90,17 +97,18 @@ export class DirectNumbersExerciseComponent implements OnInit {
     this.actualCharPos = 0;
     this.timeChangeChar = 0;
     this.answer = '';
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -319,7 +327,9 @@ export class DirectNumbersExerciseComponent implements OnInit {
     } else { // Exercise series
       // If correct
       if (this.answer === this.directNumbersService.getSeriesSeries(this.actualSeries)) {
-        ++this.score;
+        ++this.score.correctCount;
+      } else {
+        ++this.score.failCount;
       }
       this.exercisePhase = ExercisePhase.NEXT;
       this.changeAssistantText();

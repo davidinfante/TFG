@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PositionsExerciseService} from '../../../services/exercises/positions-exercise.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
-import {IdImage} from "../../../classes/image";
+import {IdImage} from '../../../classes/image';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phase of the exercise
@@ -38,6 +40,7 @@ export class PositionsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Positions Exercise's own attributes
@@ -46,7 +49,7 @@ export class PositionsExerciseComponent implements OnInit {
   private actualBuilding: number;
   private repeatedBuilding: boolean;
   private lastError: ExercisePhase;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -58,9 +61,13 @@ export class PositionsExerciseComponent implements OnInit {
    */
   private imgs: IdImage[];
 
-  constructor(private positionsExerciseService: PositionsExerciseService) {
+  constructor(
+    private positionsExerciseService: PositionsExerciseService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -76,17 +83,18 @@ export class PositionsExerciseComponent implements OnInit {
     this.actualBuilding = 1;
     this.repeatedBuilding = false;
     this.lastError = null;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -165,7 +173,7 @@ export class PositionsExerciseComponent implements OnInit {
     this.positionsExerciseService.resetIsChecked(this.actualBuilding);
     // If correct
     if (correctAnswer) {
-      ++this.score;
+      ++this.score.correctCount;
       // If has been already repeated continue to next building
       if (this.repeatedBuilding) {
         this.repeatedBuilding = false;
@@ -183,7 +191,7 @@ export class PositionsExerciseComponent implements OnInit {
         this.changeAssistantText();
       }
     } else { // If not correct
-      --this.score;
+      ++this.score.failCount;
       // Error cycle
       switch (this.lastError) {
         case null:

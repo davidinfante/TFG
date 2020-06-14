@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {InstrumentalQuestionnaireService} from '../../../services/instrumental-questionnaire.service';
+import {InstrumentalQuestionnaireAnswers} from '../../../classes/exercises/instrumental-questionnaire-answers';
 
 /**
  * Phases of the exercise
@@ -26,53 +28,42 @@ export class InstrumentalQuestionnaireExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Instrumental Questionnaire Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
-  private score: number;
   /**
    * Questionnaire answers
    */
-  private telephone: string;
-  private shopping: string;
-  private cooking: string;
-  private householdChores: string;
-  private laundry: string;
-  private transport: string;
-  private medicine: string;
-  private economicAffairs: string;
+  private instrumentalQuestionnaireAnswers: InstrumentalQuestionnaireAnswers;
 
-  constructor() {
+  constructor(
+    private instrumentalQuestionnaireService: InstrumentalQuestionnaireService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
-    this.score = 0;
 
-    this.telephone = null;
-    this.shopping = null;
-    this.cooking = null;
-    this.householdChores = null;
-    this.laundry = null;
-    this.transport = null;
-    this.medicine = null;
-    this.economicAffairs = null;
+    this.instrumentalQuestionnaireAnswers = new InstrumentalQuestionnaireAnswers();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.instrumentalQuestionnaireService.addResult(this.userId, this.instrumentalQuestionnaireAnswers).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 

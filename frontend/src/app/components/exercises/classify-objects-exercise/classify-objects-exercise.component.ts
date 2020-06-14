@@ -3,6 +3,8 @@ import {exerciseManager} from '../../../classes/exercise-manager';
 import {ClassifyObjectsService} from '../../../services/exercises/classify-objects.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phases of the exercise
@@ -31,13 +33,14 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Direct Numbers Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
   private actualSeries: number;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -49,9 +52,13 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
    */
   private imgs: IdImage[];
 
-  constructor(private classifyObjectsService: ClassifyObjectsService) {
+  constructor(
+    private classifyObjectsService: ClassifyObjectsService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -64,7 +71,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
     this.changeAssistantText();
 
     this.actualSeries = 0;
-    this.score = 0;
+    this.score = new Score();
 
     // Initialize timer values
     this.pauseTimer();
@@ -74,10 +81,11 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -153,9 +161,10 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
    * Check's the answers
    */
   private checkAnswer(): void {
-    this.score +=
-      (this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches -
-        this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).errors);
+    this.score.correctCount += this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches;
+    this.score.failCount += this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).errors;
+    this.score.omissionCount += (this.classifyObjectsService.numberOfCorrectOptions(this.actualSeries) -
+      this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches);
 
     this.exercisePhase = ExercisePhase.SCORE;
     this.changeAssistantText();
@@ -282,7 +291,8 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
         titleA = 'Clasificación y memorización de imágenes';
         descriptionA = 'Fallos: ' + this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).errors + ', aciertos: ' +
           this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches + ', has olvidado: ' +
-          (this.classifyObjectsService.numberOfCorrectOptions(this.actualSeries) - this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches) +
+          (this.classifyObjectsService.numberOfCorrectOptions(this.actualSeries) -
+            this.classifyObjectsService.numberOfCorrectAnswers(this.actualSeries).matches) +
           '. Cuando estés listo pulsa en Continuar.';
         break;
       case ExercisePhase.NEXT:

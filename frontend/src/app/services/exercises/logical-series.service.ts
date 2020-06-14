@@ -9,11 +9,6 @@ import {Observable} from 'rxjs';
 })
 export class LogicalSeriesService {
   private path = '/api/logicalSeries';
-  /*private placeholder = {
-    src: '../../../../assets/exercises/LogicalSeriesExercise/placeholder.png',
-    height: 98,
-    width: 98
-  };*/
   private logicalSeries: LogicalSeries[] = [
     /**
      * Demo
@@ -259,13 +254,6 @@ export class LogicalSeriesService {
   queryImages(): Observable<any> {
     return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
   }
-
-  /**
-   * Returns the placeholder img
-   */
-  /*getPlaceHolder() {
-    return this.placeholder;
-  }*/
 
   /**
    * Returns a series by it's Id

@@ -4,16 +4,17 @@ TFG 19/20 - David Infante Casas
 ### Directory structure
 ```
 docs/                       Project documentation
-TFG/src/
+backend/
+    api/                    Express microservices
+frontend/src/
     app/                    App code
-        classes             Classes needed by the app
+        classes/            Classes needed by the app
             exercises/      Classes needed by the exercises
         components/         Components used by the app
             exercises/      Exercise components
-        directives          All directives needed by the app
-        enum                Enums needed by the app
-        pages               All pages that can be navigated through the app
-        services            Services that grant data to elements that require it
+        directives/         All directives needed by the app
+        pages/              All pages that can be navigated through the app
+        services/           Services that grant data to elements that require it
             exercises/      Data needed by each exercise
     assets/                 Media files
         img                 Project's main images
@@ -41,20 +42,21 @@ Here's a diagram:
 - Create or use any components you may need and pack them up in a component with the full exercise
   - Your main component class must have these attributes
   ```
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   ``` 
   - Include the object `exerciseManager` in your main exercise class
   - Add this code in the constructor
   ```
   exerciseManager.exerciseInfo.subscribe( data => {
-    this.exerciseAttributes = data;
+    this.userId = data.userId;
+    this.exerciseAttributes = data.attributes;
   });
   ```
-  - Add this code to the function that is called when the exercise end
+  - Add this code to the function that is called when the exercise ends
    ```
   exerciseManager.notifyEnd({
     id: this.exerciseAttributes.id,
-    score: (The exercise's score as a number),
     success: true
   });
   ```
@@ -66,6 +68,8 @@ Here's a diagram:
     description: 'Your description'
   });
   ```
+  - To send the exercise's results you can use ```ExerciseResultsService``` like this:
+  ```this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe(res => {}); ```
 - Include the component's class in the `declarations: [...]` and `entryComponents: [...]` 
         sections at `/pages/session/session.module.ts`
 - Edit the file `/services/exercises.service.ts` adding a new element in the exercises array including:

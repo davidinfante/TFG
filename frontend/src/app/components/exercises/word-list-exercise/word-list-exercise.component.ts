@@ -3,6 +3,8 @@ import {exerciseManager} from '../../../classes/exercise-manager';
 import {WordListService} from '../../../services/exercises/word-list.service';
 import {FunctionsService} from '../../../services/functions.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phase of the exercise
@@ -29,6 +31,7 @@ export class WordListExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Word List Exercise's own attributes
@@ -37,7 +40,7 @@ export class WordListExerciseComponent implements OnInit {
   private answeredList: string[];
   @Input() answer: string;
   private repetition: number;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -47,11 +50,13 @@ export class WordListExerciseComponent implements OnInit {
 
   constructor(
     private wordListService: WordListService,
-    private functionsService: FunctionsService
+    private functionsService: FunctionsService,
+    private exerciseResultsService: ExerciseResultsService
   ) {
     // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -62,7 +67,7 @@ export class WordListExerciseComponent implements OnInit {
     this.timeLeft = this.exerciseAttributes.duration;
     this.answeredList = [];
     this.repetition = 0;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
@@ -78,10 +83,11 @@ export class WordListExerciseComponent implements OnInit {
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -96,7 +102,9 @@ export class WordListExerciseComponent implements OnInit {
     const correct = this.wordListService.getAnswerList().includes(answer) && !this.answeredList.includes(answer);
     if (correct) {
       this.answeredList.push(answer);
-      ++this.score;
+      ++this.score.correctCount;
+    } else {
+      ++this.score.failCount;
     }
     this.answer = null;
   }

@@ -10,7 +10,7 @@ const app = express();
 require('./database');
 
 // Settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', 3000);
 
 // Middlewares
 app.use(morgan('dev'));
@@ -19,12 +19,18 @@ app.use(express.json());
 
 // Routes
 app.use('/api/users', require('./api/users/router'));
-app.use('/api/classifyObjects', require('./api/ClassifyObjects/router'));
-app.use('/api/directNumbers', require('./api/DirectNumbers/router'));
-app.use('/api/numbersAndVowels', require('./api/NumbersAndVowels/router'));
-app.use('/api/positions', require('./api/Positions/router'));
-app.use('/api/pyramids', require('./api/Pyramids/router'));
-app.use('/api/logicalSeries', require('./api/LogicalSeries/router'));
+
+app.use('/api/exerciseResults', require('./api/exerciseResults/router'));
+
+app.use('/api/questionnaire', require('./api/questionnaire/router'));
+app.use('/api/instrumentalQuestionnaire', require('./api/instrumentalQuestionnaire/router'));
+
+app.use('/api/classifyObjects', require('./api/classifyObjects/router'));
+app.use('/api/directNumbers', require('./api/directNumbers/router'));
+app.use('/api/numbersAndVowels', require('./api/numbersAndVowels/router'));
+app.use('/api/positions', require('./api/positions/router'));
+app.use('/api/pyramids', require('./api/pyramids/router'));
+app.use('/api/logicalSeries', require('./api/logicalSeries/router'));
 
 // Start server
 app.listen(app.get('port'), () => {

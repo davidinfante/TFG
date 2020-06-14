@@ -9,21 +9,6 @@ import {Observable} from 'rxjs';
 })
 export class PositionsExerciseService {
   private path = '/api/positions';
-  /*private tejado = {
-    src: '../../../../assets/exercises/PositionsExercise/tejado.png',
-    height: 136,
-    width: 468
-  };
-  private ventanaClose = {
-    src: '../../../../assets/exercises/PositionsExercise/ventana-close.png',
-    height: 98,
-    width: 98
-  };
-  private ventanaOpen = {
-    src: '../../../../assets/exercises/PositionsExercise/ventana-open.png',
-    height: 98,
-    width: 98
-  };*/
   private positions: CheckboxArray[] = [
     {
       id: 1,
@@ -94,27 +79,6 @@ export class PositionsExerciseService {
   queryImages(): Observable<any> {
     return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
   }
-
-  /**
-   * Returns the tejado img
-   */
-  /*getTejado() {
-    return this.tejado;
-  }*/
-
-  /**
-   * Returns the ventanaClose img
-   */
-  /*getVentanaClose() {
-    return this.ventanaClose;
-  }*/
-
-  /**
-   * Returns the ventanaOpen img
-   */
-  /*getVentanaOpen() {
-    return this.ventanaOpen;
-  }*/
 
   /**
    * Returns a positions exercise by it's Id

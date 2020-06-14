@@ -13,7 +13,7 @@
 <ion-card *ngIf="exercisePhase === 1">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="telephone">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.telephone">
         <ion-row>
           <ion-col><span i18n>A la hora de usar el teléfono</span></ion-col>
         </ion-row>
@@ -43,7 +43,7 @@
         </ion-row>
       </ion-radio-group>
       <ion-row>
-        <ion-col><ion-button *ngIf="this.telephone !== null" (click)="nextPhase()" i18n>Continuar</ion-button></ion-col>
+        <ion-col><ion-button *ngIf="this.instrumentalQuestionnaireAnswers.telephone !== null" (click)="nextPhase()" i18n>Continuar</ion-button></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -55,7 +55,7 @@
 <ion-card *ngIf="exercisePhase === 2">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="shopping">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.shopping">
         <ion-row>
           <ion-col><span i18n>A la hora de hacer compras</span></ion-col>
         </ion-row>
@@ -87,7 +87,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.shopping !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.shopping !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -100,7 +100,7 @@
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="cooking">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.cooking">
         <ion-row>
           <ion-col><span i18n>A la hora de hacer la comida</span></ion-col>
         </ion-row>
@@ -132,7 +132,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.cooking !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.cooking !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -145,7 +145,7 @@
 <ion-card *ngIf="exercisePhase === 4">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="householdChores">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.householdChores">
         <ion-row>
           <ion-col><span i18n>A la hora de el cuidado de la casa</span></ion-col>
         </ion-row>
@@ -183,7 +183,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.householdChores !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.householdChores !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -196,7 +196,7 @@
 <ion-card *ngIf="exercisePhase === 5">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="laundry">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.laundry">
         <ion-row>
           <ion-col><span i18n>A la hora de lavar la ropa</span></ion-col>
         </ion-row>
@@ -222,7 +222,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.laundry !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.laundry !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -235,7 +235,7 @@
 <ion-card *ngIf="exercisePhase === 6">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="transport">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.transport">
         <ion-row>
           <ion-col><span i18n>A la hora de utilizar medios de transporte</span></ion-col>
         </ion-row>
@@ -267,7 +267,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.transport !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.transport !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -280,7 +280,7 @@
 <ion-card *ngIf="exercisePhase === 7">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="medicine">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.medicine">
         <ion-row>
           <ion-col><span i18n>A la hora de tomar mis medicamentos</span></ion-col>
         </ion-row>
@@ -306,7 +306,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.medicine !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.medicine !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -319,7 +319,7 @@
 <ion-card *ngIf="exercisePhase === 8">
   <ion-card-content>
     <ion-grid>
-      <ion-radio-group [(ngModel)]="economicAffairs">
+      <ion-radio-group [(ngModel)]="this.instrumentalQuestionnaireAnswers.economicAffairs">
         <ion-row>
           <ion-col><span i18n>A la hora de manejar los asuntos económicos</span></ion-col>
         </ion-row>
@@ -345,7 +345,7 @@
       <ion-row>
         <ion-col>
           <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
-          <ion-button *ngIf="this.economicAffairs !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+          <ion-button *ngIf="this.instrumentalQuestionnaireAnswers.economicAffairs !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

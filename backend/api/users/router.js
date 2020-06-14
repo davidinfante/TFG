@@ -24,28 +24,13 @@ router.post('/', async (req, res) => {
 });
 
 /**
- * Updates a user's currentExercise
+ * Updates a user's currentExercise or session
  */
-router.post('/:id/currentExercise', async (req, res) => {
-    const us = await user.find(id => {
-        return id === req.params.id;
-    });
-    user.findOneAndUpdate(us.currentExercise, req.body, {upsert: true}, function(err, doc) {
+router.post('/:id', async (req, res) => {
+    const query = { id: req.body.id };
+    user.findOneAndUpdate(query, req.body, {upsert: true}, function(err, doc) {
         if (err) return res.send(500, {error: err});
-        return res.send('Succesfully saved.');
-    });
-});
-
-/**
- * Updates a user's session
- */
-router.post('/:id/session', async (req, res) => {
-    const us = await user.find(id => {
-        return id === req.params.id;
-    });
-    user.findOneAndUpdate(us.session, req.body, {upsert: true}, function(err, doc) {
-        if (err) return res.send(500, {error: err});
-        return res.send('Succesfully saved.');
+        return res.send('Results updated.');
     });
 });
 

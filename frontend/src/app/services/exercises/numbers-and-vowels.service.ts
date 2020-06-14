@@ -8,16 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class NumbersAndVowelsService {
   private path = '/api/numbersAndVowels';
-  /*private pizarraIntro = {
-    src: '../../../../assets/exercises/NumbersAndVowelsExercise/pizarraIntro.png',
-    height: 300,
-    width: 400
-  };
-  private pizarra = {
-    src: '../../../../assets/exercises/NumbersAndVowelsExercise/pizarra.png',
-    height: 300,
-    width: 400
-  };*/
   private demoSeries = [
     {
       id: 1,
@@ -154,20 +144,6 @@ export class NumbersAndVowelsService {
   queryImages(): Observable<any> {
     return this.httpClient.get(this.functionsService.getBackendUrl() + this.path + '/');
   }
-
-  /**
-   * Returns the pizarraIntro img
-   */
-  /*getPizarraIntro() {
-    return this.pizarraIntro;
-  }*/
-
-  /**
-   * Returns the izarra img
-   */
-  /*getPizarra() {
-    return this.pizarra;
-  }*/
 
   /**
    * Returns a demo series by it's Id

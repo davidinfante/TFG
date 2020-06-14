@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {QuestionnaireAnswers} from '../../../classes/exercises/questionnaire-answers';
+import {QuestionnaireService} from '../../../services/questionnaire.service';
 
 /**
  * Phases of the exercise
@@ -39,85 +41,44 @@ export class IntroductionExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Introduction Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
   private consent: boolean;
-  private score: number;
   /**
    * Questionnaire answers
    */
-  private gender: string;
-  private placeOfBirth: string;
-  private yearOfBirth: number;
-  private monthOfBirth: number;
-  private dayOfBirth: number;
-  private maritalStatus: string;
-  private liveWith: string;
-  private bathing: string;
-  private getDressed: string;
-  private getReady: string;
-  private eating: string;
-  private urinating: string;
-  private defecating: string;
-  private toilet: string;
-  private bedSofa: string;
-  private walking: string;
-  private stairs: string;
-  private education: string;
-  private read: string;
-  private workshop: string;
-  private physicalExercise: string;
-  private computer: string;
-  private phoneNumber: string;
+  private questionnaireAnswers: QuestionnaireAnswers;
 
-  constructor() {
+  constructor(
+    private questionnaireService: QuestionnaireService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
   ngOnInit() {
     this.exercisePhase = ExercisePhase.INTRO1;
     this.changeAssistantText();
-    this.score = 0;
 
     this.consent = false;
-    this.gender = null;
-    this.placeOfBirth = null;
-    this.yearOfBirth = null;
-    this.monthOfBirth = null;
-    this.dayOfBirth = null;
-    this.maritalStatus = null;
-    this.liveWith = null;
-    this.bathing = null;
-    this.getDressed = null;
-    this.getReady = null;
-    this.eating = null;
-    this.urinating = null;
-    this.defecating = null;
-    this.toilet = null;
-    this.bedSofa = null;
-    this.walking = null;
-    this.stairs = null;
-    this.education = null;
-    this.read = null;
-    this.workshop = null;
-    this.physicalExercise = null;
-    this.computer = null;
-    this.phoneNumber = null;
+    this.questionnaireAnswers = new QuestionnaireAnswers();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.questionnaireService.addResult(this.userId, this.questionnaireAnswers).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 

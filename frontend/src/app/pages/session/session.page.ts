@@ -38,7 +38,7 @@ export class SessionPage implements OnInit {
   /**
    * Session's attributes
    */
-  private userId = 0;
+  private userId: number;
   private sessionId: number;
   private session: Session;
   private currentExercise: Exercise;
@@ -59,11 +59,8 @@ export class SessionPage implements OnInit {
     // Subscribe to the ending exercise event
     exerciseManager.exerciseEnded.subscribe( data => {
       if (this.currentExercise.id === data.id && data.success) {
-        // Do something with the score
-        // data.score bla bla bla
-
         // Update the current exercise index in the database
-        this.userService.updateCurrentExercise(this.userId, this.currentExerciseIndex).subscribe( res => {
+        this.userService.updateSessionExercise(this.userId, this.sessionId , this.currentExerciseIndex).subscribe( res => {
           this.nextExercise();
         });
       } else {
@@ -73,6 +70,8 @@ export class SessionPage implements OnInit {
   }
 
   ngOnInit() {
+    // Get userId from login
+    this.userId = 0;
     // Get the actual session and current exercise index from the user database
     this.userService.getUserSession(this.userId).subscribe(res => {
       this.sessionId = res.session;
@@ -111,7 +110,9 @@ export class SessionPage implements OnInit {
       this.componentRef = this.viewContainerRef.createComponent(componentFactory);
 
       // Notify the exercise their attributes
-      exerciseManager.notifyExerciseInfo(this.sessionsService.getExerciseAttributes(this.sessionId, this.currentExerciseIndex));
+      exerciseManager.notifyExerciseInfo({
+        userId: this.userId, attributes: this.sessionsService.getExerciseAttributes(this.sessionId, this.currentExerciseIndex)
+      });
 
       ++this.currentExerciseIndex;
     } else { // No exercises left
@@ -131,11 +132,9 @@ export class SessionPage implements OnInit {
       this.sessionId = res.session;
       if (this.sessionsService.getAllSessions().length > this.sessionId) {
         ++this.sessionId;
-
-        // Update the session and current exercise index in the database
-        this.userService.updateSession(this.userId, this.sessionId).subscribe( re => {});
-        this.userService.updateCurrentExercise(this.userId, 0).subscribe( r => {});
         this.currentExerciseIndex = 0;
+        // Update the session and current exercise index in the database
+        this.userService.updateSessionExercise(this.userId, this.sessionId, this.currentExerciseIndex).subscribe( re => {});
         this.sessionPhase = SessionPhase.NOEXERCISE;
         this.viewContainerRef = null;
         this.componentRef = null;

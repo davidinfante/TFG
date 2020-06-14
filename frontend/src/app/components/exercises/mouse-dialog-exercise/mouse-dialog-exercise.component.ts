@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {FunctionsService} from '../../../services/functions.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
+import {Score} from '../../../classes/score';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
 
 /**
  * Phases of the exercise
@@ -21,17 +23,22 @@ export class MouseDialogExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Mouse Dialog Exercise's own attributes
    */
   private exercisePhase: ExercisePhase;
   private repetition: number;
-  private score: number;
+  private score: Score;
 
-  constructor(private functionsService: FunctionsService) {
+  constructor(
+    private functionsService: FunctionsService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -39,17 +46,18 @@ export class MouseDialogExerciseComponent implements OnInit {
     this.exercisePhase = ExercisePhase.INTRO;
     this.changeAssistantText();
     this.repetition = 0;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -68,6 +76,7 @@ export class MouseDialogExerciseComponent implements OnInit {
    */
   private nextIteration(): void {
     if (this.repetition < this.exerciseAttributes.repetitions) {
+      ++this.score.correctCount;
       ++this.repetition;
     } else {
       this.exercisePhase = ExercisePhase.END;

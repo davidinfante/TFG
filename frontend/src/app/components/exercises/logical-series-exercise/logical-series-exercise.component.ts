@@ -3,6 +3,8 @@ import {exerciseManager} from '../../../classes/exercise-manager';
 import {LogicalSeriesService} from '../../../services/exercises/logical-series.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phases of the exercise
@@ -30,6 +32,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Local Series Exercise's own attributes
@@ -39,7 +42,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private radioValue: string;
   private continueButton: boolean;
   private checkedAnswer: boolean;
-  private score: number;
+  private score: Score;
   /**
    * Place holder image variables
    */
@@ -57,9 +60,13 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private imgs: IdImage[];
 
-  constructor(private logicalSeriesService: LogicalSeriesService) {
+  constructor(
+    private logicalSeriesService: LogicalSeriesService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -76,17 +83,18 @@ export class LogicalSeriesExerciseComponent implements OnInit {
     this.countdownTimeLeft = 3;
     this.showPlaceholder = true;
     this.checkedAnswer = false;
-    this.score = 0;
+    this.score = new Score();
   }
 
   /**
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -177,9 +185,11 @@ export class LogicalSeriesExerciseComponent implements OnInit {
    */
   private checkAnswer(): void {
     // Detects if the selected answer is correct
-    if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
-      if (this.exercisePhase === ExercisePhase.EXERCISE) {
-        ++this.score;
+    if (this.exercisePhase === ExercisePhase.EXERCISE) {
+      if (this.radioValue === this.logicalSeriesService.getCorrectOptionValue(this.actualSeries)) {
+        ++this.score.correctCount;
+      } else {
+        ++this.score.failCount;
       }
     }
     // Change the answer buttons color

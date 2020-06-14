@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {exerciseManager} from '../../../classes/exercise-manager';
 import {PyramidsService} from '../../../services/exercises/pyramids.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
-import {IdImage} from "../../../classes/image";
+import {IdImage} from '../../../classes/image';
+import {ExerciseResultsService} from '../../../services/exercise-results.service';
+import {Score} from '../../../classes/score';
 
 /**
  * Phase of the exercise
@@ -27,6 +29,7 @@ export class PyramidsExerciseComponent implements OnInit {
   /**
    * Exercise Attributes
    */
+  private userId: number;
   private exerciseAttributes: ExerciseAttributes;
   /**
    * Pyramids Exercise's own attributes
@@ -35,7 +38,7 @@ export class PyramidsExerciseComponent implements OnInit {
   private actualPyramids: number;
   private demoPyramidsLeft: number;
   private demoText: string;
-  private score: number;
+  private score: Score;
   /**
    * Timer variables
    */
@@ -48,9 +51,13 @@ export class PyramidsExerciseComponent implements OnInit {
    */
   private imgs: IdImage[];
 
-  constructor(private pyramidsService: PyramidsService) {
+  constructor(
+    private pyramidsService: PyramidsService,
+    private exerciseResultsService: ExerciseResultsService
+  ) {
     exerciseManager.exerciseInfo.subscribe( data => {
-      this.exerciseAttributes = data;
+      this.userId = data.userId;
+      this.exerciseAttributes = data.attributes;
     });
   }
 
@@ -64,7 +71,7 @@ export class PyramidsExerciseComponent implements OnInit {
     this.actualPyramids = 0;
     this.demoPyramidsLeft = 0;
     this.demoText = '';
-    this.score = 0;
+    this.score = new Score();
 
     this.countdownTimeLeft = 3;
     this.timeLeft = this.exerciseAttributes.duration;
@@ -74,10 +81,11 @@ export class PyramidsExerciseComponent implements OnInit {
    * Ends the exercise notifying the session
    */
   private endExercise(): void {
-    exerciseManager.notifyEnd({
-      id: this.exerciseAttributes.id,
-      score: this.score,
-      success: true
+    this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe( res => {
+      exerciseManager.notifyEnd({
+        id: this.exerciseAttributes.id,
+        success: true
+      });
     });
   }
 
@@ -158,8 +166,8 @@ export class PyramidsExerciseComponent implements OnInit {
    */
   private exerciseChangePanel(): void {
     // Update score
-    this.score += this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).matches -
-      this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).errors;
+    this.score.correctCount += this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).matches;
+    this.score.failCount += this.pyramidsService.numberOfCorrectAnswers(this.actualPyramids).errors;
 
     // If there are not more exercises left
     if (this.actualPyramids >= this.pyramidsService.getPyramidsLength() - 1) { // - 1 because of demoSeries being id: 0
