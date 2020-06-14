@@ -5,6 +5,7 @@ import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
 import {ExerciseResultsService} from '../../../services/exercise-results.service';
 import {Score} from '../../../classes/score';
+import {MedalsService} from '../../../services/medals.service';
 
 /**
  * Phases of the exercise
@@ -41,6 +42,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
   private exercisePhase: ExercisePhase;
   private actualSeries: number;
   private score: Score;
+  private medal: string;
   /**
    * Timer variables
    */
@@ -54,7 +56,8 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
 
   constructor(
     private classifyObjectsService: ClassifyObjectsService,
-    private exerciseResultsService: ExerciseResultsService
+    private exerciseResultsService: ExerciseResultsService,
+    private medalsService: MedalsService
   ) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.userId = data.userId;
@@ -144,6 +147,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
       ++this.actualSeries;
     } else {
       this.exercisePhase = ExercisePhase.END;
+      this.createMedal();
       this.changeAssistantText();
     }
   }
@@ -220,6 +224,26 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
       this.timeLeft = 90;
     }
     this.exerciseAttributes.duration = this.timeLeft;
+  }
+
+  /**
+   * Requests a medal for this exercise
+   */
+  private createMedal(): void {
+    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount);
+    this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {
+      this.getMedal();
+    });
+  }
+
+  /**
+   * Gets the medal for this exercise
+   */
+  private getMedal(): void {
+    this.medalsService.getMedal(this.userId, this.exerciseAttributes.id).subscribe( res => {
+      this.medal = res.medal;
+      this.changeAssistantText();
+    });
   }
 
   /**
@@ -303,7 +327,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ medalla }} Has obtenido una puntuación de: ' + this.score;
+        descriptionA = 'Has obtenido una medalla de: ' + this.medal;
         break;
     }
     exerciseManager.notifyAssistant({

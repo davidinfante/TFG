@@ -7,9 +7,7 @@ const user = require('./user_model');
  * Get user info by its id
  */
 router.get('/:id', async (req, res) => {
-    const us = await user.find(id => {
-        return id === req.params.id;
-    });
+    const us = await user.find({ id: req.params.id });
     res.json(us[0]);
 });
 
@@ -26,7 +24,7 @@ router.post('/', async (req, res) => {
 /**
  * Updates a user's currentExercise or session
  */
-router.post('/:id', async (req, res) => {
+router.post('/:id', (req, res) => {
     const query = { id: req.body.id };
     user.findOneAndUpdate(query, req.body, {upsert: true}, function(err, doc) {
         if (err) return res.send(500, {error: err});

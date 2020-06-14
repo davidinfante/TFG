@@ -5,6 +5,7 @@ import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
 import {ExerciseResultsService} from '../../../services/exercise-results.service';
 import {Score} from '../../../classes/score';
+import {MedalsService} from '../../../services/medals.service';
 
 /**
  * Phases of the exercise
@@ -43,6 +44,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   private continueButton: boolean;
   private checkedAnswer: boolean;
   private score: Score;
+  private medal: string;
   /**
    * Place holder image variables
    */
@@ -62,7 +64,8 @@ export class LogicalSeriesExerciseComponent implements OnInit {
 
   constructor(
     private logicalSeriesService: LogicalSeriesService,
-    private exerciseResultsService: ExerciseResultsService
+    private exerciseResultsService: ExerciseResultsService,
+    private medalsService: MedalsService
   ) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.userId = data.userId;
@@ -154,6 +157,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       this.changePlaceHolderImg();
     } else {
       this.exercisePhase = ExercisePhase.END;
+      this.createMedal();
       this.changeAssistantText();
     }
   }
@@ -224,6 +228,26 @@ export class LogicalSeriesExerciseComponent implements OnInit {
   }
 
   /**
+   * Requests a medal for this exercise
+   */
+  private createMedal(): void {
+    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount);
+    this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {
+      this.getMedal();
+    });
+  }
+
+  /**
+   * Gets the medal for this exercise
+   */
+  private getMedal(): void {
+    this.medalsService.getMedal(this.userId, this.exerciseAttributes.id).subscribe( res => {
+      this.medal = res.medal;
+      this.changeAssistantText();
+    });
+  }
+
+  /**
    * Changes the text and visibility of the assistant
    * during the exercise
    */
@@ -258,7 +282,7 @@ export class LogicalSeriesExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena! ¡Lo has hecho muy bien!';
-        descriptionA = '{{ medalla }} Has acertado: ' + this.score + ' veces.';
+        descriptionA = 'Has conseguido una medalla de: ' + this.medal;
         break;
     }
     exerciseManager.notifyAssistant({

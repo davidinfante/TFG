@@ -34,7 +34,7 @@ export class MouseDialogExerciseComponent implements OnInit {
 
   constructor(
     private functionsService: FunctionsService,
-    private exerciseResultsService: ExerciseResultsService
+    private exerciseResultsService: ExerciseResultsService,
   ) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.userId = data.userId;

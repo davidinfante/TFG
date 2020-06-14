@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/api/users', require('./api/users/router'));
 
 app.use('/api/exerciseResults', require('./api/exerciseResults/router'));
-
+app.use('/api/medals', require('./api/medals/router'));
 app.use('/api/questionnaire', require('./api/questionnaire/router'));
 app.use('/api/instrumentalQuestionnaire', require('./api/instrumentalQuestionnaire/router'));
 

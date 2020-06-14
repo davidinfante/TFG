@@ -5,6 +5,7 @@ import {FunctionsService} from '../../../services/functions.service';
 import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {ExerciseResultsService} from '../../../services/exercise-results.service';
 import {Score} from '../../../classes/score';
+import {MedalsService} from '../../../services/medals.service';
 
 /**
  * Phase of the exercise
@@ -37,6 +38,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   @Input() answer: string;
   private alternativeWord: number;
   private score: Score;
+  private medal: string;
   /**
    * Timer variables
    */
@@ -46,7 +48,8 @@ export class WordListExerciseAlternativeComponent implements OnInit {
   constructor(
     private wordListService: WordListService,
     private functionsService: FunctionsService,
-    private exerciseResultsService: ExerciseResultsService
+    private exerciseResultsService: ExerciseResultsService,
+    private medalsService: MedalsService
   ) {
     // Get Exercise Attributes from the session
     exerciseManager.exerciseInfo.subscribe( data => {
@@ -146,6 +149,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
       ++this.alternativeWord;
     } else { // else end the exercise
       this.exercisePhase = ExercisePhase.END;
+      this.createMedal();
       this.changeAssistantText();
     }
   }
@@ -177,6 +181,26 @@ export class WordListExerciseAlternativeComponent implements OnInit {
       ++this.score.failCount;
     }
     this.nextAlternativeWord();
+  }
+
+  /**
+   * Requests a medal for this exercise
+   */
+  private createMedal(): void {
+    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount);
+    this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {
+      this.getMedal();
+    });
+  }
+
+  /**
+   * Gets the medal for this exercise
+   */
+  private getMedal(): void {
+    this.medalsService.getMedal(this.userId, this.exerciseAttributes.id).subscribe( res => {
+      this.medal = res.medal;
+      this.changeAssistantText();
+    });
   }
 
   /**
@@ -225,7 +249,7 @@ export class WordListExerciseAlternativeComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = 'Fin del ejercicio';
-        descriptionA = '{{ medalla }} Has conseguido: ' + this.score + ' puntos';
+        descriptionA = 'Has conseguido una medalla de: ' + this.medal;
         break;
     }
     exerciseManager.notifyAssistant({

@@ -5,6 +5,7 @@ import {ExerciseAttributes} from '../../../classes/exercise-attributes';
 import {IdImage} from '../../../classes/image';
 import {ExerciseResultsService} from '../../../services/exercise-results.service';
 import {Score} from '../../../classes/score';
+import {MedalsService} from '../../../services/medals.service';
 
 /**
  * Phase of the exercise
@@ -50,6 +51,7 @@ export class PositionsExerciseComponent implements OnInit {
   private repeatedBuilding: boolean;
   private lastError: ExercisePhase;
   private score: Score;
+  private medal: string;
   /**
    * Timer variables
    */
@@ -63,7 +65,8 @@ export class PositionsExerciseComponent implements OnInit {
 
   constructor(
     private positionsExerciseService: PositionsExerciseService,
-    private exerciseResultsService: ExerciseResultsService
+    private exerciseResultsService: ExerciseResultsService,
+    private medalsService: MedalsService
   ) {
     exerciseManager.exerciseInfo.subscribe( data => {
       this.userId = data.userId;
@@ -183,6 +186,7 @@ export class PositionsExerciseComponent implements OnInit {
           this.exercisePhase = ExercisePhase.NEXT_BUILDING;
         }  else { // End the exercise
           this.exercisePhase = ExercisePhase.END;
+          this.createMedal();
         }
         this.changeAssistantText();
       } else { // If this building hasn't been repeated
@@ -245,6 +249,26 @@ export class PositionsExerciseComponent implements OnInit {
   }
 
   /**
+   * Requests a medal for this exercise
+   */
+  private createMedal(): void {
+    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount);
+    this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {
+      this.getMedal();
+    });
+  }
+
+  /**
+   * Gets the medal for this exercise
+   */
+  private getMedal(): void {
+    this.medalsService.getMedal(this.userId, this.exerciseAttributes.id).subscribe( res => {
+      this.medal = res.medal;
+      this.changeAssistantText();
+    });
+  }
+
+  /**
    * Changes the text and visibility of the assistant
    * during the exercise
    */
@@ -300,7 +324,7 @@ export class PositionsExerciseComponent implements OnInit {
       case ExercisePhase.END:
         showA = true;
         titleA = '¡Enhorabuena!';
-        descriptionA = '{{ medalla }} Has conseguido una puntuación de: ' + this.score + ' puntos.';
+        descriptionA = 'Has conseguido una medalla de: ' + this.medal;
         break;
       case ExercisePhase.ERR_TRY_AGAIN:
         showA = true;
