@@ -3,7 +3,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 0 || exercisePhase === 1 || exercisePhase === 2">
   <ion-card-content>
-    <ion-button (click)="changeDemoPhase()">Continuar</ion-button>
+    <ion-button (click)="changeDemoPhase()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -12,11 +12,11 @@
   -->
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
-    <ion-button (click)="changeDemoPhase()">Terminar prueba</ion-button>
+    <ion-button (click)="changeDemoPhase()" i18n>Terminar prueba</ion-button>
       <ion-item-group>
         <!-- Items - Objetos -->
         <ion-row>
-          <ion-col><span>Objetos</span></ion-col>
+          <ion-col><span i18n>Objetos</span></ion-col>
         </ion-row>
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(0)" size="auto">
@@ -28,7 +28,7 @@
         </ion-row>
         <!-- Transport - Transporte -->
         <ion-row>
-          <ion-col><span>Transporte</span></ion-col>
+          <ion-col><span i18n>Transporte</span></ion-col>
         </ion-row>
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(1)" size="auto">
@@ -40,7 +40,7 @@
         </ion-row>
         <!-- Body - Partes del Cuerpo -->
         <ion-row>
-          <ion-col><span>Partes del Cuerpo</span></ion-col>
+          <ion-col><span i18n>Partes del Cuerpo</span></ion-col>
         </ion-row>
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(2)" size="auto">
@@ -52,7 +52,7 @@
         </ion-row>
         <!-- Instruments - Instrumentos -->
         <ion-row>
-          <ion-col><span>Instrumentos</span></ion-col>
+          <ion-col><span i18n>Instrumentos</span></ion-col>
         </ion-row>
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(3)" size="auto">
@@ -64,7 +64,7 @@
         </ion-row>
         <!-- Furniture - Muebles -->
         <ion-row>
-          <ion-col><span>Muebles</span></ion-col>
+          <ion-col><span i18n>Muebles</span></ion-col>
         </ion-row>
         <ion-row>
           <ion-col *ngFor="let ser of classifyObjectsService.demoGetPositionsArray(4)" size="auto">
@@ -83,7 +83,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 4">
   <ion-card-content>
-    <ion-button (click)="changeDemoPhase()">Comenzar ejercicio</ion-button>
+    <ion-button (click)="changeDemoPhase()" i18n>Comenzar ejercicio</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -92,7 +92,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 5">
   <ion-card-content>
-    <ion-button (click)="startCountdown()">Continuar</ion-button>
+    <ion-button (click)="startCountdown()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -110,7 +110,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 7">
   <ion-card-content>
-    <h1>{{ this.timeLeft + '/' + this.exerciseAttributes.duration}} segundos</h1>
+    <h1 i18n>{{ this.timeLeft + '/' + this.exerciseAttributes.duration}} segundos</h1>
       <ion-row>
         <div *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)">
           <ion-col *ngIf="ser.value" size="auto">
@@ -118,7 +118,7 @@
           </ion-col>
         </div>
       </ion-row>
-    <h1>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
+    <h1 i18n>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
   </ion-card-content>
 </ion-card>
 
@@ -127,7 +127,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 8">
   <ion-card-content>
-    <ion-button (click)="checkAnswer()">Listo</ion-button>
+    <ion-button (click)="checkAnswer()" i18n>Listo</ion-button>
     <ion-item-group>
       <ion-row>
         <ion-col *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)" size="auto">
@@ -138,7 +138,7 @@
         </ion-col>
       </ion-row>
     </ion-item-group>
-    <h1>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
+    <h1 i18n>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
   </ion-card-content>
 </ion-card>
 
@@ -147,13 +147,13 @@
   -->
 <ion-card *ngIf="exercisePhase === 9">
   <ion-card-content>
-    <ion-button (click)="next()">Continuar</ion-button>
+    <ion-button (click)="next()" i18n>Continuar</ion-button>
     <ion-row>
       <ion-col *ngFor="let ser of classifyObjectsService.getPositionsArray(actualSeries)" size="auto">
         <img [src]="this.getImage(ser.img).img.src" [height]="this.getImage(ser.img).img.height" [width]="this.getImage(ser.img).img.width"/>
       </ion-col>
     </ion-row>
-    <h1>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
+    <h1 i18n>Repetición: {{ (this.actualSeries + 1) + '/' + this.classifyObjectsService.getSeriesLength() }}</h1>
   </ion-card-content>
 </ion-card>
 
@@ -162,7 +162,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 10">
   <ion-card-content>
-    <ion-button (click)="startCountdown()">Continuar</ion-button>
+    <ion-button (click)="startCountdown()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -171,6 +171,6 @@
   -->
 <ion-card *ngIf="exercisePhase === 11">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>

@@ -5,14 +5,14 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <span>
+        <span i18n>
           Deberás escribir las palabras que recuerdes de la LISTA AZUL. Para ello, deberás ir escribiendo cada palabra
           en un recuadro que se te mostrará y pulsar el botón Escribir Siguiente Palabra. Cuando termines de escribir las
           palabras que recuerdes deberás pulsar el botón No recuerdo más palabras.
         </span>
       </ion-row>
       <ion-row>
-        <ion-button (click)="startCountdown()">Continuar</ion-button>
+        <ion-button (click)="startCountdown()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -35,10 +35,10 @@
 <ion-card *ngIf="exercisePhase === 2">
   <ion-card-content>
     <div>
-      <ion-label>Introduce una palabra:</ion-label>
+      <ion-label i18n>Introduce una palabra:</ion-label>
       <ion-input type="string" [(ngModel)]="answer"></ion-input>
-      <ion-button (click)="checkAnswer()">Escribir Siguiente Palabra</ion-button>
-      <ion-button (click)="intro2()">No recuerdo más palabras</ion-button>
+      <ion-button (click)="checkAnswer()" i18n>Escribir Siguiente Palabra</ion-button>
+      <ion-button (click)="intro2()" i18n>No recuerdo más palabras</ion-button>
     </div>
   </ion-card-content>
 </ion-card>
@@ -48,7 +48,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
-    <ion-button (click)="startExercise()">Continuar</ion-button>
+    <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -65,13 +65,13 @@
         <ion-col size="auto">
           <ion-button color="success" (click)="yesButton()">
             <ion-icon name="thumbs-up-outline" slot="start"></ion-icon>
-            Sí
+            <span i18n>Sí</span>
           </ion-button>
         </ion-col>
         <ion-col>
           <ion-button color="danger" (click)="noButton()">
             <ion-icon name="thumbs-down-outline" slot="start"></ion-icon>
-            No
+            <span i18n>No</span>
           </ion-button>
         </ion-col>
       </ion-row>
@@ -84,6 +84,6 @@
   -->
 <ion-card *ngIf="exercisePhase === 5">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>

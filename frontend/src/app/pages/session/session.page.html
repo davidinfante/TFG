@@ -22,7 +22,7 @@
             - Start Button
             -->
           <ion-card-content *ngIf="sessionPhase == 0">
-            <ion-button (click)="nextExercise()">Comenzar</ion-button>
+            <ion-button (click)="nextExercise()" i18n>Comenzar</ion-button>
           </ion-card-content>
           <!--
             - Template where exercises will be loaded dynamically
@@ -32,7 +32,7 @@
             - Finish Button
             -->
           <ion-card-content *ngIf="sessionPhase == 2">
-            <ion-button routerLink="/home" (click)="nextSession()">Finalizar</ion-button>
+            <ion-button routerLink="/home" (click)="nextSession()" i18n>Finalizar</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

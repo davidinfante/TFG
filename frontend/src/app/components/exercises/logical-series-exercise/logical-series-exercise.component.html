@@ -3,7 +3,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 0">
   <ion-card-content>
-    <ion-card-subtitle>
+    <ion-card-subtitle i18n>
       Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
       círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por último
       otro cuadrado. ¿Adivinas que iría después del último cuadrado?
@@ -19,7 +19,7 @@
         <img class="ion-margin" [src]="this.getImage('placeholder').img.src" [height]="this.getImage('placeholder').img.height" [width]="this.getImage('placeholder').img.width"/>
       </ion-row>
       <ion-row>
-        <ion-button (click)="startDemo()">Continuar</ion-button>
+        <ion-button (click)="startDemo()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -30,7 +30,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 1">
   <ion-card-content>
-    <ion-card-subtitle>
+    <ion-card-subtitle i18n>
       Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
       círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por
       último otro cuadrado. ¿Adivinas que iría después del último cuadrado?
@@ -48,7 +48,7 @@
       <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
     </ion-row>
     <ion-row>
-      <ion-card-subtitle>
+      <ion-card-subtitle i18n>
         De las respuestas de abajo, pulsa cuál es la correcta:
       </ion-card-subtitle>
     </ion-row>
@@ -68,8 +68,8 @@
           </div>
         </ion-row>
     </ion-radio-group>
-    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()">Listo</ion-button>
-    <ion-button *ngIf="continueButton" (click)="startExercise()">Continuar</ion-button>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="startExercise()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -100,7 +100,7 @@
       <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW"/>
     </ion-row>
     <ion-row>
-      <ion-card-subtitle>
+      <ion-card-subtitle i18n>
         De las respuestas de abajo, pulsa cuál es la correcta:
       </ion-card-subtitle>
     </ion-row>
@@ -120,8 +120,8 @@
         </div>
       </ion-row>
     </ion-radio-group>
-    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()">Listo</ion-button>
-    <ion-button *ngIf="continueButton" (click)="nextSeries()">Continuar</ion-button>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="nextSeries()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -130,6 +130,6 @@
   -->
 <ion-card *ngIf="exercisePhase === 4">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>

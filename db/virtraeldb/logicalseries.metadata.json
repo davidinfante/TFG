@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"virtraeldb.logicalseries"}],"uuid":"5c0e729e14e64bd7882cb092dda7e62d"}

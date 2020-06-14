@@ -5,7 +5,7 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <span>
+        <span i18n>
           Por ejemplo, si te aparece la secuencia 3u1a, entonces deberás introducir 13au, ya que primero hay que
           introducir todos los números del más pequeño al más grande y luego todas las vocales en orden aeiou.
         </span>
@@ -14,7 +14,7 @@
         <img *ngIf="this.imgs" [src]="this.getImage('pizarraIntro').img.src" [height]="this.getImage('pizarraIntro').img.height" [width]="this.getImage('pizarraIntro').img.width"/>
       </ion-row>
       <ion-row>
-        <ion-button (click)="startDemo()">Continuar</ion-button>
+        <ion-button (click)="startDemo()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -25,7 +25,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 1">
   <ion-card-content>
-    <ion-button (click)="watchSeries()">Continuar</ion-button>
+    <ion-button (click)="watchSeries()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -83,16 +83,16 @@
             <ion-button (click)="answerU()">u</ion-button>
           </ion-row>
           <ion-row>
-            <ion-button (click)="deleteLastChar()">BORRAR</ion-button>
+            <ion-button (click)="deleteLastChar()" i18n>BORRAR</ion-button>
           </ion-row>
 
           <ion-row>
-            <ion-button *ngIf="duringDemo" (click)="watchSeries()">VER DE NUEVO</ion-button>
+            <ion-button *ngIf="duringDemo" (click)="watchSeries()" i18n>VER DE NUEVO</ion-button>
           </ion-row>
         </ion-grid>
       </ion-row>
       <ion-row>
-        <ion-button *ngIf="checkAnswerLength() === 0" (click)="checkAnswer()">Listo</ion-button>
+        <ion-button *ngIf="checkAnswerLength() === 0" (click)="checkAnswer()" i18n>Listo</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -105,11 +105,11 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        Has pulsado {{ this.answer }}, pero deberías haber pulsado {{ this.numbersAndVowelsService.getDemoSeriesCorrectAnswer(actualDemoSeries) }}.
-        Pulsa el botón Continuar cuando estés preparado.
+        <span i18n>Has pulsado {{ this.answer }}, pero deberías haber pulsado {{ this.numbersAndVowelsService.getDemoSeriesCorrectAnswer(actualDemoSeries) }}.
+          Pulsa el botón Continuar cuando estés preparado.</span>
       </ion-row>
       <ion-row>
-        <ion-button (click)="watchSeries()">Continuar</ion-button>
+        <ion-button (click)="watchSeries()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -122,10 +122,10 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        Es correcto, pulsa el botón Continuar cuando estés preparado.
+        <span i18n>Es correcto, pulsa el botón Continuar cuando estés preparado.</span>
       </ion-row>
       <ion-row>
-        <ion-button (click)="nextSeries()">Continuar</ion-button>
+        <ion-button (click)="nextSeries()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -138,7 +138,7 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <ion-button (click)="startCountdown()">Comenzar ejercicio</ion-button>
+        <ion-button (click)="startCountdown()" i18n>Comenzar ejercicio</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -160,10 +160,10 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        Pulsa el botón Continuar cuando estés preparado.
+        <span i18n>Pulsa el botón Continuar cuando estés preparado.</span>
       </ion-row>
       <ion-row>
-        <ion-button (click)="nextSeries()">Continuar</ion-button>
+        <ion-button (click)="nextSeries()" i18n>Continuar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card-content>
@@ -174,6 +174,6 @@
   -->
 <ion-card *ngIf="exercisePhase === 9">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>

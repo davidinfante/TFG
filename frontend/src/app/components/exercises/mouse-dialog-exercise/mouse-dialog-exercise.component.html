@@ -6,7 +6,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button (click)="startExercise()">Continuar</ion-button>
+          <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -19,7 +19,7 @@
 <ion-card *ngIf="exercisePhase === 1">
   <ion-card-content>
     <div class="clickArea">
-      <ion-button [ngStyle]="getPosition()" (click)="nextIteration()">¡Púlsame!</ion-button>
+      <ion-button [ngStyle]="getPosition()" (click)="nextIteration()" i18n>¡Púlsame!</ion-button>
     </div>
   </ion-card-content>
 </ion-card>
@@ -32,7 +32,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button (click)="endExercise()">Continuar</ion-button>
+          <ion-button (click)="endExercise()" i18n>Continuar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

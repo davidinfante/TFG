@@ -5,7 +5,7 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <ion-button (click)="startExercise()">Continuar</ion-button>
+        <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
       </ion-row>
       <ion-row *ngIf="this.imgs">
         <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/></ion-col>
@@ -58,7 +58,7 @@
         </ion-row>
       </ion-item-group>
     </ion-grid>
-    <ion-button (click)="checkAnswer()">Finalizar</ion-button>
+    <ion-button (click)="checkAnswer()" i18n>Finalizar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -67,7 +67,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 4">
   <ion-card-content>
-    <ion-button (click)="tryAgain()">Nuevo Intento</ion-button>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -76,7 +76,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 5">
   <ion-card-content>
-    <ion-button (click)="nextBuildingIntro()">Siguiente Edificio</ion-button>
+    <ion-button (click)="nextBuildingIntro()" i18n>Siguiente Edificio</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -85,7 +85,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 6">
   <ion-card-content>
-    <ion-button (click)="nextExercise()">Continuar</ion-button>
+    <ion-button (click)="nextExercise()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -94,7 +94,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 7">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -103,7 +103,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 8">
   <ion-card-content>
-    <ion-button (click)="tryAgain()">Nuevo Intento</ion-button>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -120,7 +120,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button (click)="errorTryAgain()">Nuevo Intento</ion-button>
+    <ion-button (click)="errorTryAgain()" i18n>Nuevo Intento</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -129,7 +129,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 10">
   <ion-card-content>
-    <ion-button (click)="tryAgain()">Nuevo Intento</ion-button>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -151,6 +151,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button (click)="tryAgain()">Nuevo Intento</ion-button>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
   </ion-card-content>
 </ion-card>

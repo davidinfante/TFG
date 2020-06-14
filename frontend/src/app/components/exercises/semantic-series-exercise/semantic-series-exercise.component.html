@@ -3,7 +3,7 @@
   -->
 <ion-card *ngIf="exercisePhase === 0">
   <ion-card-content>
-    <ion-card-subtitle>
+    <ion-card-subtitle i18n>
       Por ejemplo: Negro, Rojo, Verde, Mesa, Azul, Amarillo.
     </ion-card-subtitle>
     <!--
@@ -23,10 +23,10 @@
         </ion-row>
       </ion-grid>
     </ion-radio-group>
-    <ion-card-subtitle>
+    <ion-card-subtitle i18n>
       En este grupo de palabras, Mesa es la única palabra que no es un color, y, por tanto, es la palabra que sobra.
     </ion-card-subtitle>
-    <ion-button (click)="startExercise()">Continuar</ion-button>
+    <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -61,8 +61,8 @@
         </ion-row>
       </ion-grid>
     </ion-radio-group>
-    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()">Listo</ion-button>
-    <ion-button *ngIf="continueButton" (click)="nextSeries()">Continuar</ion-button>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="nextSeries()" i18n>Continuar</ion-button>
   </ion-card-content>
 </ion-card>
 
@@ -71,6 +71,6 @@
   -->
 <ion-card *ngIf="exercisePhase === 3">
   <ion-card-content>
-    <ion-button (click)="endExercise()">Siguiente Ejercicio</ion-button>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
   </ion-card-content>
 </ion-card>
