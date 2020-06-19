@@ -122,6 +122,7 @@ export class WordListExerciseComponent implements OnInit {
       this.changeAssistantText();
     } else {
       this.exercisePhase = ExercisePhase.END;
+      this.createMedal();
       this.changeAssistantText();
     }
   }

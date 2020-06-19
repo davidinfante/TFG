@@ -4,6 +4,7 @@ TFG 19/20 - David Infante Casas
 ### Directory structure
 ```
 docs/                       Project documentation
+db/virtraeldb/              Project database
 backend/
     api/                    Express microservices
 frontend/src/
