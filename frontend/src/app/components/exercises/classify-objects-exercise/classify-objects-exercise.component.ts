@@ -230,7 +230,7 @@ export class ClassifyObjectsExerciseComponent implements OnInit {
    * Requests a medal for this exercise
    */
   private createMedal(): void {
-    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount);
+    this.score.finalScore = (this.score.correctCount * 10) / (this.score.correctCount + this.score.failCount + this.score.omissionCount);
     this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {
       this.getMedal();
     });

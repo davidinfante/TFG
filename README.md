@@ -34,7 +34,7 @@ Here's a diagram:
 
 ### How to add new Sessions:
 - Edit the file `/services/sessions.service.ts` adding a new element in the sessions array including:
-  - The session's id
+  - The session's id as a number
   - The title as a string
   - A description as a string
   - An array with the session's exercises (id, duration, repetitions)
@@ -69,12 +69,24 @@ Here's a diagram:
     description: 'Your description'
   });
   ```
+  - If the storage of results is needed, add a Score type attribute.
   - To send the exercise's results you can use ```ExerciseResultsService``` like this:
-  ```this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe(res => {}); ```
+  ```
+  this.exerciseResultsService.addResult(this.userId, this.exerciseAttributes.id, this.score).subscribe(res => {});
+  ```
+  - To generate a medal, create a final score to the exercise (between 0 and 10), add it to `this.score.finalScore`
+  and send it like this:
+  ```
+  this.medalsService.createMedal(this.userId, this.exerciseAttributes.id, this.score.finalScore).subscribe( res => {});
+  ```
+  - And get it like this:
+  ```
+  this.medalsService.getMedal(this.userId, this.exerciseAttributes.id).subscribe( res => {});
+  ```
 - Include the component's class in the `declarations: [...]` and `entryComponents: [...]` 
         sections at `/pages/session/session.module.ts`
 - Edit the file `/services/exercises.service.ts` adding a new element in the exercises array including:
-  - The exercise's id, this id must be the same as the one 
+  - The exercise's id as a number, this id must be the same as the one 
   specified in the session's exercises array
   - The component's class that packs the full exercise
   - The title of the exercise as a string
