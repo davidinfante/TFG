@@ -1,0 +1,135 @@
+<!--
+  - Intro
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-card-subtitle i18n>
+      Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
+      círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por último
+      otro cuadrado. ¿Adivinas que iría después del último cuadrado?
+    </ion-card-subtitle>
+    <ion-grid>
+      <ion-row *ngIf="this.imgs">
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo1').img.src" [height]="this.getImage('demo1').img.height" [width]="this.getImage('demo1').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo1').img.src" [height]="this.getImage('demo1').img.height" [width]="this.getImage('demo1').img.width"/>
+        <img class="ion-margin" [src]="this.getImage('demo4').img.src" [height]="this.getImage('demo4').img.height" [width]="this.getImage('demo4').img.width"/>
+
+        <img class="ion-margin" [src]="this.getImage('placeholder').img.src" [height]="this.getImage('placeholder').img.height" [width]="this.getImage('placeholder').img.width"/>
+      </ion-row>
+      <ion-row>
+        <ion-button (click)="startDemo()" i18n>Continuar</ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Demo
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-card-subtitle i18n>
+      Para que entiendas como realizar el ejercicio, te proponemos un ejemplo. Los dibujos de abajo son cuadrados y
+      círculos que van cambiando siguiendo el orden: cuadrado, luego círculo, cuadrado de nuevo, otro círculo y por
+      último otro cuadrado. ¿Adivinas que iría después del último cuadrado?
+    </ion-card-subtitle>
+    <!--
+      - Sample series
+      -->
+    <ion-row>
+      <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
+        <img class="ion-margin" [src]="this.getImage(img).img.src" [height]="this.getImage(img).img.height" [width]="this.getImage(img).img.width"/>
+      </div>
+      <!--
+      - Placeholder Image
+      -->
+      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW" />
+    </ion-row>
+    <ion-row>
+      <ion-card-subtitle i18n>
+        De las respuestas de abajo, pulsa cuál es la correcta:
+      </ion-card-subtitle>
+    </ion-row>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="radioValue">
+        <ion-row>
+          <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
+            <ion-item>
+              <ion-col>
+                <img class="ion-margin" [src]="this.getImage(but.id).img.src" [height]="this.getImage(but.id).img.height" [width]="this.getImage(but.id).img.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+                <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
+                <span>{{ but.value }}</span>
+              </ion-col>
+            </ion-item>
+          </div>
+        </ion-row>
+    </ion-radio-group>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="startExercise()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Countdown
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Exercise series
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <!--
+      - Sample series
+      -->
+    <ion-row>
+      <div *ngFor="let img of logicalSeriesService.getSampleImg(actualSeries)">
+        <img class="ion-margin" [src]="this.getImage(img).img.src" [height]="this.getImage(img).img.height" [width]="this.getImage(img).img.width"/>
+      </div>
+      <!--
+      - Placeholder Image
+      -->
+      <img class="ion-margin" [src]="placeholderSrc" [height]="placeholderH" [width]="placeholderW"/>
+    </ion-row>
+    <ion-row>
+      <ion-card-subtitle i18n>
+        De las respuestas de abajo, pulsa cuál es la correcta:
+      </ion-card-subtitle>
+    </ion-row>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="radioValue">
+      <ion-row>
+        <div *ngFor="let but of logicalSeriesService.getButtons(actualSeries)">
+          <ion-item>
+            <ion-col>
+              <img class="ion-margin" [src]="this.getImage(but.id).img.src" [height]="this.getImage(but.id).img.height" [width]="this.getImage(but.id).img.width" [ngStyle]="{'background-color': but.backgroundColor}"/>
+              <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
+              <span>{{ but.value }}</span>
+            </ion-col>
+          </ion-item>
+        </div>
+      </ion-row>
+    </ion-radio-group>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="nextSeries()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Ending
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
+  </ion-card-content>
+</ion-card>

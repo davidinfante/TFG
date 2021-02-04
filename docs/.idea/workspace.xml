@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7ad3b8cd-97e1-425b-a673-35ffcbf85c6a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/components/exercises/logical-series-exercise/logical-series-exercise.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/components/exercises/word-list-exercise/word-list-exercise.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/components/exercises/word-list-exercise/word-list-exercise.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/components/exercises/word-list-exercise/word-list-exercise.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/components/exercises/word-list-exercise/word-list-exercise.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/app/services/logical-series.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/app/services/logical-series.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TFG/src/assets/exercises/img/LogicalSeriesExercise/demo/figure3.png" beforeDir="false" afterPath="$PROJECT_DIR$/../TFG/src/assets/exercises/img/LogicalSeriesExercise/demo/figure3.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1a2egyqOGPtEb5wv4d2zyEBO9b4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ad3b8cd-97e1-425b-a673-35ffcbf85c6a" name="Default Changelist" comment="" />
+      <created>1585938230544</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585938230544</updated>
+      <workItem from="1585938231787" duration="6000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

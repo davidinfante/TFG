@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"virtraeldb.users"}],"uuid":"5847a84a76494c31876db879b4cb31ae"}

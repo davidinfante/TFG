@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"virtraeldb.pyramids"}],"uuid":"93bfd296b5134223b3d60912dc03d17c"}

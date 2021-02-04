@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"virtraeldb.instrumentalquestionnaires"}],"uuid":"449ee2758e9f4553a098d59292c7306e"}

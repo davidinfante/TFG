@@ -1,0 +1,841 @@
+<!--
+  - INTRO1
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-card-title i18n>
+      Organización
+    </ion-card-title>
+    <ion-card-subtitle i18n>
+      Durante 15 sesiones, de aproximadamente una hora cada una, realizarás ejercicios para estimular diferentes
+      habilidades: memoria, atención, razonamiento y planificación. Una vez terminadas las sesiones, tendrás acceso
+      a ejercicios colaborativos, para hacerlos con otras personas que usen VIRTRA-EL.
+    </ion-card-subtitle>
+    <ion-button (click)="nextPhase()" i18n>Leído</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - INTRO2
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <ion-card-title i18n>
+      Planificación
+    </ion-card-title>
+    <ion-card-subtitle i18n>
+      Puedes interrumpir las sesiones en cualquier momento, aunque se te recomienda que si comienzas una, intentes completarla
+      en el mismo día. Por favor, trata de realizar cada sesión al completo, sin interrumpirlas. Por ejemplo, puedes hacer
+      cada sesión en un día distinto.
+    </ion-card-subtitle>
+    <ion-button (click)="nextPhase()" i18n>Leído</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - INTRO3
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <ion-card-title i18n>
+      Ejecución
+    </ion-card-title>
+    <ion-card-subtitle i18n>
+      Antes de hacer cada ejercicio se te explicará en qué consiste, se te hará una prueba para que practiques, y después
+      tendrás que hacer el ejercicio tú solo.
+    </ion-card-subtitle>
+    <ion-button (click)="nextPhase()" i18n>Leído</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - INTRO4
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+   <ion-grid>
+     <ion-row>
+       <ion-col>
+         <span i18n>
+           ¿Alguna vez has usado un ordenador?
+         </span>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col size="auto">
+         <ion-button color="success" (click)="nextPhase()">
+           <ion-icon name="thumbs-up-outline" slot="start"></ion-icon>
+           <span i18n>Sí</span>
+         </ion-button>
+       </ion-col>
+       <ion-col>
+         <ion-button color="danger" (click)="nextPhase()">
+           <ion-icon name="thumbs-down-outline" slot="start"></ion-icon>
+           <span i18n>No</span>
+         </ion-button>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - INTRO5
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+         <span i18n>
+           He leído el consentimiento informado y estoy de acuerdo en que se utilicen los datos recopilados en VIRTRA-EL con fines estadísticos o para ayudar en mi terapia.
+         </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="auto">
+          <ion-button color="success" (click)="this.consent = true;">
+            <ion-icon name="thumbs-up-outline" slot="start"></ion-icon>
+            <span i18n>Sí, estoy de acuerdo</span>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger" (click)="this.consent = false;">
+            <ion-icon name="thumbs-down-outline" slot="start"></ion-icon>
+            <span i18n>No estoy de acuerdo</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="this.consent === true">
+        <ion-col>
+          <ion-button (click)="nextPhase()">
+            <span i18n>Continuar</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <iframe src="../../../../assets/exercises/IntroductionExercise/consentimientoinformado.pdf" width="100%" height="500px"></iframe>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION1
+  -->
+<ion-card *ngIf="exercisePhase === 5">
+  <ion-card-content>
+    <ion-grid>
+      <span i18n>
+        Tus respuestas serán totalmente confidenciales. Servirán para mejorar el funcionamiento de los ejercicios en el futuro y
+        adaptarlos a las necesidades de todas las personas. También se utilizarán  para elaborar estadísticas que permitan comprobar
+        cómo es de efectivo VIRTRA-EL. En la mayoría de casos, deberás seleccionar una respuesta de entre las que te ofrecemos.
+      </span>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.gender">
+        <ion-row>
+          <ion-col><span i18n>Sexo</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="masculino"></ion-radio>
+            <span i18n>Masculino</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="femenino"></ion-radio>
+            <span i18n>Femenino</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col><ion-button *ngIf="questionnaireAnswers.gender !== null" (click)="nextPhase()" i18n>Continuar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION2
+  -->
+<ion-card *ngIf="exercisePhase === 6">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Lugar de nacimiento</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.placeOfBirth" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Año de nacimiento (Número)</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.yearOfBirth" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Mes de nacimiento (Número)</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.monthOfBirth" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Día de nacimiento (Número)</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.dayOfBirth" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.placeOfBirth !== null && questionnaireAnswers.yearOfBirth !== null && questionnaireAnswers.monthOfBirth !== null && questionnaireAnswers.dayOfBirth !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION3
+  -->
+<ion-card *ngIf="exercisePhase === 7">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.maritalStatus">
+        <ion-row>
+          <ion-col><span i18n>Estado civil</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="soltero"></ion-radio>
+            <span i18n>Soltero/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="casado"></ion-radio>
+            <span i18n>Casado/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="viudo"></ion-radio>
+            <span i18n>Viudo/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="divorciado"></ion-radio>
+            <span i18n>Divorciado/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="otro"></ion-radio>
+            <span i18n>Otro/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.maritalStatus !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION4
+  -->
+<ion-card *ngIf="exercisePhase === 8">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.liveWith">
+        <ion-row>
+          <ion-col><span i18n>Convivo con</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="esposo"></ion-radio>
+            <span i18n>Esposo/a o pareja</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="solo"></ion-radio>
+            <span i18n>Solo/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="residencia"></ion-radio>
+            <span i18n>Vivo en una residencia</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="hijo"></ion-radio>
+            <span i18n>Hijo/a</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="otrosfamiliares"></ion-radio>
+            <span i18n>Otros familiares</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="otros"></ion-radio>
+            <span i18n>Otros</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.liveWith !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION5
+  -->
+<ion-card *ngIf="exercisePhase === 9">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.bathing">
+        <ion-row>
+          <ion-col><span i18n>Necesito ayuda para bañarme</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Sí</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.bathing !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION6
+  -->
+<ion-card *ngIf="exercisePhase === 10">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.getDressed">
+        <ion-row>
+          <ion-col><span i18n>A la hora de vestirme</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="unpoco"></ion-radio>
+            <span i18n>Necesito un poco de ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Necesito ser vestido por otra persona</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.getDressed !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION7
+  -->
+<ion-card *ngIf="exercisePhase === 11">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.getReady">
+        <ion-row>
+          <ion-col><span i18n>Necesito ayuda para arreglarme</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Si</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.getReady !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION8
+  -->
+<ion-card *ngIf="exercisePhase === 12">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.eating">
+        <ion-row>
+          <ion-col><span i18n>A la hora de comer</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="unpoco"></ion-radio>
+            <span i18n>Necesito un poco de ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Necesito ser alimentado por otra persona</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.eating !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION9
+  -->
+<ion-card *ngIf="exercisePhase === 13">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.urinating">
+        <ion-row>
+          <ion-col><span i18n>A la hora de orinar</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No sufro episodios de incontinencia</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="ocasionalmente"></ion-radio>
+            <span i18n>Sufro ocasionalmente de algún episodio de incontinencia</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Soy incontinente</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.urinating !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION10
+  -->
+<ion-card *ngIf="exercisePhase === 14">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.defecating">
+        <ion-row>
+          <ion-col><span i18n>A la hora de defecar</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No sufro episodios de incontinencia</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="sonda"></ion-radio>
+            <span i18n>No sufro episodios de incontinencia. Si tengo sonda, puedo cambiar la bolsa solo</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Soy incontinente</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.defecating !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION11
+  -->
+<ion-card *ngIf="exercisePhase === 15">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.toilet">
+        <ion-row>
+          <ion-col><span i18n>A la hora de ir al aseo</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="unpoco"></ion-radio>
+            <span i18n>Necesito un poco de ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="si"></ion-radio>
+            <span i18n>Necesito mucha ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.toilet !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION12
+  -->
+<ion-card *ngIf="exercisePhase === 16">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.bedSofa">
+        <ion-row>
+          <ion-col><span i18n>A la hora de ir a la cama/sillón</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="unpoco"></ion-radio>
+            <span i18n>Necesito un poco de ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="mucha"></ion-radio>
+            <span i18n>Necesito mucha ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="grua"></ion-radio>
+            <span i18n>Necesito ayuda de una grúa o de al menos dos personas fuertes</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.bedSofa !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION13
+  -->
+<ion-card *ngIf="exercisePhase === 17">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.walking">
+        <ion-row>
+          <ion-col><span i18n>A la hora de andar</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="solo"></ion-radio>
+            <span i18n>Puedo andar 50 metros o más sin ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="andador"></ion-radio>
+            <span i18n>Para andar 50 metros necesito algo de ayuda (por ejemplo, de un andador)</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="sillaruedas"></ion-radio>
+            <span i18n>Soy independiente en silla de ruedas</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>Soy incapaz de andar</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.walking !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION14
+  -->
+<ion-card *ngIf="exercisePhase === 18">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.stairs">
+        <ion-row>
+          <ion-col><span i18n>A la hora de subir y bajar escaleras</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="noayuda"></ion-radio>
+            <span i18n>No necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="siayuda"></ion-radio>
+            <span i18n>Necesito ayuda</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="no"></ion-radio>
+            <span i18n>No soy capaz</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.stairs !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION15
+  -->
+<ion-card *ngIf="exercisePhase === 19">
+  <ion-card-content>
+    <ion-grid>
+      <ion-radio-group [(ngModel)]="questionnaireAnswers.education">
+        <ion-row>
+          <ion-col><span i18n>Nivel de estudios</span></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="leer"></ion-radio>
+            <span i18n>Leer/escribir</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="primarios"></ion-radio>
+            <span i18n>Estudios primarios</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="escolar"></ion-radio>
+            <span i18n>Graduado escolar/EGB</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="bachillerato"></ion-radio>
+            <span i18n>Bachillerato/COU</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="fp"></ion-radio>
+            <span i18n>Formación profesional</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="diplomatura"></ion-radio>
+            <span i18n>Diplomatura</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="licenciatura"></ion-radio>
+            <span i18n>Licenciatura</span>
+          </ion-col></ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item><ion-col>
+            <ion-radio value="doctorado"></ion-radio>
+            <span i18n>Doctorado</span>
+          </ion-col></ion-item>
+        </ion-row>
+      </ion-radio-group>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.education !== null" (click)="nextPhase()" i18n>Continuar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - QUESTION16
+  -->
+<ion-card *ngIf="exercisePhase === 20">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col><span i18n>Horas semanales dedicadas a...</span></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Lectura</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.read" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Talleres (memoria, pintura, teatro, etc.)</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.workshop" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Ejercicio físico (caminar, gimnasia, etc.)</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.physicalExercise" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Utilizar el ordenador</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.computer" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" i18n>Teléfono</ion-label>
+            <ion-input [(ngModel)]="questionnaireAnswers.phoneNumber" type="tel"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="previousQuestion()" i18n>Atrás</ion-button>
+          <ion-button *ngIf="questionnaireAnswers.read !== null && questionnaireAnswers.workshop !== null && questionnaireAnswers.physicalExercise !== null && questionnaireAnswers.computer !== null && questionnaireAnswers.phoneNumber !== null" (click)="nextPhase()" i18n>Terminar cuestionario</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - END
+  -->
+<ion-card *ngIf="exercisePhase === 21">
+  <ion-card-content>
+    <ion-button (click)="endExercise()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>

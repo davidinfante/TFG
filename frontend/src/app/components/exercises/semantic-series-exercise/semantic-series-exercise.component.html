@@ -1,0 +1,76 @@
+<!--
+  - Intro
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-card-subtitle i18n>
+      Por ejemplo: Negro, Rojo, Verde, Mesa, Azul, Amarillo.
+    </ion-card-subtitle>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="radioValue">
+      <ion-grid>
+        <ion-row>
+          <div *ngFor="let but of semanticSeriesService.getButtons(actualSeries)">
+            <ion-item>
+              <ion-col>
+                <span>{{ but.title }}</span>
+                <ion-radio [value]="but.value"></ion-radio>
+              </ion-col>
+            </ion-item>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-radio-group>
+    <ion-card-subtitle i18n>
+      En este grupo de palabras, Mesa es la única palabra que no es un color, y, por tanto, es la palabra que sobra.
+    </ion-card-subtitle>
+    <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Countdown
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Exercise series
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <!--
+      - Answer Buttons
+      -->
+    <ion-radio-group [(ngModel)]="radioValue">
+      <ion-grid>
+        <ion-row>
+          <div *ngFor="let but of semanticSeriesService.getButtons(actualSeries)">
+            <ion-item>
+              <ion-col>
+                <span [ngStyle]="{'background-color': but.backgroundColor}">{{ but.title }}</span>
+                <ion-radio *ngIf="!this.checkedAnswer" [value]="but.value"></ion-radio>
+              </ion-col>
+            </ion-item>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-radio-group>
+    <ion-button *ngIf="radioValue !== null && continueButton === false" (click)="checkAnswer()" i18n>Listo</ion-button>
+    <ion-button *ngIf="continueButton" (click)="nextSeries()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Ending
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
+  </ion-card-content>
+</ion-card>

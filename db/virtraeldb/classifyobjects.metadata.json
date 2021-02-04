@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"virtraeldb.classifyobjects"}],"uuid":"1e5e6c20254545899d3ec9371256282a"}

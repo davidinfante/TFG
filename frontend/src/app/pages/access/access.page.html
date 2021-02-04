@@ -1,0 +1,49 @@
+<!--
+  - Header
+  -->
+<app-headermenu></app-headermenu>
+
+<!--
+  - Content
+  -->
+<ion-content>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title i18n>Iniciar Sesión</ion-card-title>
+              <ion-card-subtitle i18n>Introduce tus datos de acceso a VIRTRA-EL para acceder.</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating" i18n>E-Mail</ion-label>
+                <ion-input type="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating" i18n>Contraseña</ion-label>
+                <ion-input type="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox slot="start"></ion-checkbox>
+                <ion-label i18n>Mantener conectado</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-button routerLink="/session">
+                  <ion-icon name="log-in-outline" slot="start"></ion-icon>
+                  <span i18n>Acceder</span>
+                </ion-button>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-content>
+
+<!--
+  - Footer
+  -->
+<app-footer></app-footer>

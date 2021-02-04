@@ -1,0 +1,156 @@
+<!--
+  - Intro
+  -->
+<ion-card *ngIf="exercisePhase === 0">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-button (click)="startExercise()" i18n>Continuar</ion-button>
+      </ion-row>
+      <ion-row *ngIf="this.imgs">
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('ventanaOpen').img.src" [height]="this.getImage('ventanaOpen').img.height" [width]="this.getImage('ventanaOpen').img.width"/></ion-col>
+        <ion-col size-lg="2" size-md="4"><img class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Countdown
+  -->
+<ion-card *ngIf="exercisePhase === 1">
+  <ion-card-content>
+    <h1>{{ this.countdownTimeLeft }}</h1>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Exercise BUILDING
+  -->
+<ion-card *ngIf="exercisePhase === 2">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="this.getImage('ventanaOpen').img.src" [height]="this.getImage('ventanaOpen').img.height" [width]="this.getImage('ventanaOpen').img.width"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Answer
+  -->
+<ion-card *ngIf="exercisePhase === 3">
+  <ion-card-content>
+    <ion-grid>
+      <ion-item-group>
+        <ion-row>
+          <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+            <ion-item>
+              <img [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/>
+              <ion-checkbox [(ngModel)]="pos.isChecked"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+    </ion-grid>
+    <ion-button (click)="checkAnswer()" i18n>Finalizar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Repetition message REP_TRY_AGAIN
+  -->
+<ion-card *ngIf="exercisePhase === 4">
+  <ion-card-content>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Next building message NEXT_BUILDING
+  -->
+<ion-card *ngIf="exercisePhase === 5">
+  <ion-card-content>
+    <ion-button (click)="nextBuildingIntro()" i18n>Siguiente Edificio</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Next building intro message NEXT_BUILDING_INTRO
+  -->
+<ion-card *ngIf="exercisePhase === 6">
+  <ion-card-content>
+    <ion-button (click)="nextExercise()" i18n>Continuar</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - End
+  -->
+<ion-card *ngIf="exercisePhase === 7">
+  <ion-card-content>
+    <ion-button (click)="endExercise()" i18n>Siguiente Ejercicio</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Error Try again message ERR_TRY_AGAIN
+  -->
+<ion-card *ngIf="exercisePhase === 8">
+  <ion-card-content>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Error Type 1 ERR_1
+  -->
+<ion-card *ngIf="exercisePhase === 9">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding)" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="this.getImage('ventanaOpen').img.src" [height]="this.getImage('ventanaOpen').img.height" [width]="this.getImage('ventanaOpen').img.width"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="errorTryAgain()" i18n>Nuevo Intento</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Error Type 2 ERR_2
+  -->
+<ion-card *ngIf="exercisePhase === 10">
+  <ion-card-content>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<!--
+  - Error Type 3 ERR_3 // Error Type 4 ERR_4
+  -->
+<ion-card *ngIf="exercisePhase === 11 || exercisePhase === 12">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let pos of positionsExerciseService.getPositionsArray(actualBuilding); let i = index;" class="grid" size="3">
+          <img *ngIf="pos.value === false" class="ion-margin" [src]="this.getImage('ventanaClose').img.src" [height]="this.getImage('ventanaClose').img.height" [width]="this.getImage('ventanaClose').img.width"/>
+          <img *ngIf="pos.value === true" class="ion-margin" [src]="this.getImage('ventanaOpen').img.src" [height]="this.getImage('ventanaOpen').img.height" [width]="this.getImage('ventanaOpen').img.width"/>
+          <span *ngIf="i === 4">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 4] }}</span>
+          <span *ngIf="i === 9">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 8] }}</span>
+          <span *ngIf="i === 14">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 12] }}</span>
+          <span *ngIf="i === 19">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 16] }}</span>
+          <span *ngIf="i === 24">{{ this.positionsExerciseService.getCorrectPositions(this.actualBuilding)[i - 20] }}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="tryAgain()" i18n>Nuevo Intento</ion-button>
+  </ion-card-content>
+</ion-card>
